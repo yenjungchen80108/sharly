@@ -1,0 +1,21 @@
+{
+    "NAV": {
+        "LANGUAGE": "Language",
+        "CONTACT": "Contact",
+        "MORE": "More",
+        "SIGN_IN": "Sign In",
+        "SIGN_UP": "Sign Up"
+    },
+    "CONTACT": {
+        "TITLE": "Title",
+        "CONTENT": "Content",
+        "PLACEHOLDER": "Please Type...",
+        "SUBMIT": "Submit"
+    },
+    "POST": {
+        "PUBLISH": "Publish",
+        "PUBLISHING": "Publishing",
+        "DELETE": "Delete",
+        "DELETING": "Deleting"
+    }
+}

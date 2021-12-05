@@ -1,0 +1,21 @@
+{
+    "NAV": {
+        "LANGUAGE": "语言",
+        "CONTACT": "联络我们",
+        "MORE": "了解更多",
+        "SIGN_IN": "登入",
+        "SIGN_UP": "註册"
+    },
+    "CONTACT": {
+        "TITLE": "主旨",
+        "CONTENT": "內文",
+        "PLACEHOLDER": "请输入...",
+        "SUBMIT": "送出"
+    },
+    "POST": {
+        "PUBLISH": "发布",
+        "PUBLISHING": "发布中",
+        "DELETE": "删除",
+        "DELETING": "删除中"
+    }
+}

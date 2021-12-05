@@ -1,0 +1,21 @@
+{
+    "NAV": {
+        "LANGUAGE": "語言",
+        "CONTACT": "聯絡我們",
+        "MORE": "了解更多",
+        "SIGN_IN": "登入",
+        "SIGN_UP": "註冊"
+    },
+    "CONTACT": {
+        "TITLE": "主旨",
+        "CONTENT": "內文",
+        "PLACEHOLDER": "請輸入...",
+        "SUBMIT": "送出"
+    },
+    "POST": {
+        "PUBLISH": "發布",
+        "PUBLISHING": "發布中",
+        "DELETE": "刪除",
+        "DELETING": "刪除中"
+    }
+}
