@@ -4,12 +4,15 @@
         "CONTACT": "聯絡我們",
         "MORE": "了解更多",
         "SIGN_IN": "登入",
-        "SIGN_UP": "註冊"
+        "SIGN_UP": "註冊",
+        "THEME": "主題"
+    },
+    "COMMON": {
+        "PLACEHOLDER": "請輸入..."
     },
     "CONTACT": {
         "TITLE": "主旨",
         "CONTENT": "內文",
-        "PLACEHOLDER": "請輸入...",
         "SUBMIT": "送出"
     },
     "POST": {
@@ -17,5 +20,16 @@
         "PUBLISHING": "發布中",
         "DELETE": "刪除",
         "DELETING": "刪除中"
+    },
+    "LOGIN": {
+        "TITLE": "登入",
+        "EMAIL": "電子郵件",
+        "PASSWORD": "密碼",
+        "SUBMIT": "開始",
+        "FORGET_PW": "忘記密碼"
+    },
+    "REGISTER": {
+        "TITLE": "註冊",
+        "SUBMIT": "開始"
     }
 }

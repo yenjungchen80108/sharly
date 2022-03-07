@@ -4,12 +4,15 @@
         "CONTACT": "Contact",
         "MORE": "More",
         "SIGN_IN": "Sign In",
-        "SIGN_UP": "Sign Up"
+        "SIGN_UP": "Sign Up",
+        "THEME": "Theme"
+    },
+    "COMMON": {
+        "PLACEHOLDER": "Please Type..."
     },
     "CONTACT": {
         "TITLE": "Title",
         "CONTENT": "Content",
-        "PLACEHOLDER": "Please Type...",
         "SUBMIT": "Submit"
     },
     "POST": {
@@ -17,5 +20,16 @@
         "PUBLISHING": "Publishing",
         "DELETE": "Delete",
         "DELETING": "Deleting"
+    },
+    "LOGIN": {
+        "TITLE": "Log in to your account",
+        "EMAIL": "Email",
+        "PASSWORD": "Password",
+        "SUBMIT": "Start",
+        "FORGET_PW": "Forget Password"
+    },
+    "REGISTER": {
+        "TITLE": "Register",
+        "SUBMIT": "Start"
     }
 }

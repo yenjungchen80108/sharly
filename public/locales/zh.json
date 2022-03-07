@@ -4,12 +4,15 @@
         "CONTACT": "联络我们",
         "MORE": "了解更多",
         "SIGN_IN": "登入",
-        "SIGN_UP": "註册"
+        "SIGN_UP": "註册",
+        "THEME": "主题"
+    },
+    "COMMON": {
+        "PLACEHOLDER": "请输入..."
     },
     "CONTACT": {
         "TITLE": "主旨",
         "CONTENT": "內文",
-        "PLACEHOLDER": "请输入...",
         "SUBMIT": "送出"
     },
     "POST": {
@@ -17,5 +20,16 @@
         "PUBLISHING": "发布中",
         "DELETE": "删除",
         "DELETING": "删除中"
+    },
+    "LOGIN": {
+        "TITLE": "登入",
+        "EMAIL": "电子邮件",
+        "PASSWORD": "密码",
+        "SUBMIT": "开始",
+        "FORGET_PW": "忘记密码"
+    },
+    "REGISTER": {
+        "TITLE": "註册",
+        "SUBMIT": "开始"
     }
 }
