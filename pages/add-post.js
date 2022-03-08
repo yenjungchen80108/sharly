@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Nav from '../components/Nav';
+import Nav from '../components-old/Nav';
 import styles from '../styles/Home.module.css';
 
 export default function AddPost() {
@@ -9,6 +9,10 @@ export default function AddPost() {
     const [content, setContent] = useState('');
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
+
+    const classes = {
+        submitBtn:'bg-pink-500 hover:bg-pink-400 text-white font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded'
+    };
 
     const handlePost = async (e) => {
         e.preventDefault();
@@ -28,13 +32,14 @@ export default function AddPost() {
             createdAt: new Date().toISOString(),
         };
         // save the post
-        let response = await fetch('/api/posts', {
+        let response = await fetch('/api/cards', {
             method: 'POST',
             body: JSON.stringify(post),
         });
 
         // get the data
         let data = await response.json();
+        console.log('data', data);
 
         if (data.success) {
             // reset the fields
@@ -70,7 +75,7 @@ export default function AddPost() {
                             name="title"
                             onChange={(e) => setTitle(e.target.value)}
                             value={title}
-                            placeholder={t('CONTACT.PLACEHOLDER')}
+                            placeholder={t('COMMON.PLACEHOLDER')}
                         />
                     </div>
                     <div className={styles.formItem}>
@@ -79,11 +84,11 @@ export default function AddPost() {
                             name="content"
                             onChange={(e) => setContent(e.target.value)}
                             value={content}
-                            placeholder={t('CONTACT.PLACEHOLDER')}
+                            placeholder={t('COMMON.PLACEHOLDER')}
                         />
                     </div>
                     <div className={styles.formItem}>
-                        <button className="bg-pink-500 hover:bg-pink-400 text-white font-bold py-2 px-4 border-b-4 border-pink-700 hover:border-pink-500 rounded"
+                        <button className={classes.submitBtn}
                         type="submit">{t('CONTACT.SUBMIT')}</button>
                     </div>
                 </form>
