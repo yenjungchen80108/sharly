@@ -1,10 +1,12 @@
 import { Avatar } from '../../components/Avatar';
 import { Container } from '../../components/Layout';
 import styles from './UserHeader.module.css';
+import Hero from '../Index/Hero';
 
 const UserHeader = ({ user }) => {
   return (
     <Container className={styles.root} column alignItems="center">
+      <Hero />
       <div className={styles.avatar}>
         <Avatar size={168} username={user.username} url={user.profilePicture} />
       </div>

@@ -9,17 +9,15 @@ import styles from './PostList.module.css';
 
 const PostList = () => {
   const { data, size, setSize, isLoadingMore, isReachingEnd } = usePostPages();
+  if (!data) return <div></div>;
   // console.log('data',data);
-  // console.log('isReachingEnd',isReachingEnd);
-  const posts = data?.[0]?.message?.length === 0 && data === null ? [] : data.reduce((acc, val) => [...acc, ...val.posts], []);
-  // console.log('posts',posts);  
-  // data.reduce((acc, val) => 
-    // [...acc, ...val.posts], [])
+  // need fix
+  const posts = data?.[0]?.posts.length === 0  || data?.[0]?.length === 0? [] : data.reduce((acc, val) => [...acc, ...val.posts], []);
   return (
     <div className={styles.root}>
       <Spacer axis="vertical" size={1} />
       <Wrapper>
-        {posts.map((post) => (
+        {posts ? posts.map((post) => (
           <Link
             key={post._id}
             href={`/user/${post.creator.username}/post/${post._id}`}
@@ -29,7 +27,7 @@ const PostList = () => {
               <Post className={styles.post} post={post} />
             </div>
           </Link>
-        ))}
+        )) : <LoadingDots className={styles.loading} />}
         <Container justifyContent="center">
           {isReachingEnd ? (
             <Text color="secondary">No more posts are found</Text>
