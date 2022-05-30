@@ -3,12 +3,15 @@ import { Button } from '../../components/Button';
 import { Input, Textarea } from '../../components/Input';
 import { Container, Spacer } from '../../components/Layout';
 import Wrapper from '../../components/Layout/Wrapper';
+import HomeCardSettings from './Component'
 import { fetcher } from '../../lib/fetch';
 import { useCurrentUser } from '../../lib/user';
+// import { useCardPages } from '../../lib/card';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import styles from './Settings.module.css';
+import { cloneDeep } from 'lodash';
 
 const EmailVerify = ({ user }) => {
   const [status, setStatus] = useState();
@@ -135,7 +138,9 @@ const AboutYou = ({ user, mutate }) => {
         formData.append('name', nameRef.current.value);
         formData.append('bio', bioRef.current.value);
         if (profilePictureRef.current.files[0]) {
-          formData.append('profilePicture', profilePictureRef.current.files[0]);
+          // console.log(profilePictureRef.current.files[0].name);
+          let test = { 'name': profilePictureRef.current.files[0].name }
+          formData.append('profilePicture', test);
         }
         const response = await fetcher('/api/user', {
           method: 'PATCH',
@@ -197,6 +202,7 @@ const AboutYou = ({ user, mutate }) => {
 
 export const Settings = () => {
   const { data, error, mutate } = useCurrentUser();
+  // const { cardData } = useCardPages();
   const router = useRouter();
   useEffect(() => {
     if (!data && !error) return;
@@ -212,6 +218,8 @@ export const Settings = () => {
           <EmailVerify user={data.user} />
           <AboutYou user={data.user} mutate={mutate} />
           <Auth user={data.user} />
+          <HomeCardSettings user={data.user} mutate={mutate} />
+          {/* <HomeCardSettings card={cardData} mutate={mutate} /> */}
         </>
       ) : null}
     </Wrapper>

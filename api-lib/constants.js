@@ -12,4 +12,10 @@ export const ValidateProps = {
   comment: {
     content: { type: 'string', minLength: 1, maxLength: 280 },
   },
+  card: {
+    title: { type: 'string', minLength: 1, maxLength: 20 },
+    content: { type: 'string', minLength: 1, maxLength: 20 },
+    image: { type: 'string', minLength: 1 },
+    tags: { type: 'array' }
+  },
 };
