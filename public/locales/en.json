@@ -5,7 +5,9 @@
         "MORE": "More",
         "SIGN_IN": "Sign In",
         "SIGN_UP": "Sign Up",
-        "THEME": "Theme"
+        "THEME": "Theme",
+        "PROFILE": "Profile",
+        "SETTINGS": "Settings"
     },
     "COMMON": {
         "PLACEHOLDER": "Please Type..."

@@ -5,7 +5,9 @@
         "MORE": "了解更多",
         "SIGN_IN": "登入",
         "SIGN_UP": "註冊",
-        "THEME": "主題"
+        "THEME": "主題",
+        "PROFILE": "個人檔案",
+        "SETTINGS": "設定"
     },
     "COMMON": {
         "PLACEHOLDER": "請輸入..."
