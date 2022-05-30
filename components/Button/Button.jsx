@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { forwardRef } from 'react';
 import styles from './Button.module.css';
 
-export const Button = forwardRef(function Button(
+export const Button = forwardRef(function Button( // 把按鈕特定屬性傳給父層
   {
     children,
     type,
@@ -20,7 +20,7 @@ export const Button = forwardRef(function Button(
     <button
       className={clsx(
         styles.button,
-        type && styles[type],
+        styles[type],
         size && styles[size],
         styles[variant],
         className
@@ -28,6 +28,7 @@ export const Button = forwardRef(function Button(
       ref={ref}
       onClick={onClick}
       disabled={loading || disabled}
+      type={type}
     >
       {loading && <LoadingDots className={styles.loading} />}
       <span>{children}</span>

@@ -57,15 +57,13 @@ const Pagination = ({totalRecords, pageLimit, pageNeighbours, repos, onPageChang
       pageLimit,
       repos
     };
-    // console.log('paginationData',currentPage);
     onPageChanged(paginationData);
   }
 
   // const onPageChanged = useCallback(async (data) => {
-  //   // data.preventDefault();
+  //   data.preventDefault();
   //   try {
   //     const { currentPage, totalPages, pageLim, repos } = data;
-  //     // console.log('test',currentPage, totalPages, pageLim); // 1 2 5
   //     const offset = (currentPage - 1) * pageLim; // 0
   //     const newCurrentRepo = repos.slice(offset, offset + pageLim); // 0, 5
   //     setCurrentRepo(prev => [...prev, newCurrentRepo]);

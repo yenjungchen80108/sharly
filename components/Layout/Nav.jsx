@@ -94,10 +94,10 @@ const UserMenu = ({ user, mutate }) => {
         {visible && (
           <div className={styles.menu}>
             <Link passHref href={`/user/${user.username}`}>
-              <a className={styles.item}>Profile</a>
+              <a className={styles.item}>{t('NAV.PROFILE')}</a>
             </Link>
             <Link passHref href="/settings">
-              <a className={styles.item}>Settngs</a>
+              <a className={styles.item}>{t('NAV.SETTINGS')}</a>
             </Link>
             <div className={styles.item} style={{ cursor: 'auto' }}>
               <Container alignItems="center">
@@ -135,13 +135,13 @@ const Nav = () => {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Link passHref href="/feed">
+          <Link href="/feed" passHref className={styles.logo}>
             {/* <a className={styles.logo}>Next.js MongoDB App</a> */}
-            <a className={styles.logo}>
+            {/* <a className={styles.logo}> */}
               <img width={32} 
               src="/favicon/give-love.png"
               alt=""/>
-            </a>
+            {/* </a> */}
           </Link>
           <Popover className="relative">
             {({ open }) => (
