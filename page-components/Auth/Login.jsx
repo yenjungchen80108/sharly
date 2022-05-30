@@ -7,24 +7,96 @@ import { fetcher } from '../../lib/fetch';
 import { useCurrentUser } from '../../lib/user';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, useReducer } from 'react';
 import toast from 'react-hot-toast';
 import styles from './Auth.module.css';
 import { useTranslation } from 'react-i18next';
 
+const emailReducer = (state, action) => {
+  switch(action.type) {
+    case 'USER_INPUT':
+      return { value: action.val, isValid: action.val.includes('@') }
+    case 'INPUT_BLUR':
+      // state.value is the last state snapshot
+      return { value: state.value, isValid: state.value.includes('@') };
+  }
+  return { value: '', isValid: false };
+};
+
+const passwordReducer = (state, action) => {
+  switch(action.type) {
+    case 'USER_INPUT':
+      return { value: action.val, isValid: action.val.trim().length > 6 }
+    case 'INPUT_BLUR':
+      // state.value is the last state snapshot
+      return { value: state.value, isValid: state.value.trim().length > 6 };
+  }
+  return { value: '', isValid: false };
+};
+
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
+  // const [enteredEmail, setEnteredEmail] = useState('');
+  // const [emailIsValid, setEmailIsValid] = useState();
+  // const [enteredPassword, setEnteredPassword] = useState('');
+  // const [passwordIsValid, setPasswordIsValid] = useState();
   const { t } = useTranslation();
-
-  const [isLoading, setIsLoading] = useState(false);
+  const [ formIsValid, setFormIsValid ] = useState(false);
+  const [ isLoading, setIsLoading ] = useState(false);
+  const [ emailState, dispatchEmail ] = useReducer(emailReducer, { value: '', isValid: false });
+  const [ passwordState, dispatchPassword ] = useReducer(passwordReducer, { value: '', isValid: false });
 
   const { data: { user } = {}, mutate, isValidating } = useCurrentUser();
   const router = useRouter();
+  // alias assignment to avoid unnecessary code execution
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwordIsValid } = passwordState;
+  
   useEffect(() => {
     if (isValidating) return;
     if (user) router.replace('/feed');
-  }, [user, router, isValidating]);
+    
+    const identifier = setTimeout(() => {
+      // console.log('Checking form validity!');
+      setFormIsValid(
+        emailIsValid && passwordIsValid
+      );
+    }, 500);
+
+    return () => {
+      // console.log('CLEANUP');
+      clearTimeout(identifier);
+    };
+  }, [user, router, isValidating, emailIsValid, passwordIsValid]);
+
+  const emailChangeHandler = (event) => {
+    // setEnteredEmail(event.target.value);
+    dispatchEmail({ type: 'USER_INPUT', val: event.target.value});
+
+    // setFormIsValid(
+    //   event.target.value.includes('@') && passwordState.isValid
+    // );
+  };
+
+  const passwordChangeHandler = (event) => {
+    // setEnteredPassword(event.target.value);
+    dispatchPassword({ type: 'USER_INPUT', val: event.target.value});
+
+    // setFormIsValid(
+    //   emailState.isValid && event.target.value.trim().length > 6
+    // );
+  };
+
+  const validateEmailHandler = () => {
+    // setEmailIsValid(emailState.isValid);
+    dispatchEmail({ type: 'INPUT_BLUR'});
+  };
+
+  const validatePasswordHandler = () => {
+    // setPasswordIsValid(enteredPassword.trim().length > 6);
+    dispatchPassword({ type: 'INPUT_BLUR'})
+  };
 
   const onSubmit = useCallback(
     async (event) => {
@@ -55,25 +127,43 @@ const Login = () => {
       <div className={styles.main}>
         <h1 className={styles.title}>{t('LOGIN.TITLE')}</h1>
         <form onSubmit={onSubmit}>
-          <Input
+        <div
+          className={`${styles.control} ${
+            emailState.isValid === false ? styles.invalid : ''
+          }`}
+        >
+          <input
             ref={emailRef}
-            htmlType="email"
-            autoComplete="email"
+            // htmlType="email"
+            // autoComplete="email"
             placeholder="Email Address"
-            ariaLabel="Email Address"
+            // ariaLabel="Email Address"
             size="large"
+            value={emailState.value}
+            onChange={emailChangeHandler}
+            onBlur={validateEmailHandler}
             required
           />
+        </div>
           <Spacer size={0.5} axis="vertical" />
-          <Input
+        <div
+          className={`${styles.control} ${
+            passwordState.isValid === false ? styles.invalid : ''
+          }`}
+        >
+          <input
             ref={passwordRef}
-            htmlType="password"
-            autoComplete="current-password"
+            // htmlType="password"
+            // autoComplete="current-password"
             placeholder="Password"
-            ariaLabel="Password"
+            // ariaLabel="Password"
             size="large"
+            value={passwordState.value}
+            onChange={passwordChangeHandler}
+            onBlur={validatePasswordHandler}
             required
           />
+        </div>
           <Spacer size={0.5} axis="vertical" />
           <Button
             htmlType="submit"
@@ -81,6 +171,7 @@ const Login = () => {
             type="success"
             size="large"
             loading={isLoading}
+            disabled={!formIsValid}
           >
             Log in
           </Button>

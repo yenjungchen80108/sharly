@@ -17,11 +17,8 @@ const SignUp = () => {
   const usernameRef = useRef();
   const nameRef = useRef();
   const { t } = useTranslation();
-
   const { mutate } = useCurrentUser();
-
   const [isLoading, setIsLoading] = useState(false);
-
   const router = useRouter();
 
   const onSubmit = useCallback(
@@ -58,7 +55,7 @@ const SignUp = () => {
         <form onSubmit={onSubmit}>
           <Container alignItems="center">
             <p className={styles.subtitle}>Your Account</p>
-            <div className={styles.seperator} />
+            <div className={styles.separator} />
           </Container>
           <Input
             ref={emailRef}
@@ -82,7 +79,7 @@ const SignUp = () => {
           <Spacer size={0.75} axis="vertical" />
           <Container alignItems="center">
             <p className={styles.subtitle}>About you</p>
-            <div className={styles.seperator} />
+            <div className={styles.separator} />
           </Container>
           <Input
             ref={usernameRef}
