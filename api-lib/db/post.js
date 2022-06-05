@@ -15,10 +15,11 @@ export async function findPostById(db, id) {
           as: 'creator',
         },
       },
-      { $unwind: '$creator' },
+      { $unwind: '$creator' }, // $unwind英文解釋就是『拆分』，他可以將陣列欄位的每一個值拆分為單獨的document
       { $project: dbProjectionUsers('creator.') },
     ])
     .toArray();
+    // console.log('posts',posts);
   if (!posts[0]) return null;
   return posts[0];
 }

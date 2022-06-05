@@ -16,11 +16,11 @@ export async function findCardById(db, id) {
           as: 'creator',
         },
       },
-      { $unwind: '$creator' },
+      // { $unwind: '$creator' },
       { $project: dbProjectionUsers('creator.') },
     ])
     .toArray();
-    console.log('cards',cards);
+    // console.log('cards',cards);
   if (!cards[0]) return null;
   return cards[0];
 }

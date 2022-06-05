@@ -18,4 +18,13 @@ export const ValidateProps = {
     image: { type: 'string', minLength: 1 },
     tags: { type: 'array' }
   },
+  partner: {
+    partnerId: { type: 'string', minLength: 1, maxLength: 50 },
+    year: { type: 'string', minLength: 1, maxLength: 20 },
+    title: { type: 'string', minLength: 1, maxLength: 50 },
+    content: { type: 'string', minLength: 1, maxLength: 100 },
+    image: { type: 'string', minLength: 1 },
+    tags: { type: 'array' },
+    accountInfo: { type: 'object' }
+  },
 };
