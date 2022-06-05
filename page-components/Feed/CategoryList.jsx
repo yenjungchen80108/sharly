@@ -15,13 +15,13 @@ const CategoryList = () => {
   // if (!data) return <LoadingDots className={styles.loading} />;
   // const posts = data?.[0]?.message?.length === 0 && data === null ? [] : data.reduce((acc, val) => [...acc, ...val.posts], []);
   return (
-    <div className="flex bg-gray-200">
+    <div className="flex bg-pink-50">
       <Spacer axis="vertical" size={1} />
       {/* <Wrapper> */}
         {data ? data.cards.map((card, id) => (
           <Link
             key={card._id}
-            href={`/user/${card.creator.username}/card/${card._id}`}
+            href={`/card/${card._id}`}
             passHref
           >
             <div className="flex-1 text-gray-400 text-center px-4 py-2 m-2">

@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 import styles from './Card.module.css';
 
 const classes = {
-  inlineTag: "inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+  inlineTag: "inline-block bg-pink-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
 }
 
 const Card = ({ card, className }) => {

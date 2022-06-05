@@ -14,23 +14,23 @@ import Wrapper from './Wrapper';
 import { Fragment } from 'react'
 import { useTranslation } from 'react-i18next';
 import { Popover, Transition } from '@headlessui/react';
-import { ChartBarIcon, CursorClickIcon, ShieldCheckIcon, ChevronDownIcon } from '@heroicons/react/outline'
+import { ChevronDownIcon, GlobeIcon } from '@heroicons/react/solid';
 
 const languages = [
   {
     name: '繁體中文',
     description: 'tr',
-    icon: ChartBarIcon
+    icon: GlobeIcon
   },
   {
     name: '簡體中文',
     description: 'zh',
-    icon: CursorClickIcon
+    icon: GlobeIcon
   },
   { 
     name: 'English',
     description: "en",
-    icon: ShieldCheckIcon 
+    icon: GlobeIcon 
   }
 ]
 

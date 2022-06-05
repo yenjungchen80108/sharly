@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Nav from '../components-old/Nav';
 import styles from '../styles/Home.module.css';
 
-export default function AddPost() {
+const AddPost = () => {
     const { t, i18n } = useTranslation();
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -96,3 +96,5 @@ export default function AddPost() {
         </div>
     );
 }
+
+export default AddPost;
