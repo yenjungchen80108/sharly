@@ -9,6 +9,18 @@
         "PROFILE": "個人檔案",
         "SETTINGS": "設定"
     },
+    "SIDE": {
+        "NEW_INSTRUCTION": "新手教學",
+        "COMPANY_DONATION": "企業捐贈",
+        "DONATE_SUPPORT": "贊助支持",
+        "DIRECT_PURCHASE": "公益直購",
+        "DEMAND_MATCH": "需求配對",
+        "COMMON_QUESTIONS": "常見問題",
+        "LATEST_NEWS": "最新消息",
+        "STORY_SHARING": "故事分享",
+        "COOPERATE_PARTY": "合作夥伴",
+        "CONTACT_US": "聯絡我們"
+    },
     "COMMON": {
         "PLACEHOLDER": "請輸入..."
     },

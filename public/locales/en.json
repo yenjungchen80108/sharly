@@ -9,6 +9,18 @@
         "PROFILE": "Profile",
         "SETTINGS": "Settings"
     },
+    "SIDE": {
+        "NEW_INSTRUCTION": "Site Instruction",
+        "COMPANY_DONATION": "Company Donation",
+        "DONATE_SUPPORT": "Sponsorship",
+        "DIRECT_PURCHASE": "Direct Purchase",
+        "DEMAND_MATCH": "Demand Matching",
+        "COMMON_QUESTIONS": "Common Questions",
+        "LATEST_NEWS": "Latest News",
+        "STORY_SHARING": "Story Sharing",
+        "COOPERATE_PARTY": "Cooperate Partner",
+        "CONTACT_US": "Contact Us"
+    },
     "COMMON": {
         "PLACEHOLDER": "Please Type..."
     },

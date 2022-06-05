@@ -9,6 +9,18 @@
         "PROFILE": "个人档案",
         "SETTINGS": "设定"
     },
+    "SIDE": {
+        "NEW_INSTRUCTION": "新手教学",
+        "COMPANY_DONATION": "企业捐赠",
+        "DONATE_SUPPORT": "贊助支持",
+        "DIRECT_PURCHASE": "公益直购",
+        "DEMAND_MATCH": "需求配对",
+        "COMMON_QUESTIONS": "常见问题",
+        "LATEST_NEWS": "最新消息",
+        "STORY_SHARING": "故事分享",
+        "COOPERATE_PARTY": "合作伙伴",
+        "CONTACT_US": "联络我们"
+    },
     "COMMON": {
         "PLACEHOLDER": "请输入..."
     },
