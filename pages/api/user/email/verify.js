@@ -1,7 +1,7 @@
-import { createToken } from '../../../api-lib/db';
-import { CONFIG as MAIL_CONFIG, sendMail } from '../../../api-lib/mail';
-import { auths, database } from '../../../api-lib/middlewares';
-import { ncOpts } from '../../../api-lib/nc';
+import { createToken } from '../../../../api-lib/db';
+import { CONFIG as MAIL_CONFIG, sendMail } from '../../../../api-lib/mail';
+import { auths, database } from '../../../../api-lib/middlewares';
+import { ncOpts } from '../../../../api-lib/nc';
 import nc from 'next-connect';
 
 const handler = nc(ncOpts);
