@@ -4,11 +4,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start -p $PORT",
+    "lint": "next lint",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
-    "@headlessui/react": "^1.4.2",
+    "@headlessui/react": "^0.0.0-insiders.1d53ac3",
     "@heroicons/react": "^1.0.5",
     "@hookform/resolvers": "^2.8.5",
     "@lukeed/ms": "^2.0.0",
@@ -36,6 +37,7 @@
     "nodemailer": "^6.6.5",
     "passport": "^0.5.0",
     "passport-local": "^1.0.0",
+    "postcss": "^8.3.11",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.22.5",
@@ -43,21 +45,21 @@
     "react-hot-toast": "^2.1.1",
     "react-i18next": "^11.14.2",
     "react-prism": "^4.3.2",
+    "react-router-dom": "^6.3.0",
     "rxjs": "^7.5.1",
     "slug": "^5.1.0",
     "swr": "^1.0.1",
+    "tailwindcss": "^2.2.19",
     "validator": "^13.6.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.0",
+    "autoprefixer": "^10.4.7",
     "eslint": "7",
     "eslint-config-next": "12.0.4",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "postcss": "^8.3.11",
     "prettier": "^2.4.1",
-    "sass": "^1.49.7",
-    "tailwindcss": "^2.2.19"
+    "sass": "^1.49.7"
   }
 }
