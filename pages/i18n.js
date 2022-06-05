@@ -1,12 +1,14 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import Backend from "i18next-http-backend";
+import LanguageDetector from 'i18next-browser-languagedetector';
 
 i18n
    // 使用 i18next-http-backend
-   .use(Backend) 
+   .use(Backend)
+   .use(LanguageDetector)
    // 將 i18next 傳入 react-i18next 裡面
-   .use(initReactI18next)  
+   .use(initReactI18next)
    // 實例化 initReactI18next
    .init({
       backend: {
