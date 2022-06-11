@@ -28,13 +28,9 @@ const Card = ({ card, className }) => {
               <p className="text-gray-700 text-base">{card.content}</p>
           </div>
           <div className="px-6 pt-4 pb-2">
-            <div className="tags-input-container">
-                <div className="tag-item">
-                  {separateTags.map((item, id) => {
-                    return <span className={classes.inlineTag} key={id}>{item}</span>
-                  })}
-                </div>
-            </div>
+              {separateTags.map((item, id) => {
+                  return <span className={classes.inlineTag} key={id}>{item}</span>
+              })}
               {/* <span className={classes.inlineTag}>#photography</span>
               <span className={classes.inlineTag}>#travel</span>
               <span className={classes.inlineTag}>#winter</span> */}

@@ -10,8 +10,6 @@ import styles from './PostList.module.css';
 const PostList = () => {
   const { data, size, setSize, isLoadingMore, isReachingEnd } = usePostPages();
   if (!data) return <div></div>;
-  // console.log('data',data);
-  // need fix
   const posts = data?.[0]?.posts.length === 0  || data?.[0]?.length === 0? [] : data.reduce((acc, val) => [...acc, ...val.posts], []);
   return (
     <div className={styles.root}>
