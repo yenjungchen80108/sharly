@@ -1,5 +1,5 @@
 import { Index } from '../page-components/Index';
-import './i18n';
+import '../page-components/i18n';
 
 const IndexPage = () => {
   return <Index />;
