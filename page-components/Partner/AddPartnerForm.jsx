@@ -280,17 +280,17 @@ const DeletePartnerHintModal = ({ closeDeleteModal, partner}) => {
 }
 
 export const AddPartnerFormInner = () => {
-    const { data, isLoading, isError } = usePartners();
-    if (!data) return <div></div>;
+  const [partnerIdRef, titleRef, yearRef, contentRef, imageRef, bankNameRef, accountNameRef, accountNumRef] = [...Array(8)].map(useRef);
+  const [tags, setTags] = useState([]);
+  const [showAddPartnerForm, setShowAddPartnerForm] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [partnerElement, setPartnerElement] = useState({});
+  
+  const { data, isLoading, isError } = usePartners();
+    // if (!data) return <div></div>;
     const header = ["PartnerId", "Title", "Year", "URL", "Tags"];
-    const [partnerIdRef, titleRef, yearRef, contentRef, imageRef,
-    bankNameRef, accountNameRef, accountNumRef] = [...Array(8)].map(useRef);
     const { mutate } = useSWRConfig();
-    const [tags, setTags] = useState([]);   
-    const [showAddPartnerForm, setShowAddPartnerForm] = useState(false);
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [partnerElement, setPartnerElement] = useState({});
-    
+
     const editPartner = ((element, index) => {
       setShowAddPartnerForm(true);
       setPartnerElement(element);
@@ -327,13 +327,13 @@ export const AddPartnerFormInner = () => {
     const onSubmit = useCallback(
       async (e) => {
         e.preventDefault();
-        const formField = [partnerIdRef, titleRef, yearRef, contentRef, imageRef, bankNameRef, accountNameRef, accountNumRef];
-        const accountInfo = {
+        try {
+          const formField = [partnerIdRef, titleRef, yearRef, contentRef, imageRef, bankNameRef, accountNameRef, accountNumRef];
+          const accountInfo = {
             bankName: bankNameRef.current.value,
             accountName: accountNameRef.current.value,
             accountNumber: accountNumRef.current.value
-        }
-        try {
+          }
           // setIsLoading(true);
           await fetcher('/api/partners', {
             method: 'POST',

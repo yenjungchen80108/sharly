@@ -5,7 +5,7 @@ class MyDocument extends Document {
     const initialProps = await Document.getInitialProps(ctx);
     return { ...initialProps };
   }
-
+  // Next.js提供了 Server Side Render 功能當網站使用了SSR 的部分的時候為了SPA與SSR同步 所以提供了一個生命週期 getInitialProps 方便前後端一致
   render() {
     return (
       <Html lang="en">
