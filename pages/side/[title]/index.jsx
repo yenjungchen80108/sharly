@@ -10,7 +10,7 @@ const SidePage = ({ side }) => {
       <Head>
         <title>{side.title}</title>
       </Head>
-      {side.title === 'CooperatePartner' ? <Partner /> : <></>}
+      {side.title === 'CooperatePartner' ? <Partner /> : <section>Coming Soon...</section>}
     </>
   );
 };
