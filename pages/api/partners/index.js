@@ -12,8 +12,8 @@ handler.get(async (req, res) => {
   const partners = await findPartners(
     req.db,
     req.query.before ? new Date(req.query.before) : undefined,
-    // req.query.by,
-    req.query.limit ? parseInt(req.query.limit, 10) : undefined
+    req.query.by,
+    req.query.limit ? parseInt(5, 10) : undefined
   );
 
   res.json({ partners });
