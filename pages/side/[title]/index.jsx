@@ -2,6 +2,7 @@
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 import { Partner } from '../../../page-components/Partner';
+import { Contact } from '../../../page-components/Contact';
 
 const SidePage = ({ side }) => {
   // const { t } = useTranslation();
@@ -10,7 +11,9 @@ const SidePage = ({ side }) => {
       <Head>
         <title>{side.title}</title>
       </Head>
-      {side.title === 'CooperatePartner' ? <Partner /> : <section>Coming Soon...</section>}
+      {side.title === 'CooperatePartner' ? <Partner /> :
+      side.title === 'ContactUs' ? <Contact /> :
+      <section>Coming Soon...</section>}
     </>
   );
 };
