@@ -150,3 +150,9 @@
   border: none;
   outline: none;
 }
+
+.partner_icon {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+}

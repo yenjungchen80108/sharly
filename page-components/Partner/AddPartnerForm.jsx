@@ -15,6 +15,7 @@ import { use } from 'i18next';
 import useSWR, { useSWRConfig } from "swr";
 import { useRouter } from 'next/router';
 import { withRouter } from 'next/router';
+import { Label } from '../../components/Label';
 
 const classes = {
     inlineTag: "inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2",
@@ -31,7 +32,7 @@ const EditPartnerModal = ({ closeEditModal, partner }) => {
   bankNameRef, accountNameRef, accountNumRef] = [...Array(9)].map(useRef);
   const { mutate } = useSWRConfig();
   
-  const [state, setState] = useState({
+  const [partnerState, setPartnerState] = useState({
     id: partner._id || null,
     partnerId: partner.partnerId || null,
     title: partner.title || null,
@@ -45,16 +46,17 @@ const EditPartnerModal = ({ closeEditModal, partner }) => {
   });
 
   const handleInputChange = (e) => {
-    let { value } = e.target;
-    setState({ ...state, [e.target.name]: value });
+    // let { value } = e.target;
+    // console.log('value', e.target.value, 'name', e.target.name);
+    setPartnerState({ ...partnerState, [e.target.name]: e.target.value });
   };
 
   useEffect(() => { 
     handleInputChange.bind(this);
-  }, [state]);
+  }, [handleInputChange, partnerState]);
 
   const [isLoading, setIsLoading] = useState(false);  
-  const { id } = state;
+  const { id } = partnerState;
 
   const onSubmit = useCallback(
     async (e) => {
@@ -111,17 +113,25 @@ const EditPartnerModal = ({ closeEditModal, partner }) => {
                       <input
                         name="partnerId"
                         ref={partnerIdRef}
-                        value={state.partnerId}
+                        value={partnerState.partnerId}
                         onChange={handleInputChange}
                         className={styles.input}
                         placeholder="Title" />
                     </label>
+                    {/* <Label
+                      id="PARTNER ID"
+                      name="partnerId"
+                      value={partnerState.partnerId}
+                      onChange={handleInputChange}
+                      className={styles.input}
+                      placeholder="Title"
+                    ></Label> */}
                     <Spacer size={0.5} axis="vertical" />
                     <label className={styles.label}>TITLE
                       <input
                         name="title"
                         ref={titleRef}
-                        value={state.title}
+                        value={partnerState.title}
                         onChange={handleInputChange}
                         className={styles.input}
                         placeholder="Title" />
@@ -131,7 +141,7 @@ const EditPartnerModal = ({ closeEditModal, partner }) => {
                       <input
                         name="year"
                         ref={yearRef}
-                        value={state.year}
+                        value={partnerState.year}
                         onChange={handleInputChange}
                         className={styles.input}
                         placeholder="Title" />
@@ -141,7 +151,7 @@ const EditPartnerModal = ({ closeEditModal, partner }) => {
                       <input
                         name="content"
                         ref={contentRef}
-                        value={state.content}
+                        value={partnerState.content}
                         onChange={handleInputChange}
                         className={styles.input}
                         placeholder="Content" />
@@ -151,7 +161,7 @@ const EditPartnerModal = ({ closeEditModal, partner }) => {
                       <input
                         name="image"
                         ref={imageRef}
-                        value={state.image}
+                        value={partnerState.image}
                         onChange={handleInputChange}
                         className={styles.input}
                         placeholder="Image URL" />
@@ -161,7 +171,7 @@ const EditPartnerModal = ({ closeEditModal, partner }) => {
                       <input
                         name="tags"
                         ref={tagsRef}
-                        value={state.tags}
+                        value={partnerState.tags}
                         onChange={handleInputChange}
                         className={styles.input}
                         placeholder="Type some tags" />
@@ -171,7 +181,7 @@ const EditPartnerModal = ({ closeEditModal, partner }) => {
                       <input
                         name="bankName"
                         ref={bankNameRef}
-                        value={state.bankName}
+                        value={partnerState.bankName}
                         onChange={handleInputChange}
                         className={styles.input}
                         placeholder="Bank Name" />
@@ -181,7 +191,7 @@ const EditPartnerModal = ({ closeEditModal, partner }) => {
                       <input
                         name="accountNum"
                         ref={accountNumRef}
-                        value={state.accountNum}
+                        value={partnerState.accountNum}
                         onChange={handleInputChange}
                         className={styles.input}
                         placeholder="Account Number" />
@@ -191,7 +201,7 @@ const EditPartnerModal = ({ closeEditModal, partner }) => {
                       <input
                         name="accountName"
                         ref={accountNameRef}
-                        value={state.accountName}
+                        value={partnerState.accountName}
                         onChange={handleInputChange}
                         className={styles.input}
                         placeholder="Account Name" />
@@ -366,6 +376,7 @@ export const AddPartnerFormInner = () => {
     );
     
     return (
+      <Wrapper>
         <div>
         <Spacer axis="vertical" size={1} />
         {isLoading ? (
@@ -428,7 +439,7 @@ export const AddPartnerFormInner = () => {
             </div>
           </div>
         </div>) : (<span>no data</span>)}
-        <section className={styles.partner}>
+       <section className={styles.partner}>
           <h4 className={styles.sectionTitle}>Partner Settings</h4>
           <form>
             <h5>Partner Basic Info</h5> 
@@ -493,6 +504,7 @@ export const AddPartnerFormInner = () => {
           </form>
       </section>
       </div>
+    </Wrapper>
     );
 };
 

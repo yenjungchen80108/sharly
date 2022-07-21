@@ -25,13 +25,13 @@ export async function findPartnerById(db, id) {
   return partners[0];
 }
 
-export async function findPartners(db, before, by, limit = 10) {
+export async function findPartners(db, before, by, limit = 5) {
   return db
     .collection('partners')
     .aggregate([
       {
         $match: {
-          // ...(by && { creatorId: new ObjectId(by) }),
+          ...(by && { creatorId: new ObjectId(by) }),
           ...(before && { createdAt: { $lt: before } }),
         },
       },

@@ -3,6 +3,7 @@ import { LoadingDots } from '../../components/LoadingDots';
 import { Container, Spacer, Wrapper } from '../../components/Layout';
 import { Text, TextLink } from '../../components/Text';
 import { usePartnerPages } from '../../lib/partner';
+import styles from './Partner.module.css';
 
 const classes = {
     inlineTag: "inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2",
@@ -34,7 +35,8 @@ const PartnerList = () => {
                     {partners.map((partner, id) => (
                       <div key={id} className="shadow-lg flex flex-wrap w-full lg:w-4/5 mx-auto border-b-4">
                         <div className="flex flex-col lg:flex-row rounded overflow-hidden h-auto lg:h-45">
-                        <img className="block h-auto w-full lg:w-48 flex-none bg-cover h-24" src={partner.image} />
+                        <div className="block h-auto w-full sm:w-20 lg:w-36 flex-none bg-cover h-24">
+                          <img className={styles.partner_icon} src={'/png/donation.png'} /></div>
                         <div className="bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                         <div className="text-black font-bold text-xl mb-1">{partner.title}</div>
                         <div className="text-gray-500 text-md italic">{partner.partnerId}</div>
