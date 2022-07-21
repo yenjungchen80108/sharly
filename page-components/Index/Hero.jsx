@@ -54,7 +54,7 @@ const Hero = () => {
               <Input
                 ref={userRef}
                 htmlType="user"
-                placeholder="github username(ex: yenjungchen80108)"
+                placeholder="Github username(ex:yenjungchen80108)"
                 size="large"
                 />
               <Spacer size={0.5} axis="vertical" />

@@ -231,22 +231,16 @@ const DeleteHintModal = ({ closeDeleteModal, cardElement}) => {
 }
 
 const HomeCardSettingsInner = () => {
-  const titleRef = useRef();
-  const contentRef = useRef();
-  const imageRef = useRef();
-  // const [isLoading, setIsLoading] = useState(false);
-  const { data, isLoading, isError } = useCards();
-  const { mutate } = useSWRConfig();
+  const { data, isLoading, mutate } = useCards();
+
+  const [titleRef, contentRef, imageRef] = [...Array(3)].map(useRef);
   const [tags, setTags] = useState([]);
+  
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [cardElement, setCardElement] = useState({});
-  const [cardIndex, setCardIndex] = useState(null);
+  // const [cardIndex, setCardIndex] = useState(null);
 
-  // useEffect(() => {
-  // }, []);
-
-  // show card popup edit modal
   const closeEditModal = () => {
     setShowEditModal(false);
   }
@@ -254,20 +248,10 @@ const HomeCardSettingsInner = () => {
   const closeDeleteModal = () => {
     setShowDeleteModal(false);
   }
-  // if (!data) return <div>loading</div>;
-  // const handleFormKeyDown = function(e, callback) {
-  //   if (e.key === 'Enter' && e.shiftKey === false) {
-  //     e.preventDefault();
-  //     onSubmit;
-  //   }
-  // }
   
   const handleKeyDown = function(e) {
-    // e.preventDefault();
-    // e.stopPropagation();
     if(e.key !== 'Enter') return;
     const value = e.target.value;
-    // console.log('value',value);
     if(!value.trim()) return;
     setTags([...tags, value]);
     e.target.value = null;
@@ -280,21 +264,20 @@ const HomeCardSettingsInner = () => {
   const editCard = ((element, index) => {
     setShowEditModal(true);
     setCardElement(element);
-    setCardIndex(index);
+    // setCardIndex(index);
   });
 
   const deleteCard = ((element) => {
     setShowDeleteModal(true);
     setCardElement(element);
-    // setCardIndex(index);
   });
 
-  const onSubmit = useCallback(
+  const onAdd = useCallback(
     async (e) => {
       e.preventDefault();
       try {
-        // setIsLoading(true);
-        await fetcher('/api/cards', {
+        const formField = [titleRef, contentRef, imageRef];
+        const response = await fetcher('/api/cards', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -304,19 +287,14 @@ const HomeCardSettingsInner = () => {
               tags: tags
         }),
         });
-        toast.success('You have updated successfully');
-        titleRef.current.value = '';
-        contentRef.current.value = '';
-        imageRef.current.value = '';
+        toast.success('You have added a category successfully');
+        formField.map((item) => {
+          item.current.value = ''
+        });
         setTags([]);
-        // refresh card lists
-        mutate('/api/cards');
+        mutate('/api/cards', { cards: response.cards }, false);
       } catch (e) {
-        // console.log('e',e);
         toast.error(e.message);
-      } finally {
-        // setShowModal(false);
-        // setIsLoading(false);
       }
     },
     [tags, mutate]
@@ -365,9 +343,7 @@ const HomeCardSettingsInner = () => {
                     <HomeCardEditModal
                       closeEditModal={closeEditModal}
                       handleKeyDown={handleKeyDown}
-                      // card={data.cards}
                       cardElement={cardElement}
-                      cardIndex={cardIndex}
                     /> : <></>}
                   {showDeleteModal ?
                     <DeleteHintModal
@@ -408,7 +384,7 @@ const HomeCardSettingsInner = () => {
           </div>
           <Spacer size={0.5} axis="vertical" />
           <Button type="button" loading={isLoading}
-          onClick={onSubmit}>Add New Card</Button>
+          onClick={onAdd}>Add New Card</Button>
         </form>
     </section>
   );

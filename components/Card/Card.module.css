@@ -1,7 +1,6 @@
 .root {
   position: relative;
   box-sizing: border-box;
-  padding: 16px;
   background: var(--background);
   border: 1px solid var(--accents-2);
   border-radius: 5px;

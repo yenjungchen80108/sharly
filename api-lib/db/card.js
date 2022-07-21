@@ -35,7 +35,7 @@ export async function findCards(db, before, by, limit = 10) {
           ...(before && { createdAt: { $lt: before } }),
         },
       },
-      { $sort: { _id: -1 } },
+      { $sort: { _id: 1 } },
       { $limit: limit },
       {
         $lookup: {
@@ -93,10 +93,10 @@ export async function updateCardById(db, id, { title, content, image, tags }) {
       { _id: new ObjectId(id) },
       { $set: card },
     )
-    .then((value) => console.log('Value: ' + value))
-    .catch((err) => {
-      console.log('Error: ' + err);
-    });
+    // .then((value) => console.log('Value: ' + value))
+    // .catch((err) => {
+    //   console.log('Error: ' + err);
+    // });
 }
 
 export async function deleteCardById(db, id) {
@@ -105,8 +105,8 @@ export async function deleteCardById(db, id) {
     .deleteOne(
       { _id: new ObjectId(id) },
     )
-    .then((value) => console.log('Value: ' + value))
-    .catch((err) => {
-      console.log('Error: ' + err);
-    });
+    // .then((value) => console.log('Value: ' + value))
+    // .catch((err) => {
+    //   console.log('Error: ' + err);
+    // });
 }

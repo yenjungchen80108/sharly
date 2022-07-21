@@ -21,13 +21,13 @@ const Card = ({ card, className }) => {
 //   }, [comment.createdAt]);
   return (
     <div className={clsx(styles.root, className)}>
-       <div className="max-w-sm max-h-96 rounded overflow-hidden shadow-lg">
-          <img className="w-full max-h-40" src={card.image} alt="image"/>
+       <div className="h-50 rounded overflow-hidden">
+          <img className="w-full h-40" src={card.image} alt="image"/>
           <div className="px-6 py-4">
               <div className="font-bold text-xl mb-2">{card.title}</div>
               <p className="text-gray-700 text-base">{card.content}</p>
           </div>
-          <div className="px-6 pt-4 pb-2">
+          <div className="px-1 pt-1 pb-2">
               {separateTags.map((item, id) => {
                   return <span className={classes.inlineTag} key={id}>{item}</span>
               })}

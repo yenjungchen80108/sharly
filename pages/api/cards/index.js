@@ -15,8 +15,7 @@ handler.get(async (req, res) => {
     req.query.by,
     req.query.limit ? parseInt(req.query.limit, 10) : undefined
   );
-
-  res.json({ cards });
+  return res.json({ cards });
 });
 
 handler.post(
@@ -37,15 +36,13 @@ handler.post(
       return res.status(401).end();
     }
 
-    const card = await insertCard(req.db, {
-      title: req.body.title,
-      content: req.body.content,
-      image: req.body.image,
-      tags: req.body.tags,
+    const { title, content, image, tags } = req.body
+    const cards = await insertCard(req.db, {
+      title, content, image, tags,
       creatorId: req.user._id,
     });
 
-    return res.json({ card });
+    return res.json({ cards });
   }
 );
 
@@ -67,11 +64,6 @@ handler.patch(
     }
 
     const { _id, title, content, image, tags  } = req.body;
-    // const newCard = { rest };
-    // const card = await findCardById(req.db, _id);
-    // if (!card) {
-    //   return res.status(404).json({ error: { message: 'Card is not found PATCH.' } });
-    // }
     const cards = await updateCardById(req.db, _id, { title, content, image, tags });
 
     res.json({ cards });
