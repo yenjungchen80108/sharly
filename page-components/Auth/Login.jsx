@@ -7,7 +7,7 @@ import { fetcher } from '../../lib/fetch';
 import { useCurrentUser } from '../../lib/user';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useRef, useState, useReducer } from 'react';
+import { useCallback, useEffect, useRef, useState, useReducer, useMemo } from 'react';
 import toast from 'react-hot-toast';
 import styles from './Auth.module.css';
 import { useTranslation } from 'react-i18next';
@@ -52,41 +52,70 @@ const Login = () => {
   // alias assignment to avoid unnecessary code execution
   const { isValid: emailIsValid } = emailState;
   const { isValid: passwordIsValid } = passwordState;
-  
-  useEffect(() => {
-    if (isValidating) return;
-    if (user) router.replace('/feed');
-    
-    const identifier = setTimeout(() => {
-      // console.log('Checking form validity!');
-      setFormIsValid(
-        emailIsValid && passwordIsValid
-      );
-    }, 500);
-
-    return () => {
-      // console.log('CLEANUP');
-      clearTimeout(identifier);
-    };
-  }, [user, router, isValidating, emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = (event) => {
     // setEnteredEmail(event.target.value);
+    // console.log(event);
     dispatchEmail({ type: 'USER_INPUT', val: event.target.value});
-
+    optimizedEmailHandler(event.target.value);
+    setFormIsValid(emailIsValid && passwordIsValid);
+    // console.log(event);
     // setFormIsValid(
     //   event.target.value.includes('@') && passwordState.isValid
     // );
   };
 
+  const debounceFunc = (func, delay) => {
+    let timer;
+    return function(...args) {
+      const context = this;
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func.apply(context, args);
+      }, delay);
+      // console.log(timer);
+    }
+  }
+  // function debounceFunc(fn, ms) {
+  //   let timeoutId
+  //   return function (...args) {
+  //     if (timeoutId) clearTimeout(timeoutId)
+  //     timeoutId = setTimeout(() => {
+  //       fn(...args)
+  //     }, ms)
+  //   }
+  // }
+
+  // const handleInputChange = (e) => {
+  //   setFormIsValid(emailIsValid);
+  //   optimizedEmailHandler(e);
+  // };
+  // const optimizedEmailHandler = debounceFunc(emailChangeHandler, 200);
+  const optimizedEmailHandler = useCallback(
+    debounceFunc((val) => {
+      // console.log(val);
+    }, 500)
+  , []);
+  // const optimizedEmailHandler = useMemo(
+  //   () => debounceFunc(emailChangeHandler, 500)
+  // , []);
+
   const passwordChangeHandler = (event) => {
     // setEnteredPassword(event.target.value);
     dispatchPassword({ type: 'USER_INPUT', val: event.target.value});
-
+    optimizedPasswordHandler(event.target.value);
+    setFormIsValid(emailIsValid && passwordIsValid);
     // setFormIsValid(
     //   emailState.isValid && event.target.value.trim().length > 6
     // );
   };
+
+  const optimizedPasswordHandler = useCallback(
+    debounceFunc((val) => {
+      // setFormIsValid(emailIsValid && passwordIsValid);
+      // console.log(val);
+    }, 500)
+  , []);
 
   const validateEmailHandler = () => {
     // setEmailIsValid(emailState.isValid);
@@ -97,6 +126,23 @@ const Login = () => {
     // setPasswordIsValid(enteredPassword.trim().length > 6);
     dispatchPassword({ type: 'INPUT_BLUR'})
   };
+
+  useEffect(() => {
+    if (isValidating) return;
+    if (user) router.replace('/feed');
+    // optimizedEmailHandler();
+    // const identifier = setTimeout(() => {
+    //   // console.log('Checking form validity!');
+    //   setFormIsValid(
+    //     emailIsValid && passwordIsValid
+    //   );
+    // }, 500);
+
+    return () => {
+      // console.log('CLEANUP');
+      // clearTimeout(identifier);
+    };
+  }, [user, router, isValidating, emailIsValid, passwordIsValid]);
 
   const onSubmit = useCallback(
     async (event) => {
