@@ -1,9 +1,9 @@
-import { findCardById } from '../../api-lib/db';
-import { database } from '../../api-lib/middlewares';
+import { findCardById } from '../../../api-lib/db';
+import { database } from '../../../api-lib/middlewares';
 // import { UserPost } from '../../page-components/UserPost';
 import nc from 'next-connect';
 import Head from 'next/head';
-import { Donate } from '../../page-components/Donate';
+import { Donate } from '../../../page-components/Donate/index';
 
 export default function CardPage({ card }) {
   // if (typeof card.createdAt !== 'string') {
