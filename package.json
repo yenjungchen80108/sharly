@@ -48,6 +48,7 @@
     "react-router-dom": "^6.3.0",
     "rxjs": "^7.5.1",
     "slug": "^5.1.0",
+    "styled-components": "^5.3.5",
     "swr": "^1.0.1",
     "tailwindcss": "^2.2.19",
     "validator": "^13.6.0",
