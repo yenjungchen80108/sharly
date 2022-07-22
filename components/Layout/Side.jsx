@@ -13,7 +13,7 @@ const { t } = useTranslation();
                 let tempName = t(item.name).split(' ').join('');
                 return (<li key={id}>
                 <Link passHref href={`/side/${tempName}`}>
-                    <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <a href="#" className="flex items-center p-2 font-normal light:text-gray-900 rounded-lg hover:bg-gray-100 hover:text-white dark:hover:bg-gray-700">
                         <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" />
                         <span className="ml-3">{t(item.name)}</span>
                     </a>
@@ -34,7 +34,7 @@ const { t } = useTranslation();
                   }}
                   as={`/side/${tempName}`}
                 >
-                    <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <a href="#" className="flex items-center p-2 font-normal light:text-gray-900 rounded-lg hover:bg-gray-100 hover:text-white dark:hover:bg-gray-700">
                         <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" />
                         <span className="ml-3">{t(item.name)}</span>
                     </a>
