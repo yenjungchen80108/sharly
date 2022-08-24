@@ -21,7 +21,11 @@ if (props.values) {
 }
 
 return (
-    <Select value={props.value} onChange={props.onToggle}>
+    <Select
+    value={props.value}
+    name={props.name}
+    onChange={props.onToggle}>
+    <option>Please choose</option>
     {content}
     </Select>
 );
