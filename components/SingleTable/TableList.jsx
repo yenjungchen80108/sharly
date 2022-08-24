@@ -223,7 +223,6 @@ const TableList = (props) => {
           name={name}
           onClose={handleClose}
           onSubmit={onSubmit}
-          children={children}
         ></EditDialog> : <></>}
         {openDelete ?
         <DeleteDialog
