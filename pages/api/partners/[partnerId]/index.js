@@ -37,7 +37,7 @@ handler.post(
       content: ValidateProps.partner.content,
       image: ValidateProps.partner.image,
       tags: ValidateProps.partner.tags,
-      // accountInfo: ValidateProps.partner.accountInfo
+      accountInfo: ValidateProps.partner.accountInfo
     },
     required: ['partnerId'],
     additionalProperties: false,
