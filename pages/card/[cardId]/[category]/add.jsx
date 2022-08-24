@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import AddDonateForm from '../../../../page-components/Donate/AddDonateForm';
 
 const AddCard = ({ cardAdd }) => {
-  console.log('cardAdd',cardAdd);
   // const { t } = useTranslation();
   return (
     <>

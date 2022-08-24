@@ -18,7 +18,7 @@ handler.get(async (req, res) => {
 
   const cards = await findCards(
     req.db,
-    req.query.cardId,
+    req.query._id,
     req.query.before ? new Date(req.query.before) : undefined,
     req.query.limit ? parseInt(req.query.limit, 10) : undefined
   );
@@ -47,9 +47,9 @@ handler.post(
     const title = req.body.title;
     const content = req.body.content;
     const image = req.body.image;
-    const tags = req.body.tags;
-    console.log('req.query',req.query.cardId);
-    const card = await findCardById(req.db, req.query.cardId);
+    // const tags = req.body.tags;
+    // console.log('req.query',req.query.cardId);
+    const card = await findCardById(req.db, req.query._id);
 
     if (!card) {
       return res.status(404).json({ error: { message: 'Card is not found POST.' } });

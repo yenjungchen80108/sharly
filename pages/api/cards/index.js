@@ -13,7 +13,7 @@ handler.get(async (req, res) => {
     req.db,
     req.query.before ? new Date(req.query.before) : undefined,
     req.query.by,
-    req.query.limit ? parseInt(req.query.limit, 10) : undefined
+    req.query.limit ? parseInt(5, 10) : undefined
   );
   return res.json({ cards });
 });
@@ -29,7 +29,7 @@ handler.post(
       tags: ValidateProps.card.tags
     },
     required: ['title'],
-    additionalProperties: false,
+    additionalProperties: true,
   }),
   async (req, res) => {
     if (!req.user) {
