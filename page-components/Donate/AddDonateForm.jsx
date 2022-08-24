@@ -173,12 +173,11 @@ export const DonateItemFormInner = () => {
             setValue={setValues}
             onSubmit={onSubmit}
             onDelete={onDelete}
-            children={// eslint-disable-next-line
-            <DonateForm
-              handleChange={handleChange}
-              values={values}
-            />}
-          ></SingleTableList>
+          ><DonateForm
+            handleChange={handleChange}
+            values={values}
+          />
+          </SingleTableList>
         </>)
         : (<span>no data</span>)}
       </div>
