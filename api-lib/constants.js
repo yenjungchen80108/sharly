@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 export const ValidateProps = {
   user: {
     username: { type: 'string', minLength: 4, maxLength: 20 },
@@ -13,12 +15,20 @@ export const ValidateProps = {
     content: { type: 'string', minLength: 1, maxLength: 280 },
   },
   card: {
+    _id: {
+      type: 'string',
+      default: () => nanoid(),
+    },
     title: { type: 'string', minLength: 1, maxLength: 20 },
     content: { type: 'string', minLength: 1, maxLength: 20 },
     image: { type: 'string', minLength: 1 },
     tags: { type: 'array' }
   },
   partner: {
+    _id: {
+      type: 'string',
+      default: () => nanoid(),
+    },
     partnerId: { type: 'string', minLength: 1, maxLength: 50 },
     year: { type: 'string', minLength: 1, maxLength: 20 },
     title: { type: 'string', minLength: 1, maxLength: 50 },
@@ -27,4 +37,21 @@ export const ValidateProps = {
     tags: { type: 'array' },
     accountInfo: { type: 'object' }
   },
+  donateItem: {
+    _id: {
+      type: 'string',
+      default: () => nanoid(),
+    },
+    // itemId: { type: 'string', minLength: 1, maxLength: 10 },
+    partnerId: { type: 'string', minLength: 1, maxLength: 50 },
+    itemName: { type: 'string', minLength: 1, maxLength: 20 },
+    size: { type: 'string', minLength: 1, maxLength: 10 },
+    brand: { type: 'string', minLength: 1, maxLength: 10 },
+    info: { type: 'string', minLength: 1 },
+    status: { type: 'string', minLength: 1, maxLength: 10 },
+    time: { type: 'string', minLength: 1 },
+    category: { type: 'string', minLength: 1, maxLength: 10 },
+    img: { type: 'string', minLength: 1 },
+    demand: { type: 'string', minLength: 1, maxLength: 10 }
+  }
 };

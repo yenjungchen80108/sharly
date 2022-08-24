@@ -19,10 +19,13 @@ async function createIndexes(db) {
       .createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }]),
     db
       .collection('cards')
-      .createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }]),
+      .createIndexes([{ key: { createdAt: -1 } }, { key: { _id: 1 } }]),
     db
       .collection('partners')
       .createIndexes([{ key: { createdAt: -1 } }, { key: { partnerId: -1 } }]),
+    db
+      .collection('donateItems')
+      .createIndexes([{ key: { createdAt: -1 } }, { key: { _id: 1 } }]),
     db
       .collection('comments')
       .createIndexes([{ key: { createdAt: -1 } }, { key: { postId: -1 } }]),
