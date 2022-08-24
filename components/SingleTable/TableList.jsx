@@ -217,21 +217,19 @@ const TableList = (props) => {
           name={name}
           onClose={handleClose}
           onSubmit={onSubmit}
-          children={children}
-        /> : <></>}
+        >{children}</AddDialog> : <></>}
         {openEdit ?
         <EditDialog
           name={name}
           onClose={handleClose}
           onSubmit={onSubmit}
-          children={children}
-        /> : <></>}
+        >{children}</EditDialog> : <></>}
         {openDelete ?
         <DeleteDialog
           onClose={handleClose}
           onDelete={onDelete}
           rowData={rowData}
-        /> : <></>}
+        ></DeleteDialog> : <></>}
       </div>
     </div>
   );
