@@ -151,7 +151,7 @@ export const HomeCardSettingsInner = () => {
             removeTag={removeTag}
             values={values}
             tags={tags}
-          />
+          ></CategoryForm>
           </SingleTableList>
         </>)
         : (<span>no data</span>)}

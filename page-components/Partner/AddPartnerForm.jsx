@@ -184,7 +184,7 @@ export const AddPartnerFormInner = () => {
             removeTag={removeTag}
             values={values}
             tags={tags}
-          />
+          ></PartnerForm>
           </SingleTableList>
         </>)
         : (<span>no data</span>)}

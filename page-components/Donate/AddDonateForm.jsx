@@ -176,7 +176,7 @@ export const DonateItemFormInner = () => {
           ><DonateForm
             handleChange={handleChange}
             values={values}
-          />
+          ></DonateForm>
           </SingleTableList>
         </>)
         : (<span>no data</span>)}
