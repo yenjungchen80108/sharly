@@ -1,4 +1,4 @@
-import clsx from 'clsx'; // clsx is generally used to conditionally apply a given classNameName
+import clsx from 'clsx';
 import styles from './Item.module.css';
 
 const Item = (props) => {

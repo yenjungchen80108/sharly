@@ -24,7 +24,7 @@ const CategoryList = () => {
             href={`/card/${card._id}`}
             passHref
           >
-            <div className="flex text-gray-400 text-center px-1 py-1 m-3">
+            <div className="flex text-gray-400 text-center px-1 py-1 m-3 cursor-pointer">
               {/* <Post className={styles.post} post={post} /> */}
               <Card className={styles.post} card={card} key={card._id}></Card>
             </div>
