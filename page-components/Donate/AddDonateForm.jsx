@@ -173,10 +173,10 @@ export const DonateItemFormInner = () => {
             setValue={setValues}
             onSubmit={onSubmit}
             onDelete={onDelete}
-            children={<DonateForm
+            children={[<DonateForm
               handleChange={handleChange}
               values={values}
-            />}
+            />]}
           ></SingleTableList>
         </>)
         : (<span>no data</span>)}
