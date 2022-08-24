@@ -178,13 +178,14 @@ export const AddPartnerFormInner = () => {
             setValue={setValues}
             onSubmit={onSubmit}
             onDelete={onDelete}
-            children={[<PartnerForm
+            children={// eslint-disable-next-line
+            <PartnerForm
               handleChange={handleChange}
               handleAddTag={handleAddTag}
               removeTag={removeTag}
               values={values}
               tags={tags}
-            />]}
+            />}
           ></SingleTableList>
         </>)
         : (<span>no data</span>)}

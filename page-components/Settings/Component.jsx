@@ -145,13 +145,14 @@ export const HomeCardSettingsInner = () => {
             setValue={setValues}
             onSubmit={onSubmit}
             onDelete={onDelete}
-            children={[<CategoryForm
+            children={// eslint-disable-next-line
+            <CategoryForm
               handleChange={handleChange}
               handleAddTag={handleAddTag}
               removeTag={removeTag}
               values={values}
               tags={tags}
-            />]}
+            />}
           ></SingleTableList>
         </>)
         : (<span>no data</span>)}

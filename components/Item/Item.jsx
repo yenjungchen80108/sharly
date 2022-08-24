@@ -19,7 +19,7 @@ const Item = (props) => {
       </div>
     </div>
     <div className={styles.itemWrap}>
-    <img className={styles.imgWrap} src={'/png/book.png'} />
+    <img className={styles.imgWrap} src={'/png/book.png'} alt="default_img"/>
     <div className={styles.contentWrap}>
       <div className="text-gray-900 font-bold text-xl mb-2">Books</div>
       <div className="flex items-center">
