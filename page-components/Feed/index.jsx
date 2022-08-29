@@ -3,14 +3,16 @@ import styles from './Feed.module.css';
 import Poster from './Poster';
 import PostList from './PostList';
 import CategoryList from './CategoryList';
+import HomeCardSettings from '../Settings/Component';
 
 export const Feed = () => {
   return (
     <div className={styles.root}>
       <CategoryList />
-      <Spacer size={1} axis="vertical" />      
+      <HomeCardSettings />
+      {/* <Spacer size={1} axis="vertical" />      
       <Poster />
-      <PostList />
+      <PostList /> */}
     </div>
   );
 };

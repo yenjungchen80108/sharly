@@ -138,7 +138,6 @@ const AboutYou = ({ user, mutate }) => {
         formData.append('name', nameRef.current.value);
         formData.append('bio', bioRef.current.value);
         if (profilePictureRef.current.files[0]) {
-          // console.log(profilePictureRef.current.files[0].name);
           let test = { 'name': profilePictureRef.current.files[0].name }
           formData.append('profilePicture', test);
         }
@@ -218,8 +217,7 @@ export const Settings = () => {
           <EmailVerify user={data.user} />
           <AboutYou user={data.user} mutate={mutate} />
           <Auth user={data.user} />
-          <HomeCardSettings user={data.user} mutate={mutate} />
-          {/* <HomeCardSettings card={cardData} mutate={mutate} /> */}
+          {/* <HomeCardSettings user={data.user} mutate={mutate} /> */}
         </>
       ) : null}
     </Wrapper>
