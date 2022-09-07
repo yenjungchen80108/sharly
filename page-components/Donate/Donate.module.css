@@ -20,3 +20,8 @@
     transition: border-color 0.15s ease;
     outline: 0;
 }
+
+.box {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+}
