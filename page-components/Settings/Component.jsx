@@ -16,14 +16,16 @@ import { withRouter } from 'next/router';
 import { Label } from '../../components/Label';
 import { SingleTableList } from '../../components/SingleTable';
 import { columns } from './constant';
+import { useTranslation } from 'react-i18next';
 
 // common form for add, edit, delete mode
 export const CategoryForm = (props) => {
+  const { t } = useTranslation();
   const { handleChange, handleAddTag, removeTag, values, tags } = props;
 
   return (
     <section>
-        <h5>Category Info</h5> 
+        <h5>{t('CATEGORY.MODAL_TITLE')}</h5> 
         <Label
           name="title"
           value={values.title}
@@ -65,7 +67,9 @@ export const HomeCardSettingsInner = () => {
   const [ tags, setTags ]= useState([]);
   const { data, isLoading, isError } = useCards();
   const { mutate } = useSWRConfig();
-
+  const { t } = useTranslation();
+  const closeRef = useRef();
+  // console.log(closeRef);
   const onSubmit = async (e, mode) => {
     try {
       e.preventDefault();
@@ -76,14 +80,16 @@ export const HomeCardSettingsInner = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
       });
-      toast.success('You have updated successfully');
+      toast.success(mode === 'add' ? 
+      t('MESSAGE.CREATE_SUCCESS') : t('MESSAGE.UPDATE_SUCCESS'));
       setValues(mode === 'add' ? init : values);
       mutate('/api/cards');
     } catch (e) {
-      toast.error(e.message);
+      toast.error(e.info.error.message);
     } finally {
-      // setShowModal(false);
-      // setIsLoading(false);
+      setTimeout(() => {
+        closeRef.current.handleClose();
+      }, 1000);
     }
   };
 
@@ -100,12 +106,13 @@ export const HomeCardSettingsInner = () => {
       });
 
       mutate('/api/cards');
-      toast.success('Card has been deleted');
+      toast.success(t('MESSAGE.DELETE_SUCCESS'));
     } catch (e) {
-      toast.error(e.message);
+      toast.error(e.info.error.message);
     } finally {
-      // setShowModal(false);
-      // setIsLoading(false);
+      setTimeout(() => {
+        closeRef.current.handleClose();
+      }, 1000)
   }
 };
 
@@ -138,7 +145,8 @@ export const HomeCardSettingsInner = () => {
         ) : data.cards ? 
         (<>
           <SingleTableList
-            name="Category Settings"
+            ref={closeRef}
+            name={t('CATEGORY.TITLE')}
             initVal={init}
             columns={columns}
             fields={data.cards}
@@ -170,20 +178,7 @@ const HomeCardSettings = () => {
         {/* <h3 className={styles.heading}>Share your thoughts</h3> */}
         {loading ? (
           <LoadingDots>Loading</LoadingDots>
-        ) : data?.user ? (
-          <HomeCardSettingsInner/>
-          // <HomeCardSettingsInner user={data.user} />
-        ) : (
-          <Text color="secondary">
-            Please{' '}
-            <Link href="/login" passHref>
-              <TextLink color="link" variant="highlight">
-                sign in
-              </TextLink>
-            </Link>{' '}
-            to update
-          </Text>
-        )}
+        ) :<HomeCardSettingsInner/>}
       </div>
     // </Wrapper>
   );

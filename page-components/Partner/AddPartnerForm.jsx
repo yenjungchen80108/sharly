@@ -15,15 +15,16 @@ import { withRouter } from 'next/router';
 import { Label } from '../../components/Label';
 import { SingleTableList } from '../../components/SingleTable';
 import { columns } from './constant';
+import { useTranslation } from 'react-i18next';
 
 // common form for add, edit, delete mode
 export const PartnerForm = (props) => {
+  const { t } = useTranslation();
   const { handleChange, handleAddTag, removeTag, values, tags } = props;
 
   return (
     <section>
-        {/* <h4>Donate Book Settings</h4> */}
-        <h5>Partner Info</h5> 
+        <h5>{t('PARTNER.MODAL_TITLE')}</h5> 
         <Label
           name="partnerId"
           value={values.partnerId}
@@ -96,6 +97,8 @@ export const AddPartnerFormInner = () => {
   const [ tags, setTags ]= useState([]);
   const { data, isLoading, isError } = usePartners();
   const { mutate } = useSWRConfig();
+  const { t } = useTranslation();
+  const closeRef = useRef();
 
   const onSubmit = async (e, mode) => {
     try {
@@ -107,14 +110,16 @@ export const AddPartnerFormInner = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
       });
-      toast.success('You have updated successfully');
+      toast.success(mode === 'add' ? 
+      t('MESSAGE.CREATE_SUCCESS') : t('MESSAGE.UPDATE_SUCCESS'));
       setValues(mode === 'add' ? init : values);
       mutate('/api/partners');
     } catch (e) {
-      toast.error(e.message);
+      toast.error(e.info.error.message);
     } finally {
-      // setShowModal(false);
-      // setIsLoading(false);
+      setTimeout(() => {
+        closeRef.current.handleClose();
+      }, 1000);
     }
   };
 
@@ -131,12 +136,13 @@ export const AddPartnerFormInner = () => {
       });
 
       mutate('/api/partners');
-      toast.success('Partner has been deleted');
+      toast.success(t('MESSAGE.DELETE_SUCCESS'));
     } catch (e) {
-      toast.error(e.message);
+      toast.error(e.info.error.message);
     } finally {
-      // setShowModal(false);
-      // setIsLoading(false);
+      setTimeout(() => {
+        closeRef.current.handleClose();
+      }, 1000);
   }
 };
 
@@ -171,7 +177,8 @@ export const AddPartnerFormInner = () => {
         ) : data.partners ? 
         (<>
           <SingleTableList
-            name="Partner Settings"
+            ref={closeRef}
+            name={t('PARTNER.TITLE')}
             initVal={init}
             columns={columns}
             fields={data.partners}

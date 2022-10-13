@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import styles from './Table.module.css';
-import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
+import { useState, useMemo, useEffect, useRef, useCallback, useImperativeHandle, forwardRef } from 'react';
 import { useTable, useFilters, useGlobalFilter, useAsyncDebounce } from "react-table";
 import { Label } from '../Label';
 import AddDialog from '../Dialog/AddDialog/AddDialog';
@@ -79,7 +79,7 @@ function fuzzyTextFilterFn(rows, id, filterValue) {
 // Let the table remove the filter if the string is empty
 fuzzyTextFilterFn.autoRemove = val => !val
 
-const TableList = (props) => {
+const TableList = forwardRef((props, ref) => {
   const { className, name, initVal, columns, fields, children, setValue, onSubmit, onDelete } = props;
   const [ openAdd, setOpenAdd ] = useState(false);
   const [ openEdit, setOpenEdit ] = useState(false);
@@ -125,6 +125,14 @@ const TableList = (props) => {
     setOpenEdit(false);
     setOpenDelete(false);
   };
+
+  useImperativeHandle(ref, () => ({
+    handleClose() {
+      setOpenAdd(false);
+      setOpenEdit(false);
+      setOpenDelete(false);
+    }
+  }),[])
 
   const defaultColumn = useMemo(
     () => ({
@@ -226,6 +234,7 @@ const TableList = (props) => {
         >{children}</EditDialog> : <></>}
         {openDelete ?
         <DeleteDialog
+          name={name}
           onClose={handleClose}
           onDelete={onDelete}
           rowData={rowData}
@@ -233,6 +242,6 @@ const TableList = (props) => {
       </div>
     </div>
   );
-};
+});
 
 export default TableList;

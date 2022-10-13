@@ -14,9 +14,11 @@ import { withRouter } from 'next/router';
 import { Label } from '../../components/Label';
 import { SingleTableList } from '../../components/SingleTable';
 import { columns } from './constant';
+import { useTranslation } from 'react-i18next';
 
 // common form for add, edit, delete mode
 export const DonateForm = (props) => {
+  const { t } = useTranslation();
   const { handleChange, values } = props;
   const { data } = usePartners();
   let newRes = [];
@@ -36,8 +38,7 @@ export const DonateForm = (props) => {
 
   return (
     <section>
-        {/* <h4>Donate Book Settings</h4> */}
-        <h5>Book Info</h5> 
+        <h5>{t('ITEM.MODAL_TITLE')}</h5> 
         <Label
           name="partnerId"
           type="select"
@@ -110,6 +111,8 @@ export const DonateItemFormInner = () => {
   const [values, setValues] = useState(init);
   const { donateItemData, isLoading, isError } = useDonateItems();
   const { mutate } = useSWRConfig();
+  const { t } = useTranslation();
+  const closeRef = useRef();
 
   const onSubmit = async (e, mode) => {
     try {
@@ -120,14 +123,16 @@ export const DonateItemFormInner = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
       });
-      toast.success('You have updated successfully');
+      toast.success(mode === 'add' ? 
+      t('MESSAGE.CREATE_SUCCESS') : t('MESSAGE.UPDATE_SUCCESS'));
       setValues(mode === 'add' ? init : values);
       mutate('/api/donateItems');
     } catch (e) {
-      toast.error(e.message);
+      toast.error(e.info.error.message);
     } finally {
-      // setShowModal(false);
-      // setIsLoading(false);
+      setTimeout(() => {
+        closeRef.current.handleClose();
+      }, 1000);
     }
   };
 
@@ -144,12 +149,13 @@ export const DonateItemFormInner = () => {
       });
 
       mutate('/api/donateItems');
-      toast.success('Donate Item has been deleted');
+      toast.success(t('MESSAGE.DELETE_SUCCESS'));
     } catch (e) {
-      toast.error(e.message);
+      toast.error(e.info.error.message);
     } finally {
-      // setShowModal(false);
-      // setIsLoading(false);
+      setTimeout(() => {
+        closeRef.current.handleClose();
+      }, 1000);
   }
 };
 
@@ -166,7 +172,8 @@ export const DonateItemFormInner = () => {
         ) : donateItemData.donateItems ? 
         (<>
           <SingleTableList
-            name="Donate Item Settings"
+            ref={closeRef}
+            name={t('ITEM.TITLE')}
             initVal={init}
             columns={columns}
             fields={donateItemData.donateItems}
