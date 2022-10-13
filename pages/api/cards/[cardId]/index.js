@@ -34,6 +34,7 @@ handler.post(
       title: ValidateProps.card.title,
       content: ValidateProps.card.content,
       image: ValidateProps.card.image,
+      category: ValidateProps.card.category,
       tags: ValidateProps.card.tags
     },
     required: ['title'],
@@ -47,6 +48,7 @@ handler.post(
     const title = req.body.title;
     const content = req.body.content;
     const image = req.body.image;
+    const category = req.body.category;
     // const tags = req.body.tags;
     // console.log('req.query',req.query.cardId);
     const card = await findCardById(req.db, req.query._id);
@@ -57,7 +59,7 @@ handler.post(
 
     const cards = await insertCard(req.db, card._id, {
       creatorId: req.user._id,
-      content, title, image, tags
+      content, title, image, category, tags
     });
 
     return res.json({ cards });

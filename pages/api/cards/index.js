@@ -26,6 +26,7 @@ handler.post(
       title: ValidateProps.card.title,
       content: ValidateProps.card.content,
       image: ValidateProps.card.image,
+      category: ValidateProps.card.category,
       tags: ValidateProps.card.tags
     },
     required: ['title'],
@@ -36,9 +37,9 @@ handler.post(
       return res.status(401).end();
     }
 
-    const { title, content, image, tags } = req.body
+    const { title, content, image, category, tags } = req.body
     const cards = await insertCard(req.db, {
-      title, content, image, tags,
+      title, content, image, category, tags,
       creatorId: req.user._id,
     });
 
@@ -54,6 +55,7 @@ handler.patch(
       title: ValidateProps.card.title,
       content: ValidateProps.card.content,
       image: ValidateProps.card.image,
+      category: ValidateProps.card.category,
       tags: ValidateProps.card.tags
     }
   }),
@@ -63,8 +65,8 @@ handler.patch(
       return;
     }
 
-    const { _id, title, content, image, tags  } = req.body;
-    const cards = await updateCardById(req.db, _id, { title, content, image, tags });
+    const { _id, title, content, image, category, tags  } = req.body;
+    const cards = await updateCardById(req.db, _id, { title, content, image, category, tags });
 
     res.json({ cards });
   }

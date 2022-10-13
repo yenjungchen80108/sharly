@@ -9,7 +9,7 @@ const AddCard = ({ cardAdd }) => {
       <Head>
         <title>{cardAdd.category}</title>
       </Head>
-       {cardAdd.category === 'book' ? <AddDonateForm /> : <></>}
+       {cardAdd.category === 'books' ? <AddDonateForm /> : <></>}
     </>
   );
 };

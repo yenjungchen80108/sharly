@@ -14,7 +14,7 @@ import styles from './Donate.module.css';
 export const Donate = ({ item }) => {
   const router = useRouter();
   const { donateItemData, isLoading, isError } = useDonateItems();
-  const { cardId } = router.query;
+  const { cardId, category } = router.query;
   // router.query.category = 'book';
   // router.push(router);
   // const { data } = useCards();
@@ -28,7 +28,7 @@ export const Donate = ({ item }) => {
         // category: 'book',
         query: {
           cardId: cardId,
-          category: 'book'
+          category: category
         },
       }}
       as={`/card/[cardId]/[category]/add`}>
@@ -39,7 +39,9 @@ export const Donate = ({ item }) => {
         </div>
       </Link>
       <div className={styles.box}>
-      {donateItemData ? donateItemData.donateItems.map((item, id) => (
+      {donateItemData ? donateItemData.donateItems
+      .filter(data => data.category === category)
+      .map((item, id) => (
           <Link
             key={item._id}
             href={`/card/${item._id}`}

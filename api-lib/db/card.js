@@ -51,12 +51,13 @@ export async function findCards(db, before, by, limit = 10) {
     .toArray();
 }
 
-export async function insertCard(db, { title, content, image, tags, creatorId }) {
+export async function insertCard(db, { title, content, image, tags, category, creatorId }) {
   const card = {
     title,
     content,
     image,
     tags,
+    category,
     creatorId,
     createdAt: new Date(),
   };
@@ -78,12 +79,13 @@ export async function insertCard(db, { title, content, image, tags, creatorId })
 //   });
 // }
 
-export async function updateCardById(db, id, { title, content, image, tags }) {
+export async function updateCardById(db, id, { title, content, image, tags, category }) {
   const card = {
     title,
     content,
     image,
     tags,
+    category,
     createdAt: new Date(),
   };
   

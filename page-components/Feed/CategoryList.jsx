@@ -21,7 +21,12 @@ const CategoryList = () => {
         {data ? data.cards.map((card, id) => (
           <Link
             key={card._id}
-            href={`/card/${card._id}`}
+            href={{
+              pathname: `/card/${card._id}`,
+              query: {
+                cardId: card._id,
+                category: card.category
+              },}}
             passHref
           >
             <div className="flex text-gray-400 text-center px-1 py-1 m-3 cursor-pointer">

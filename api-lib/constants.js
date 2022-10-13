@@ -22,7 +22,8 @@ export const ValidateProps = {
     title: { type: 'string', minLength: 1, maxLength: 20 },
     content: { type: 'string', minLength: 1, maxLength: 20 },
     image: { type: 'string', minLength: 1 },
-    tags: { type: 'array' }
+    tags: { type: 'array' },
+    category: { type: 'string' }
   },
   partner: {
     _id: {

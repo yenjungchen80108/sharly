@@ -42,6 +42,11 @@ export const CategoryForm = (props) => {
           onChange={handleChange}
         ></Label>
         <Label
+          name="category"
+          value={values.category}
+          onChange={handleChange}
+        ></Label>
+        <Label
           type="tag"
           name="tags"
           tags={tags}
@@ -61,6 +66,7 @@ export const HomeCardSettingsInner = () => {
     title: '',
     content: '',
     image: '',
+    category: '',
     tags: [],
   }
   const [ values, setValues ] = useState(init);
