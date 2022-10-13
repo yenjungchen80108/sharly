@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { sideUpInfo, sideDownInfo } from './sideData';
 import Link from 'next/link';
+import { useRouter } from 'next/router'
 
 const Side = () => {
 const { t } = useTranslation();
@@ -29,7 +30,8 @@ const { t } = useTranslation();
                     href={{
                     pathname: `/side/[title]`,
                     query: {
-                      title: tempName, // should be `title` not `id`
+                      title: tempName, // should be `title` not `id`,
+                      trans: t(item.name),
                     },
                   }}
                   as={`/side/${tempName}`}

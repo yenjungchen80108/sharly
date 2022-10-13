@@ -3,16 +3,18 @@ import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 import { Partner } from '../../../page-components/Partner';
 import { Contact } from '../../../page-components/Contact';
+import { useRouter } from 'next/router'
 
 const SidePage = ({ side }) => {
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
+  const router = useRouter();
   return (
     <>
       <Head>
-        <title>{side.title}</title>
+        <title>{router.query.trans}</title>
       </Head>
-      {side.title === 'CooperatePartner' ? <Partner /> :
-      side.title === 'ContactUs' ? <Contact /> :
+      {router.query.trans === t('SIDE.COOPERATE_PARTY') ? <Partner /> :
+      router.query.trans === t('SIDE.CONTACT_US') ? <Contact /> :
       <section>Coming Soon...</section>}
     </>
   );

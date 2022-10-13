@@ -1,15 +1,17 @@
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 import AddPartnerForm from '../../../../page-components/Partner/AddPartnerForm';
+import { useRouter } from 'next/router';
 
 const AddPartnerPage = ({ sideAdd }) => {
   const { t } = useTranslation();
+  const router = useRouter();
   return (
     <>
       <Head>
         <title>{sideAdd.title}</title>
       </Head>
-      {sideAdd.title === 'CooperatePartner' ? <AddPartnerForm /> : <></>}
+      {router.query.trans === t('SIDE.COOPERATE_PARTY') ? <AddPartnerForm /> : <>Coming Soon</>}
     </>
   );
 };
