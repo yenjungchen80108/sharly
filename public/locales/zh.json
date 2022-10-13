@@ -21,9 +21,6 @@
         "COOPERATE_PARTY": "合作伙伴",
         "CONTACT_US": "联络我们"
     },
-    "COMMON": {
-        "PLACEHOLDER": "请输入..."
-    },
     "CONTACT": {
         "TITLE": "主旨",
         "CONTENT": "內文",
@@ -45,5 +42,32 @@
     "REGISTER": {
         "TITLE": "註册",
         "SUBMIT": "开始"
+    },
+    "CATEGORY": {
+        "TITLE": "類別設定",
+        "MODAL_TITLE": "類別資料表單"
+    },
+    "PARTNER": {
+        "TITLE": "機構設定",
+        "MODAL_TITLE": "機構資料表單"
+    },
+    "ITEM": {
+        "TITLE": "物品設定",
+        "MODAL_TITLE": "物品資料表單"
+    },
+    "COMMON": {
+        "PLACEHOLDER": "请输入...",
+        "ADD": "新增",
+        "EDIT": "编辑",
+        "DELETE": "删除",
+        "SAVE": "储存",
+        "YES": "是",
+        "NO": "否"
+    },
+    "MESSAGE": {
+        "DELETE": "确定删除？",
+        "CREATE_SUCCESS": "新增成功！",
+        "UPDATE_SUCCESS": "更新成功！",
+        "DELETE_SUCCESS": "删除成功！"
     }
 }

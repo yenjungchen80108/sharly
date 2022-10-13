@@ -21,9 +21,6 @@
         "COOPERATE_PARTY": "Cooperate Partner",
         "CONTACT_US": "Contact Us"
     },
-    "COMMON": {
-        "PLACEHOLDER": "Please Type..."
-    },
     "CONTACT": {
         "TITLE": "Title",
         "CONTENT": "Content",
@@ -45,5 +42,32 @@
     "REGISTER": {
         "TITLE": "Register",
         "SUBMIT": "Start"
+    },
+    "CATEGORY": {
+        "TITLE": "Category Settings",
+        "MODAL_TITLE": "Category Info Form"
+    },
+    "PARTNER": {
+        "TITLE": "Partner Settings",
+        "MODAL_TITLE": "Partner Info Form"
+    },
+    "ITEM": {
+        "TITLE": "Item Settings",
+        "MODAL_TITLE": "Item Info Form"
+    },
+    "COMMON": {
+        "PLACEHOLDER": "Please Type...",
+        "ADD": "Add",
+        "EDIT": "Edit",
+        "DELETE": "Delete",
+        "SAVE": "Save",
+        "YES": "Yes",
+        "NO": "No"
+    },
+    "MESSAGE": {
+        "DELETE": "Are you sure you want to delete?",
+        "CREATE_SUCCESS": "Create Successfully!",
+        "UPDATE_SUCCESS": "Update Successfully!",
+        "DELETE_SUCCESS": "Delete Successfully!"
     }
 }
