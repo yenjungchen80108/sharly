@@ -53,3 +53,27 @@ body {
   color: var(--foreground);
   background-color: var(--background);
 }
+
+@mixin yearBadge {
+  display: block;
+  text-align: center;
+  border-radius: 4px;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+$yearConfig: 
+  "0" white #f4516c,
+  "1" white #ffb822,
+  "2" white #34bfa3,
+  "3" white #36a3f7,
+  "4" white #716aca,
+  "5" white #954535;
+
+@each $year in $yearConfig {
+  .age--#{nth($year, 1)} {
+    @include yearBadge;
+    color: nth($year, 2);
+    background-color: nth($year, 3);
+  }
+}

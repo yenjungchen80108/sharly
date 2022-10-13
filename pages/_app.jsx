@@ -1,4 +1,4 @@
-import '../assets/base.css';
+import '../assets/base.scss';
 import '../styles/globals.css'
 import { Layout } from '../components/Layout';
 import { ThemeProvider } from 'next-themes';
