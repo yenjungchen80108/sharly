@@ -4,10 +4,12 @@ import Poster from './Poster';
 import PostList from './PostList';
 import CategoryList from './CategoryList';
 import HomeCardSettings from '../Settings/Component';
+import PcDonation from '../../public/svg/pcDonation.svg';
 
 export const Feed = () => {
   return (
     <div className={styles.root}>
+      <PcDonation />
       <CategoryList />
       <HomeCardSettings />
       {/* <Spacer size={1} axis="vertical" />      
