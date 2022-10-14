@@ -1,5 +1,5 @@
 import { ValidateProps } from '../../../api-lib/constants';
-import { findDonateItems, insertDonateItem, updateDonateItemById, findDonateItemById, deleteDonateItemById } from '../../../api-lib/db';
+import { findDonateItems, countDonateItems, insertDonateItem, updateDonateItemById, findDonateItemById, deleteDonateItemById } from '../../../api-lib/db';
 import { auths, database, validateBody } from '../../../api-lib/middlewares';
 import { ncOpts } from '../../../api-lib/nc';
 import nc from 'next-connect';
@@ -8,15 +8,34 @@ const handler = nc(ncOpts);
 
 handler.use(database);
 
+const ITEMS_PER_PAGE = 5;
 handler.get(async (req, res) => {
-  const donateItems = await findDonateItems(
+  const page = req.query.page || 1;
+  const skip = (page - 1) * ITEMS_PER_PAGE;
+  // add skip and limit query for pagination
+  const donateInfo = await findDonateItems(
     req.db,
     req.query.before ? new Date(req.query.before) : undefined,
     req.query.by,
-    req.query.limit ? parseInt(5, 10) : undefined
+    req.query.skip ? req.query.skip : skip,
+    req.query.limit ? req.query.limit : ITEMS_PER_PAGE
   );
+  // get all items in donate item table
+  const donateInfoAll = await countDonateItems(
+    req.db,
+    req.query.before ? new Date(req.query.before) : undefined,
+    req.query.by
+  );
+  const countPromise = donateInfoAll.length;
+  const [count, items] = await Promise.all([countPromise, donateInfo]);
+  const pageCount = Math.ceil(countPromise / ITEMS_PER_PAGE);
 
-  res.json({ donateItems });
+  return res.json({ 
+    pagination: {
+      count,
+      pageCount
+    },
+    donateItems: items })
 });
 
 handler.post(

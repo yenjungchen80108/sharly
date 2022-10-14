@@ -25,7 +25,7 @@ export async function findDonateItemById(db, id) {
   return donateItems[0];
 }
 
-export async function findDonateItems(db, before, by, limit = 5) {
+export async function findDonateItems(db, before, by, skip, limit) {
   return db
     .collection('donateItems')
     .aggregate([
@@ -36,6 +36,7 @@ export async function findDonateItems(db, before, by, limit = 5) {
         },
       },
       { $sort: { _id: -1 } },
+      { $skip: skip },
       { $limit: limit },
       // {
       //   $lookup: {
@@ -49,6 +50,20 @@ export async function findDonateItems(db, before, by, limit = 5) {
       // { $project: dbProjectionUsers('creator.') },
     ])
     .toArray();
+}
+
+export function countDonateItems(db, before, by) {
+  return db
+  .collection('donateItems')
+  .aggregate([
+    {
+      $match: {
+        ...(by && { creatorId: new ObjectId(by) }),
+        ...(before && { createdAt: { $lt: before } }),
+      },
+    },
+  ])
+  .toArray();
 }
 
 export async function insertDonateItem(db, { partnerId, itemName, size, brand, info,
