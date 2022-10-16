@@ -1,5 +1,5 @@
 import { ValidateProps } from '../../../api-lib/constants';
-import { findCards, insertCard, updateCardById, findCardById, deleteCardById } from '../../../api-lib/db';
+import { findCards, countCards, insertCard, updateCardById, findCardById, deleteCardById } from '../../../api-lib/db';
 import { auths, database, validateBody } from '../../../api-lib/middlewares';
 import { ncOpts } from '../../../api-lib/nc';
 import nc from 'next-connect';
@@ -8,14 +8,33 @@ const handler = nc(ncOpts);
 
 handler.use(database);
 
+const ITEMS_PER_PAGE = 5;
 handler.get(async (req, res) => {
-  const cards = await findCards(
+  const page = req.query.page || 1;
+  const skip = (page - 1) * ITEMS_PER_PAGE;
+  // add skip and limit query for pagination
+  const cardInfo = await findCards(
     req.db,
     req.query.before ? new Date(req.query.before) : undefined,
     req.query.by,
-    req.query.limit ? parseInt(5, 10) : undefined
+    req.query.skip ? req.query.skip : skip,
+    req.query.limit ? req.query.limit : ITEMS_PER_PAGE
   );
-  return res.json({ cards });
+  // get all items in partner table
+  const cardInfoAll = await countCards(
+    req.db,
+    req.query.before ? new Date(req.query.before) : undefined,
+    req.query.by
+  );
+  const countPromise = cardInfoAll.length;
+  const [count, items] = await Promise.all([countPromise, cardInfo]);
+  const pageCount = Math.ceil(countPromise / ITEMS_PER_PAGE);
+  return res.json({ 
+    pagination: {
+      count,
+      pageCount
+    },
+    cards: items })
 });
 
 handler.post(

@@ -15,9 +15,9 @@ import { Label } from '../../components/Label';
 import { SingleTableList } from '../../components/SingleTable';
 import { columns } from './constant';
 import { useTranslation } from 'react-i18next';
-import { Button } from '../../components/Button';
-import LeftArrow from '../../public/svg/leftArrow.svg'
-import RightArrow from '../../public/svg/rightArrow.svg'
+// import { Button } from '../../components/Button';
+// import LeftArrow from '../../public/svg/leftArrow.svg'
+// import RightArrow from '../../public/svg/rightArrow.svg'
 
 // common form for add, edit, delete mode
 export const DonateForm = (props) => {
@@ -112,33 +112,30 @@ export const DonateItemFormInner = () => {
     demand: ''
   }
   const [values, setValues] = useState(init);
-  const [pageIndex, setPageIndex] = useState(1);
-  const [pageCount, setPageCount] = useState(0);
-  const { donateItemData, isLoading } = useDonateItemsPages(pageIndex);
+  // const [pageIndex, setPageIndex] = useState(1);
+  // const [pageCount, setPageCount] = useState(0);
   const { mutate } = useSWRConfig();
   const { t } = useTranslation();
-  const closeRef = useRef();
+  const tableRef = useRef();
+  const { data, isLoading } = useDonateItemsPages(1);
 
   useEffect(() => {
-    console.log({donateItemData});
-    if (donateItemData) {
-      setPageCount(donateItemData.pagination.pageCount);
-    }
-  }, [donateItemData])
+    console.log({tableRef});
+  }, [tableRef])
   
-  function handlePrev() {
-    setPageIndex((p) => {
-      if (p === 1) return p;
-      return p - 1;
-    })
-  }
+  // function handlePrev() {
+  //   setPageIndex((p) => {
+  //     if (p === 1) return p;
+  //     return p - 1;
+  //   })
+  // }
 
-  function handleNext() {
-    setPageIndex((p) => {
-      if (p === pageCount) return p;
-      return p + 1;
-    })
-  }
+  // function handleNext() {
+  //   setPageIndex((p) => {
+  //     if (p === pageCount) return p;
+  //     return p + 1;
+  //   })
+  // }
 
   const onSubmit = async (e, mode) => {
     try {
@@ -152,12 +149,13 @@ export const DonateItemFormInner = () => {
       toast.success(mode === 'add' ? 
       t('MESSAGE.CREATE_SUCCESS') : t('MESSAGE.UPDATE_SUCCESS'));
       setValues(mode === 'add' ? init : values);
-      mutate(`/api/donateItems?page=${pageIndex}`);
+      mutate(`/api/donateItems?page=${tableRef.current.pageId}`);
     } catch (e) {
       toast.error(e.info.error.message);
     } finally {
       setTimeout(() => {
-        closeRef.current.handleClose();
+        // console.log({tableRef});
+        tableRef.current.handleClose();
       }, 1000);
     }
   };
@@ -174,13 +172,13 @@ export const DonateItemFormInner = () => {
         }),
       });
 
-      mutate(`/api/donateItems?page=${pageIndex}`);
+      mutate(`/api/donateItems?page=${tableRef.current.pageId}`);
       toast.success(t('MESSAGE.DELETE_SUCCESS'));
     } catch (e) {
       toast.error(e.info.error.message);
     } finally {
       setTimeout(() => {
-        closeRef.current.handleClose();
+        tableRef.current.handleClose();
       }, 1000);
   }
 };
@@ -195,14 +193,16 @@ export const DonateItemFormInner = () => {
         <Spacer axis="vertical" size={1} />
         {isLoading ? (
         <LoadingDots>Loading</LoadingDots>
-        ) : donateItemData.donateItems ? 
+        ) : data.donateItems ? 
         (<>
           <SingleTableList
-            ref={closeRef}
+            ref={tableRef}
             name={t('ITEM.TITLE')}
             initVal={init}
             columns={columns}
-            fields={donateItemData.donateItems}
+            fields={data.donateItems}
+            // tableSource={donateItemData}
+            usePages={useDonateItemsPages}
             setValue={setValues}
             onSubmit={onSubmit}
             onDelete={onDelete}
@@ -211,12 +211,11 @@ export const DonateItemFormInner = () => {
             values={values}
           ></DonateForm>
           </SingleTableList>
-          <div style={{ display: 'flex', margin: 10 }}>
-            {/* Page: {pageIndex}<br/>Page count: {pageCount} */}
+          {/* <div style={{ display: 'flex', margin: 10 }}>
             <Button onClick={handlePrev} disabled={pageIndex === 1}><LeftArrow/></Button>
             &nbsp;
             <Button onClick={handleNext} disabled={pageIndex === pageCount}><RightArrow/></Button>
-          </div>
+          </div> */}
         </>)
         : (<span>no data</span>)}
       </div>

@@ -25,7 +25,7 @@ export async function findPartnerById(db, id) {
   return partners[0];
 }
 
-export async function findPartners(db, before, by, limit = 5) {
+export async function findPartners(db, before, by, skip, limit) {
   return db
     .collection('partners')
     .aggregate([
@@ -36,6 +36,7 @@ export async function findPartners(db, before, by, limit = 5) {
         },
       },
       { $sort: { _id: -1 } },
+      { $skip: skip },
       { $limit: limit },
       // {
       //   $lookup: {
@@ -49,6 +50,20 @@ export async function findPartners(db, before, by, limit = 5) {
       // { $project: dbProjectionUsers('creator.') },
     ])
     .toArray();
+}
+
+export function countPartners(db, before, by) {
+  return db
+  .collection('partners')
+  .aggregate([
+    {
+      $match: {
+        ...(by && { creatorId: new ObjectId(by) }),
+        ...(before && { createdAt: { $lt: before } }),
+      },
+    },
+  ])
+  .toArray();
 }
 
 export async function insertPartner(db, { partnerId, title, year, content, image, tags, accountInfo }) {

@@ -13,7 +13,7 @@ import styles from './Donate.module.css';
 
 export const Donate = ({ item }) => {
   const router = useRouter();
-  const { donateItemData, isLoading, isError } = useDonateItems();
+  const { data, isLoading, isError } = useDonateItems();
   const { cardId, category } = router.query;
   // router.query.category = 'book';
   // router.push(router);
@@ -39,7 +39,7 @@ export const Donate = ({ item }) => {
         </div>
       </Link>
       <div className={styles.box}>
-      {donateItemData ? donateItemData.donateItems
+      {data ? data.donateItems
       .filter(data => data.category === category)
       .map((item, id) => (
           <Link

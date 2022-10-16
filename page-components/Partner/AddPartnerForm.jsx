@@ -2,7 +2,7 @@ import { Spacer, Wrapper } from '../../components/Layout';
 import { LoadingDots } from '../../components/LoadingDots';
 import { Text, TextLink } from '../../components/Text';
 import { fetcher } from '../../lib/fetch';
-import { usePartners } from '../../lib/partner';
+import { usePartners, usePartnerPagination } from '../../lib/partner';
 import { useDonateItems } from '../../lib/donateItem';
 import { useCurrentUser } from '../../lib/user';
 import Link from 'next/link';
@@ -95,10 +95,10 @@ export const AddPartnerFormInner = () => {
   }
   const [ values, setValues ] = useState(init);
   const [ tags, setTags ]= useState([]);
-  const { data, isLoading, isError } = usePartners();
   const { mutate } = useSWRConfig();
   const { t } = useTranslation();
-  const closeRef = useRef();
+  const tableRef = useRef();
+  const { data, isLoading, isError } = usePartnerPagination(1);
 
   const onSubmit = async (e, mode) => {
     try {
@@ -118,7 +118,7 @@ export const AddPartnerFormInner = () => {
       toast.error(e.info.error.message);
     } finally {
       setTimeout(() => {
-        closeRef.current.handleClose();
+        tableRef.current.handleClose();
       }, 1000);
     }
   };
@@ -141,7 +141,7 @@ export const AddPartnerFormInner = () => {
       toast.error(e.info.error.message);
     } finally {
       setTimeout(() => {
-        closeRef.current.handleClose();
+        tableRef.current.handleClose();
       }, 1000);
   }
 };
@@ -177,11 +177,12 @@ export const AddPartnerFormInner = () => {
         ) : data.partners ? 
         (<>
           <SingleTableList
-            ref={closeRef}
+            ref={tableRef}
             name={t('PARTNER.TITLE')}
             initVal={init}
             columns={columns}
             fields={data.partners}
+            usePages={usePartnerPagination}
             setValue={setValues}
             onSubmit={onSubmit}
             onDelete={onDelete}

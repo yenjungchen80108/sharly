@@ -1,5 +1,5 @@
 import { ValidateProps } from '../../../api-lib/constants';
-import { findPartners, insertPartner, updatePartnerById, findPartnerById, deletePartnerById } from '../../../api-lib/db';
+import { findPartners, countPartners, insertPartner, updatePartnerById, findPartnerById, deletePartnerById } from '../../../api-lib/db';
 import { auths, database, validateBody } from '../../../api-lib/middlewares';
 import { ncOpts } from '../../../api-lib/nc';
 import nc from 'next-connect';
@@ -8,15 +8,34 @@ const handler = nc(ncOpts);
 
 handler.use(database);
 
+const ITEMS_PER_PAGE = 5;
 handler.get(async (req, res) => {
-  const partners = await findPartners(
+  const page = req.query.page || 1;
+  const skip = (page - 1) * ITEMS_PER_PAGE;
+  // add skip and limit query for pagination
+  const partnerInfo = await findPartners(
     req.db,
     req.query.before ? new Date(req.query.before) : undefined,
     req.query.by,
-    req.query.limit ? parseInt(5, 10) : undefined
+    req.query.skip ? req.query.skip : skip,
+    req.query.limit ? req.query.limit : ITEMS_PER_PAGE
   );
 
-  res.json({ partners });
+  // get all items in partner table
+  const partnerInfoAll = await countPartners(
+    req.db,
+    req.query.before ? new Date(req.query.before) : undefined,
+    req.query.by
+  );
+  const countPromise = partnerInfoAll.length;
+  const [count, items] = await Promise.all([countPromise, partnerInfo]);
+  const pageCount = Math.ceil(countPromise / ITEMS_PER_PAGE);
+  return res.json({ 
+    pagination: {
+      count,
+      pageCount
+    },
+    partners: items })
 });
 
 handler.post(

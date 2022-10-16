@@ -3,7 +3,7 @@ import { LoadingDots } from '../../components/LoadingDots';
 import { Text, TextLink } from '../../components/Text';
 import { fetcher } from '../../lib/fetch';
 import { usePartners } from '../../lib/partner';
-import { useCards } from '../../lib/card';
+import { useCards, useCardPages } from '../../lib/card';
 import { useDonateItems } from '../../lib/donateItem';
 import { useCurrentUser } from '../../lib/user';
 import Link from 'next/link';
@@ -71,11 +71,11 @@ export const HomeCardSettingsInner = () => {
   }
   const [ values, setValues ] = useState(init);
   const [ tags, setTags ]= useState([]);
-  const { data, isLoading, isError } = useCards();
   const { mutate } = useSWRConfig();
   const { t } = useTranslation();
-  const closeRef = useRef();
-  // console.log(closeRef);
+  const tableRef = useRef();
+  const { data, isLoading, isError } = useCardPages(1);
+
   const onSubmit = async (e, mode) => {
     try {
       e.preventDefault();
@@ -94,7 +94,7 @@ export const HomeCardSettingsInner = () => {
       toast.error(e.info.error.message);
     } finally {
       setTimeout(() => {
-        closeRef.current.handleClose();
+        tableRef.current.handleClose();
       }, 1000);
     }
   };
@@ -117,7 +117,7 @@ export const HomeCardSettingsInner = () => {
       toast.error(e.info.error.message);
     } finally {
       setTimeout(() => {
-        closeRef.current.handleClose();
+        tableRef.current.handleClose();
       }, 1000)
   }
 };
@@ -151,11 +151,12 @@ export const HomeCardSettingsInner = () => {
         ) : data.cards ? 
         (<>
           <SingleTableList
-            ref={closeRef}
+            ref={tableRef}
             name={t('CATEGORY.TITLE')}
             initVal={init}
             columns={columns}
             fields={data.cards}
+            usePages={useCardPages}
             setValue={setValues}
             onSubmit={onSubmit}
             onDelete={onDelete}

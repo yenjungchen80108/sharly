@@ -25,7 +25,7 @@ export async function findCardById(db, id) {
   return cards[0];
 }
 
-export async function findCards(db, before, by, limit = 10) {
+export async function findCards(db, before, by, skip, limit) {
   return db
     .collection('cards')
     .aggregate([
@@ -36,19 +36,34 @@ export async function findCards(db, before, by, limit = 10) {
         },
       },
       { $sort: { _id: 1 } },
+      { $skip: skip },
       { $limit: limit },
-      {
-        $lookup: {
-          from: 'users',
-          localField: 'creatorId',
-          foreignField: '_id',
-          as: 'creator',
-        },
-      },
-      { $unwind: '$creator' },
-      { $project: dbProjectionUsers('creator.') },
+      // {
+      //   $lookup: {
+      //     from: 'users',
+      //     localField: 'creatorId',
+      //     foreignField: '_id',
+      //     as: 'creator',
+      //   },
+      // },
+      // { $unwind: '$creator' },
+      // { $project: dbProjectionUsers('creator.') },
     ])
     .toArray();
+}
+
+export function countCards(db, before, by) {
+  return db
+  .collection('cards')
+  .aggregate([
+    {
+      $match: {
+        ...(by && { creatorId: new ObjectId(by) }),
+        ...(before && { createdAt: { $lt: before } }),
+      },
+    },
+  ])
+  .toArray();
 }
 
 export async function insertCard(db, { title, content, image, tags, category, creatorId }) {

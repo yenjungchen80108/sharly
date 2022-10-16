@@ -20,7 +20,7 @@ handler.get(async (req, res) => {
     req.db,
     req.query.partnerId,
     req.query.before ? new Date(req.query.before) : undefined,
-    req.query.limit ? parseInt(req.query.limit, 10) : undefined
+    // req.query.limit ? parseInt(req.query.limit, 10) : undefined
   );
 
   return res.json({ partners });

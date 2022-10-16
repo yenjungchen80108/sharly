@@ -6,10 +6,13 @@ import { Label } from '../Label';
 import AddDialog from '../Dialog/AddDialog/AddDialog';
 import EditDialog from '../Dialog/EditDialog/EditDialog';
 import DeleteDialog from '../Dialog/DeleteDialog/DeleteDialog';
+import { Button } from '../Button';
 import AddForm from '../../public/svg/addForm.svg';
 import EditForm from '../../public/svg/editForm.svg';
 import DeleteForm from '../../public/svg/deleteForm.svg';
-import SearchIcon from '../../public/svg/searchIcon.svg'
+import SearchIcon from '../../public/svg/searchIcon.svg';
+import LeftArrow from '../../public/svg/leftArrow.svg'
+import RightArrow from '../../public/svg/rightArrow.svg'
 
 const classes = {
   cardOuter: 'shadow-md rounded px-8 pt-6 pb-8',
@@ -80,11 +83,38 @@ function fuzzyTextFilterFn(rows, id, filterValue) {
 fuzzyTextFilterFn.autoRemove = val => !val
 
 const TableList = (props, ref) => {
-  const { className, name, initVal, columns, fields, children, setValue, onSubmit, onDelete } = props;
+  const { className, name, initVal, columns, usePages, fields, children, setValue, onSubmit, onDelete } = props;
   const [ openAdd, setOpenAdd ] = useState(false);
   const [ openEdit, setOpenEdit ] = useState(false);
   const [ openDelete, setOpenDelete ] = useState(false);
   const [ rowData, setRowData ] = useState(initVal);
+  const [ pageIndex, setPageIndex ] = useState(1);
+  const [ pageCount, setPageCount ] = useState(0);
+  const { data } = usePages(pageIndex);
+  const [ field, setField ] = useState(data);
+
+  useEffect(() => {
+    let item = Object.keys(data);
+    if (data) {
+      setPageCount(data[item[0]].pageCount);
+      setField(data[item[1]])
+    };
+  }, [])
+  
+  function handlePrev() {
+    setPageIndex((p) => {
+      if (p === 1) return p;
+      return p - 1;
+    })
+  }
+
+  function handleNext() {
+    setPageIndex((p) => {
+      if (p === pageCount) return p;
+      return p + 1;
+    })
+  }
+
   const filterTypes = useMemo(
     () => ({
       // Add a new fuzzyTextFilterFn filter type.
@@ -131,7 +161,9 @@ const TableList = (props, ref) => {
       setOpenAdd(false);
       setOpenEdit(false);
       setOpenDelete(false);
-    }
+    },
+    pageId: pageIndex,
+    ref
   }),[])
 
   const defaultColumn = useMemo(
@@ -144,7 +176,7 @@ const TableList = (props, ref) => {
 
   const tableInstance = useTable({
     columns,
-    data: fields,
+    data: data === undefined ? field : data[Object.keys(data)[1]],
     defaultColumn, // Be sure to pass the defaultColumn option
     filterTypes,
   }, useFilters,
@@ -218,6 +250,11 @@ const TableList = (props, ref) => {
                 })}
               </tbody>
             </table>
+            <div style={{ display: 'flex', margin: 10 }}>
+              <Button onClick={handlePrev} disabled={pageIndex === 1}><LeftArrow/></Button>
+              &nbsp;
+              <Button onClick={handleNext} disabled={pageIndex === pageCount}><RightArrow/></Button>
+            </div>
           </div>
         </div>
         {openAdd ?
