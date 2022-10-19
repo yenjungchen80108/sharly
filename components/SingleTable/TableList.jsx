@@ -250,7 +250,7 @@ const TableList = (props, ref) => {
                 })}
               </tbody>
             </table>
-            <div style={{ display: 'flex', margin: 10 }}>
+            <div style={{ display: 'flex', margin: 10,justifyContent: 'flex-end' }}>
               <Button onClick={handlePrev} disabled={pageIndex === 1}><LeftArrow/></Button>
               &nbsp;
               <Button onClick={handleNext} disabled={pageIndex === pageCount}><RightArrow/></Button>
