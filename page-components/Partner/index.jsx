@@ -19,8 +19,8 @@ export const Partner = () => {
       }}
       as={`/side/[title]/add`}
       >
-        <Button type="success">
-            Add/Edit/Delete new partner
+        <Button>
+        {t('PARTNER.TITLE')}
         </Button>
       </Link>
       <PartnerList />

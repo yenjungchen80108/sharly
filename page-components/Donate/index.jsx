@@ -6,6 +6,7 @@ import { LoadingDots } from '../../components/LoadingDots';
 import { useRouter } from 'next/router';
 import { useDonateItems } from '../../lib/donateItem';
 import styles from './Donate.module.css';
+import { useTranslation } from 'react-i18next';
 // import { Post as PostItem } from '../../components/Post';
 // import Commenter from './Commenter';
 // import CommentList from './CommentList';
@@ -15,6 +16,7 @@ export const Donate = ({ item }) => {
   const router = useRouter();
   const { data, isLoading, isError } = useDonateItems();
   const { cardId, category } = router.query;
+  const { t } = useTranslation();
   // router.query.category = 'book';
   // router.push(router);
   // const { data } = useCards();
@@ -33,8 +35,8 @@ export const Donate = ({ item }) => {
       }}
       as={`/card/[cardId]/[category]/add`}>
         <div className="flex text-gray-400 text-center px-1 py-1 m-3">
-          <Button type="success">
-            機構填寫需求單
+          <Button>
+            {t('ITEM.TITLE')}
           </Button>
         </div>
       </Link>
