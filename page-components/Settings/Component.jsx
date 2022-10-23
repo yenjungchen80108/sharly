@@ -89,7 +89,7 @@ export const HomeCardSettingsInner = () => {
       toast.success(mode === 'add' ? 
       t('MESSAGE.CREATE_SUCCESS') : t('MESSAGE.UPDATE_SUCCESS'));
       setValues(mode === 'add' ? init : values);
-      mutate('/api/cards');
+      mutate(`/api/cards?page=${tableRef.current.pageId}`);
     } catch (e) {
       toast.error(e.info.error.message);
     } finally {
@@ -111,7 +111,7 @@ export const HomeCardSettingsInner = () => {
         }),
       });
 
-      mutate('/api/cards');
+      mutate(`/api/cards?page=${tableRef.current.pageId}`);
       toast.success(t('MESSAGE.DELETE_SUCCESS'));
     } catch (e) {
       toast.error(e.info.error.message);

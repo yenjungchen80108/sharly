@@ -18,7 +18,7 @@ handler.get(async (req, res) => {
     req.query.before ? new Date(req.query.before) : undefined,
     req.query.by,
     req.query.skip ? req.query.skip : skip,
-    req.query.limit ? req.query.limit : ITEMS_PER_PAGE
+    req.query.limit ? parseInt(req.query.limit) : ITEMS_PER_PAGE
   );
 
   // get all items in partner table

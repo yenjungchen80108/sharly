@@ -113,7 +113,7 @@ export const AddPartnerFormInner = () => {
       toast.success(mode === 'add' ? 
       t('MESSAGE.CREATE_SUCCESS') : t('MESSAGE.UPDATE_SUCCESS'));
       setValues(mode === 'add' ? init : values);
-      mutate('/api/partners');
+      mutate(`/api/partners?page=${tableRef.current.pageId}`);
     } catch (e) {
       toast.error(e.info.error.message);
     } finally {
@@ -135,7 +135,7 @@ export const AddPartnerFormInner = () => {
         }),
       });
 
-      mutate('/api/partners');
+      mutate(`/api/partners?page=${tableRef.current.pageId}`);
       toast.success(t('MESSAGE.DELETE_SUCCESS'));
     } catch (e) {
       toast.error(e.info.error.message);
@@ -148,7 +148,6 @@ export const AddPartnerFormInner = () => {
 
   const handleChange = (e) => {
     e.preventDefault();
-    // console.log(e.target.value);
     setValues({...values,
       [e.target.name]: e.target.value,
       accountInfo: {
@@ -204,8 +203,8 @@ export const AddPartnerFormInner = () => {
 const AddPartnerForm = ({ partner }) => {
     const { data, error } = useCurrentUser();
     const loading = !data && !error;
-    useEffect(() => {
-    }, [partner]);
+    // useEffect(() => {
+    // }, [partner]);
   
     return (
       // <Wrapper>

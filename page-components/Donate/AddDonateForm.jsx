@@ -15,9 +15,6 @@ import { Label } from '../../components/Label';
 import { SingleTableList } from '../../components/SingleTable';
 import { columns } from './constant';
 import { useTranslation } from 'react-i18next';
-// import { Button } from '../../components/Button';
-// import LeftArrow from '../../public/svg/leftArrow.svg'
-// import RightArrow from '../../public/svg/rightArrow.svg'
 
 // common form for add, edit, delete mode
 export const DonateForm = (props) => {
@@ -112,30 +109,11 @@ export const DonateItemFormInner = () => {
     demand: ''
   }
   const [values, setValues] = useState(init);
-  // const [pageIndex, setPageIndex] = useState(1);
-  // const [pageCount, setPageCount] = useState(0);
   const { mutate } = useSWRConfig();
   const { t } = useTranslation();
   const tableRef = useRef();
   const { data, isLoading } = useDonateItemsPages(1);
 
-  useEffect(() => {
-    console.log({tableRef});
-  }, [tableRef])
-  
-  // function handlePrev() {
-  //   setPageIndex((p) => {
-  //     if (p === 1) return p;
-  //     return p - 1;
-  //   })
-  // }
-
-  // function handleNext() {
-  //   setPageIndex((p) => {
-  //     if (p === pageCount) return p;
-  //     return p + 1;
-  //   })
-  // }
 
   const onSubmit = async (e, mode) => {
     try {
@@ -154,7 +132,6 @@ export const DonateItemFormInner = () => {
       toast.error(e.info.error.message);
     } finally {
       setTimeout(() => {
-        // console.log({tableRef});
         tableRef.current.handleClose();
       }, 1000);
     }
@@ -201,7 +178,6 @@ export const DonateItemFormInner = () => {
             initVal={init}
             columns={columns}
             fields={data.donateItems}
-            // tableSource={donateItemData}
             usePages={useDonateItemsPages}
             setValue={setValues}
             onSubmit={onSubmit}
@@ -211,11 +187,6 @@ export const DonateItemFormInner = () => {
             values={values}
           ></DonateForm>
           </SingleTableList>
-          {/* <div style={{ display: 'flex', margin: 10 }}>
-            <Button onClick={handlePrev} disabled={pageIndex === 1}><LeftArrow/></Button>
-            &nbsp;
-            <Button onClick={handleNext} disabled={pageIndex === pageCount}><RightArrow/></Button>
-          </div> */}
         </>)
         : (<span>no data</span>)}
       </div>
