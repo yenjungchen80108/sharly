@@ -41,6 +41,7 @@
     "passport": "^0.5.0",
     "passport-local": "^1.0.0",
     "react": "17.0.2",
+    "react-burger-menu": "^3.0.8",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.22.5",
     "react-hook-form-resolvers": "0.0.1",
