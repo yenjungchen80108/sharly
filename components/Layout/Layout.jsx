@@ -29,11 +29,11 @@ const Layout = ({ children }) => {
         <Footer />
       </main> */}
       <Nav />
-      <div className={styles.outerContainer}>
-        <Side className={styles.sidebar}/>
-        <main className={styles.content}>{children}</main>
+      <div id="outer-container" className={styles.outerContainer}>
+        <Side pageWrapId={'page-wrap'} outerContainerId={'outer-container'}/>
+        <main id="page-wrap" className={styles.content}>{children}</main>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 };

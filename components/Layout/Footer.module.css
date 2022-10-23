@@ -2,6 +2,7 @@
   font-size: 0.875rem;
   background: var(--accents-1);
   border-top: 1px solid var(--accents-2);
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
+  flex-shrink: 0;
 }

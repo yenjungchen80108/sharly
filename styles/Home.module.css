@@ -37,3 +37,7 @@
 .message {
   color: green;
 }
+
+img {
+  cursor: pointer;
+}

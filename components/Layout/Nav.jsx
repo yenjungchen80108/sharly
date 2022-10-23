@@ -129,7 +129,7 @@ const Nav = () => {
 
   return (
     <nav className={styles.nav}>
-      <Wrapper className={styles.wrapper}>
+      {/* <Wrapper className={styles.wrapper}> */}
         <Container
           className={styles.content}
           alignItems="center"
@@ -221,7 +221,7 @@ const Nav = () => {
             )}
           </Container>
         </Container>
-      </Wrapper>
+      {/* </Wrapper> */}
     </nav>
   );
 };
