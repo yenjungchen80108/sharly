@@ -1,8 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`]
+Welcome to the sharing app!<br>
+This is a basic [sharing app](https://ilottery.herokuapp.com/) using Mongodb with [Next.js](https://nextjs.org/)<br>
+
 ## Getting Started
 
-First, run the development server:
+First, cloning the app:
+```
+npm install
+```
 
+Second, add an `.env.local` file in your root folder to MongoDB connections:
+> MONGODB_URI=mongodb+srv://**username:password**@**cluster0**.tnink.mongodb.net/**dbName**?retryWrites=true&w=majority
+> DB_NAME=**dbName**
+
+Third, run the development server:
 ```bash
 npm run dev
 # or
@@ -12,10 +22,6 @@ yarn dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
 ## Learn More
 
