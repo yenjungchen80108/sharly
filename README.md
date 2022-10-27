@@ -1,5 +1,5 @@
 Welcome to the sharing app!<br>
-This is a basic [sharing app](https://ilottery.herokuapp.com/) using Mongodb with [Next.js](https://nextjs.org/)<br>
+This is a basic [sharing app](https://isharly.herokuapp.com/) using Mongodb with [Next.js](https://nextjs.org/)<br>
 
 ## Getting Started
 
