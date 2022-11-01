@@ -20,7 +20,7 @@ const DeleteDialog = (props) => {
         <form
           onSubmit={(e) => onDelete(e, rowData)}
           className="shadow-md rounded px-8 pt-6 pb-8 w-full">
-          <div>{t('MESSAGE.DELETE')}</div>
+          <div>{t('MESSAGE.DELETE')}test2</div>
           {/* <Spacer size={0.5} axis="vertical" /> */}
           <div className={classes.modalRowContainer}>
             <button className={classes.modalClose}
