@@ -21,7 +21,7 @@ const AddDialog = (props) => {
         >
           {children}
           <Button type="submit"
-          >{t('COMMON.ADD')}</Button>
+          >{t('COMMON.ADD')}testing</Button>
         </form>
       </Modal>
   </>
