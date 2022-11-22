@@ -160,6 +160,7 @@ export const HomeCardSettingsInner = () => {
             setValue={setValues}
             onSubmit={onSubmit}
             onDelete={onDelete}
+            isShowDelete={false}
           ><CategoryForm
             handleChange={handleChange}
             handleAddTag={handleAddTag}
@@ -180,14 +181,14 @@ const HomeCardSettings = () => {
   const loading = !data && !error;
 
   return (
-    // <Wrapper>
+    <Wrapper>
       <div className={styles.root}>
         {/* <h3 className={styles.heading}>Share your thoughts</h3> */}
         {loading ? (
           <LoadingDots>Loading</LoadingDots>
         ) :<HomeCardSettingsInner/>}
       </div>
-    // </Wrapper>
+    </Wrapper>
   );
 };
 

@@ -83,7 +83,8 @@ function fuzzyTextFilterFn(rows, id, filterValue) {
 fuzzyTextFilterFn.autoRemove = val => !val
 
 const TableList = (props, ref) => {
-  const { className, name, initVal, columns, usePages, fields, children, setValue, onSubmit, onDelete } = props;
+  const { className, name, initVal, columns, usePages, 
+    fields, children, setValue, onSubmit, onDelete, isShowDelete } = props;
   const [ openAdd, setOpenAdd ] = useState(false);
   const [ openEdit, setOpenEdit ] = useState(false);
   const [ openDelete, setOpenDelete ] = useState(false);
@@ -239,12 +240,12 @@ const TableList = (props, ref) => {
                           <EditForm />
                         </button>
                       </td>
-                      <td>
+                      {isShowDelete && <td>
                         <button className={classes.iconTableRow}
                           onClick={() => handleDelete(row.original)}>
                           <DeleteForm />
                         </button>
-                      </td>
+                      </td>}
                     </tr>
                   );
                 })}
