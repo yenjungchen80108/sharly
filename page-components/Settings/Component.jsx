@@ -90,6 +90,7 @@ export const HomeCardSettingsInner = () => {
       t('MESSAGE.CREATE_SUCCESS') : t('MESSAGE.UPDATE_SUCCESS'));
       setValues(mode === 'add' ? init : values);
       mutate(`/api/cards?page=${tableRef.current.pageId}`);
+      mutate(`/api/cards`);
     } catch (e) {
       toast.error(e.info.error.message);
     } finally {

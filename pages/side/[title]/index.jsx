@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Partner } from '../../../page-components/Partner';
 import { Contact } from '../../../page-components/Contact';
 import { useRouter } from 'next/router'
+import Wrapper from '../../../components/Layout/Wrapper';
 
 const SidePage = ({ side }) => {
   const { t } = useTranslation();
@@ -15,7 +16,7 @@ const SidePage = ({ side }) => {
       </Head>
       {router.query.trans === t('SIDE.COOPERATE_PARTY') ? <Partner /> :
       router.query.trans === t('SIDE.CONTACT_US') ? <Contact /> :
-      <section>Coming Soon...</section>}
+      <Wrapper>Coming Soon...</Wrapper>}
     </>
   );
 };
