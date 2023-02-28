@@ -4,7 +4,11 @@
   height: 100vh;
 }
 
-.content {
+.innerContainer {
   padding-top: 48px;
+  display: flex;
+}
+
+.content {
   flex: 1 0 auto;
 }

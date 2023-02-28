@@ -3,6 +3,7 @@ import Footer from './Footer';
 import styles from './Layout.module.css';
 import Nav from './Nav';
 import Side from './Side';
+import Stepper from './Stepper';
 
 const Layout = ({ children }) => {
   return (
@@ -31,7 +32,12 @@ const Layout = ({ children }) => {
       <Nav />
       <div id="outer-container" className={styles.outerContainer}>
         <Side pageWrapId={'page-wrap'} outerContainerId={'outer-container'}/>
-        <main id="page-wrap" className={styles.content}>{children}</main>
+        <div className={styles.innerContainer}>
+          <Stepper />
+          <main id="page-wrap" className={styles.content}>
+            {children}
+          </main>
+        </div>
         <Footer />
       </div>
     </>
