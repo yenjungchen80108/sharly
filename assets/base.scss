@@ -1,5 +1,5 @@
 /* Inspired by Vercel design */
-@import '../node_modules/modern-normalize/modern-normalize.css';
+@import "../node_modules/modern-normalize/modern-normalize.css";
 
 :root {
   --background: #fff;
@@ -28,7 +28,7 @@
   --nav-height: 48px;
 }
 
-[data-theme='dark'] {
+[data-theme="dark"] {
   --foreground: #fff;
   --background: #000;
   --accents-8: #fafafa;
@@ -47,8 +47,8 @@
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   color: var(--foreground);
   background-color: var(--background);
@@ -62,13 +62,8 @@ body {
   font-size: 14px;
 }
 
-$yearConfig: 
-  "0" white #f4516c,
-  "1" white #ffb822,
-  "2" white #34bfa3,
-  "3" white #36a3f7,
-  "4" white #716aca,
-  "5" white #954535;
+$yearConfig: "0" white #f4516c, "1" white #ffb822, "2" white #34bfa3,
+  "3" white #36a3f7, "4" white #716aca, "5" white #954535;
 
 @each $year in $yearConfig {
   .age--#{nth($year, 1)} {

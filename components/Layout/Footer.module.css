@@ -4,4 +4,8 @@
   border-top: 1px solid var(--accents-2);
   padding: 1rem;
   text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }

@@ -1,73 +1,75 @@
 {
-    "NAV": {
-        "LANGUAGE": "語言",
-        "CONTACT": "聯絡我們",
-        "MORE": "了解更多",
-        "SIGN_IN": "登入",
-        "SIGN_UP": "註冊",
-        "THEME": "主題",
-        "PROFILE": "個人檔案",
-        "SETTINGS": "設定"
-    },
-    "SIDE": {
-        "NEW_INSTRUCTION": "新手教學",
-        "COMPANY_DONATION": "企業捐贈",
-        "DONATE_SUPPORT": "贊助支持",
-        "DIRECT_PURCHASE": "公益直購",
-        "DEMAND_MATCH": "需求配對",
-        "COMMON_QUESTIONS": "常見問題",
-        "LATEST_NEWS": "最新消息",
-        "STORY_SHARING": "故事分享",
-        "COOPERATE_PARTY": "合作夥伴",
-        "CONTACT_US": "聯絡我們"
-    },
-    "CONTACT": {
-        "TITLE": "主旨",
-        "CONTENT": "內文",
-        "SUBMIT": "送出"
-    },
-    "POST": {
-        "PUBLISH": "發布",
-        "PUBLISHING": "發布中",
-        "DELETE": "刪除",
-        "DELETING": "刪除中"
-    },
-    "LOGIN": {
-        "TITLE": "登入",
-        "EMAIL": "電子郵件",
-        "PASSWORD": "密碼",
-        "SUBMIT": "開始",
-        "FORGET_PW": "忘記密碼"
-    },
-    "REGISTER": {
-        "TITLE": "註冊",
-        "SUBMIT": "開始"
-    },
-    "CATEGORY": {
-        "TITLE": "類別設定",
-        "MODAL_TITLE": "類別資料表單"
-    },
-    "PARTNER": {
-        "TITLE": "機構設定",
-        "MODAL_TITLE": "機構資料表單"
-    },
-    "ITEM": {
-        "TITLE": "物品設定",
-        "MODAL_TITLE": "物品資料表單"
-    },
-    "COMMON": {
-        "PLACEHOLDER": "請輸入...",
-        "ADD": "新增",
-        "EDIT": "編輯",
-        "DELETE": "刪除",
-        "SAVE": "儲存",
-        "YES": "是",
-        "NO": "否"
-    },
-    "MESSAGE": {
-        "DELETE": "確定刪除？",
-        "CREATE_SUCCESS": "新增成功！",
-        "UPDATE_SUCCESS": "更新成功！",
-        "DELETE_SUCCESS": "刪除成功！"
-    }
+  "NAV": {
+    "LANGUAGE": "語言",
+    "CONTACT": "聯絡我們",
+    "MORE": "了解更多",
+    "SIGN_IN": "登入",
+    "SIGN_UP": "註冊",
+    "THEME": "主題",
+    "PROFILE": "個人檔案",
+    "SETTINGS": "設定"
+  },
+  "SIDE": {
+    "NEW_INSTRUCTION": "新手教學",
+    "COMPANY_DONATION": "企業捐贈",
+    "DONATE_SUPPORT": "贊助支持",
+    "DIRECT_PURCHASE": "公益直購",
+    "DEMAND_MATCH": "需求配對",
+    "COMMON_QUESTIONS": "常見問題",
+    "LATEST_NEWS": "最新消息",
+    "STORY_SHARING": "故事分享",
+    "COOPERATE_PARTY": "合作夥伴",
+    "CONTACT_US": "聯絡我們"
+  },
+  "CONTACT": {
+    "TITLE": "主旨",
+    "CONTENT": "內文",
+    "SUBMIT": "送出"
+  },
+  "POST": {
+    "PUBLISH": "發布",
+    "PUBLISHING": "發布中",
+    "DELETE": "刪除",
+    "DELETING": "刪除中"
+  },
+  "LOGIN": {
+    "TITLE": "登入",
+    "EMAIL": "電子郵件",
+    "PASSWORD": "密碼",
+    "SUBMIT": "開始",
+    "FORGET_PW": "忘記密碼"
+  },
+  "REGISTER": {
+    "TITLE": "註冊",
+    "SUBMIT": "開始"
+  },
+  "CATEGORY": {
+    "TITLE": "類別設定",
+    "MODAL_TITLE": "類別資料表單"
+  },
+  "PARTNER": {
+    "TITLE": "機構設定",
+    "MODAL_TITLE": "機構資料表單"
+  },
+  "ITEM": {
+    "TITLE": "物品設定",
+    "MODAL_TITLE": "物品資料表單"
+  },
+  "COMMON": {
+    "PLACEHOLDER": "請輸入...",
+    "ADD": "新增",
+    "EDIT": "編輯",
+    "DELETE": "刪除",
+    "SAVE": "儲存",
+    "YES": "是",
+    "NO": "否",
+    "ADD_CART": "加入捐贈箱",
+    "VIEW_MORE": "查看更多"
+  },
+  "MESSAGE": {
+    "DELETE": "確定刪除？",
+    "CREATE_SUCCESS": "新增成功！",
+    "UPDATE_SUCCESS": "更新成功！",
+    "DELETE_SUCCESS": "刪除成功！"
+  }
 }
