@@ -1,40 +1,68 @@
-.donateSection {
-    background-color: #ffffff;
-    border-right: 1px solid #000;
-    width: 18%;
-    min-height: 100vh;
+.sideBar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: transparent;
+  position: fixed;
+  height: 100vh;
+  overflow: auto;
+}
+
+.item {
+  display: block;
+  color: black;
+  padding: 5px;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 700px) {
+  .sideBar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .item {
+    float: left;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .item {
+    text-align: center;
+    float: none;
+  }
 }
 
 .boxBorder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 3px 10px;
-    margin-bottom: 5px;
-    color: #939393;
-    border: 1px solid #939393;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  margin-bottom: 5px;
+  color: #939393;
+  border: 1px solid #939393;
+  border-radius: 10px;
+
+  &.active {
+    color: #ffffff;
+    background: #939393;
     border-radius: 10px;
 
-    &.active {
-        color: #ffffff;
-        background: #939393;
-        border-radius: 10px;
-
-        .circle {
-            border: 2px solid #fff;
-        }
+    .circle {
+      border: 2px solid #fff;
     }
+  }
 
-    :nth-child(2) {
-        margin-left: 5px;
-    }
+  :nth-child(2) {
+    margin-left: 5px;
+  }
 }
 
 .circle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    text-align: center;
-    font-size: 16px;
-    border: 2px solid #939393;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 16px;
+  border: 2px solid #939393;
 }

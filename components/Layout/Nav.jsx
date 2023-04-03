@@ -1,38 +1,38 @@
-import { Avatar } from '../Avatar';
-import { Button, ButtonLink } from '../Button';
-import { ThemeSwitcher } from '../ThemeSwitcher';
-import { fetcher } from '../../lib/fetch';
-import { useCurrentUser } from '../../lib/user';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import toast from 'react-hot-toast';
-import Container from './Container';
-import styles from './Nav.module.css';
-import Spacer from './Spacer';
-import Wrapper from './Wrapper';
-import { Fragment } from 'react'
-import { useTranslation } from 'react-i18next';
-import { Popover, Transition } from '@headlessui/react';
-import { ChevronDownIcon, GlobeIcon } from '@heroicons/react/solid';
+import { Avatar } from "../Avatar";
+import { Button, ButtonLink } from "../Button";
+import { ThemeSwitcher } from "../ThemeSwitcher";
+import { fetcher } from "../../lib/fetch";
+import { useCurrentUser } from "../../lib/user";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useCallback, useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
+import Container from "./Container";
+import styles from "./Nav.module.css";
+import Spacer from "./Spacer";
+import Wrapper from "./Wrapper";
+import { Fragment } from "react";
+import { useTranslation } from "react-i18next";
+import { Popover, Transition } from "@headlessui/react";
+import { ChevronDownIcon, GlobeIcon } from "@heroicons/react/solid";
 
 const languages = [
   {
-    name: '繁體中文',
-    description: 'tr',
-    icon: GlobeIcon
+    name: "繁體中文",
+    description: "tr",
+    icon: GlobeIcon,
   },
   {
-    name: '簡體中文',
-    description: 'zh',
-    icon: GlobeIcon
+    name: "簡體中文",
+    description: "zh",
+    icon: GlobeIcon,
   },
-  { 
-    name: 'English',
+  {
+    name: "English",
     description: "en",
-    icon: GlobeIcon 
-  }
-]
+    icon: GlobeIcon,
+  },
+];
 
 const UserMenu = ({ user, mutate }) => {
   const menuRef = useRef();
@@ -43,9 +43,9 @@ const UserMenu = ({ user, mutate }) => {
   const router = useRouter();
   useEffect(() => {
     const onRouteChangeComplete = () => setVisible(false);
-    router.events.on('routeChangeComplete', onRouteChangeComplete);
+    router.events.on("routeChangeComplete", onRouteChangeComplete);
     return () =>
-      router.events.off('routeChangeComplete', onRouteChangeComplete);
+      router.events.off("routeChangeComplete", onRouteChangeComplete);
   });
 
   useEffect(() => {
@@ -58,18 +58,18 @@ const UserMenu = ({ user, mutate }) => {
         setVisible(false);
       }
     };
-    document.addEventListener('mousedown', onMouseDown);
+    document.addEventListener("mousedown", onMouseDown);
     return () => {
-      document.removeEventListener('mousedown', onMouseDown);
+      document.removeEventListener("mousedown", onMouseDown);
     };
   }, []);
 
   const onSignOut = useCallback(async () => {
     try {
-      await fetcher('/api/auth', {
-        method: 'DELETE',
+      await fetcher("/api/auth", {
+        method: "DELETE",
       });
-      toast.success('You have been signed out');
+      toast.success("You have been signed out");
       mutate({ user: null });
     } catch (e) {
       toast.error(e.message);
@@ -94,20 +94,20 @@ const UserMenu = ({ user, mutate }) => {
         {visible && (
           <div className={styles.menu}>
             <Link passHref href={`/user/${user.username}`}>
-              <a className={styles.item}>{t('NAV.PROFILE')}</a>
+              <a className={styles.item}>{t("NAV.PROFILE")}</a>
             </Link>
             <Link passHref href="/settings">
-              <a className={styles.item}>{t('NAV.SETTINGS')}</a>
+              <a className={styles.item}>{t("NAV.SETTINGS")}</a>
             </Link>
-            <div className={styles.item} style={{ cursor: 'auto' }}>
+            <div className={styles.item} style={{ cursor: "auto" }}>
               <Container alignItems="center">
-                <span>{t('NAV.THEME')}</span>
+                <span>{t("NAV.THEME")}</span>
                 <Spacer size={0.5} axis="horizontal" />
                 <ThemeSwitcher />
               </Container>
             </div>
             <button onClick={onSignOut} className={styles.item}>
-              {t('NAV.SIGN_UP')}
+              {t("NAV.SIGN_UP")}
             </button>
           </div>
         )}
@@ -117,14 +117,14 @@ const UserMenu = ({ user, mutate }) => {
 };
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
 
 const Nav = () => {
   const { data: { user } = {}, mutate } = useCurrentUser();
   const { t, i18n } = useTranslation();
   const changeLanguage = (lng) => {
-      i18n.changeLanguage(lng);
+    i18n.changeLanguage(lng);
   };
 
   return (
@@ -135,24 +135,27 @@ const Nav = () => {
         justifyContent="space-between"
       >
         <Link href="/feed" passHref className={styles.logo}>
-          <img width={32}
+          <img
+            width={32}
             className="cursor-pointer"
             src="/favicon/give-love.png"
-            alt=""/>
+            alt=""
+          />
         </Link>
         <Popover className="relative">
           {({ open }) => (
             <>
               <Popover.Button
                 className={classNames(
-                  open ? 'text-gray-900' : 'text-gray-500',
-                  'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                  open ? "text-gray-900" : "text-gray-500",
+                  "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 )}
-              ><span>{t('NAV.LANGUAGE')}</span>
+              >
+                <span>{t("NAV.LANGUAGE")}</span>
                 <ChevronDownIcon
                   className={classNames(
-                    open ? 'text-gray-600' : 'text-gray-400',
-                    'ml-2 h-5 w-5 group-hover:text-gray-500'
+                    open ? "text-gray-600" : "text-gray-400",
+                    "ml-2 h-5 w-5 group-hover:text-gray-500"
                   )}
                   aria-hidden="true"
                 />
@@ -177,10 +180,17 @@ const Nav = () => {
                           className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
                           onClick={() => changeLanguage(item.description)}
                         >
-                          <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" />
+                          <item.icon
+                            className="flex-shrink-0 h-6 w-6 text-indigo-600"
+                            aria-hidden="true"
+                          />
                           <div className="ml-4">
-                            <p className="text-base font-medium text-gray-900">{item.name}</p>
-                            <p className="mt-1 text-sm text-gray-500">{item.description}</p>
+                            <p className="text-base font-medium text-gray-900">
+                              {item.name}
+                            </p>
+                            <p className="mt-1 text-sm text-gray-500">
+                              {item.description}
+                            </p>
                           </div>
                         </a>
                       ))}
@@ -205,13 +215,13 @@ const Nav = () => {
                   variant="ghost"
                   color="link"
                 >
-                  {t('NAV.SIGN_IN')}
+                  {t("NAV.SIGN_IN")}
                 </ButtonLink>
               </Link>
               <Spacer axis="horizontal" size={0.25} />
               <Link passHref href="/sign-up">
                 <Button size="small" type="success">
-                  {t('NAV.SIGN_UP')}
+                  {t("NAV.SIGN_UP")}
                 </Button>
               </Link>
             </>

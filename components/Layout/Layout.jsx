@@ -1,9 +1,9 @@
-import Head from 'next/head';
-import Footer from './Footer';
-import styles from './Layout.module.css';
-import Nav from './Nav';
-import Side from './Side';
-import Stepper from './Stepper';
+import Head from "next/head";
+import Footer from "./Footer";
+import styles from "./Layout.module.css";
+import Nav from "./Nav";
+import Side from "./Side";
+import Stepper from "./Stepper";
 
 const Layout = ({ children }) => {
   return (
@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
-        <meta name="description"/>
+        <meta name="description" />
         <meta property="og:title" content="sharly App" />
       </Head>
       {/* <main class="flex flex-col h-screen">
@@ -31,14 +31,14 @@ const Layout = ({ children }) => {
       </main> */}
       <Nav />
       <div id="outer-container" className={styles.outerContainer}>
-        <Side pageWrapId={'page-wrap'} outerContainerId={'outer-container'}/>
+        <Side pageWrapId={"page-wrap"} outerContainerId={"outer-container"} />
         <div className={styles.innerContainer}>
           <Stepper />
           <main id="page-wrap" className={styles.content}>
             {children}
           </main>
+          <Footer />
         </div>
-        <Footer />
       </div>
     </>
   );
