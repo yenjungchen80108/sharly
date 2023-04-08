@@ -4,12 +4,11 @@ import Poster from "./Poster";
 import PostList from "./PostList";
 import CategoryList from "./CategoryList";
 import HomeCardSettings from "../Settings/Component";
-import PcDonation from "../../public/png/pcDonation.png";
 
 export const Feed = () => {
   return (
     <div className={styles.root}>
-      <PcDonation />
+      <img alt="" src="/png/pcDonation.png" />
       <CategoryList />
       <HomeCardSettings />
       {/* <Spacer size={1} axis="vertical" />      
