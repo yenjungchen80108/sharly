@@ -1,6 +1,6 @@
-import Head from 'next/head';
-import { useTranslation } from 'react-i18next';
-import AddDonateForm from '../../../../page-components/Donate/AddDonateForm';
+import Head from "next/head";
+import { useTranslation } from "react-i18next";
+import AddDonateForm from "../../../../page-components/Donate/AddDonateForm";
 
 const AddCard = ({ cardAdd }) => {
   // const { t } = useTranslation();
@@ -9,7 +9,7 @@ const AddCard = ({ cardAdd }) => {
       <Head>
         <title>{cardAdd.category}</title>
       </Head>
-       {cardAdd.category === 'books' ? <AddDonateForm /> : <></>}
+      {cardAdd.category === "books" ? <AddDonateForm /> : <></>}
     </>
   );
 };
@@ -24,7 +24,7 @@ const AddCard = ({ cardAdd }) => {
 export async function getServerSideProps(context) {
   // console.log('context',context); // return { title: 'Mortal Kombat' }
   const cardAdd = context.query;
-  return { props: { cardAdd }}
+  return { props: { cardAdd } };
 }
 
 export default AddCard;

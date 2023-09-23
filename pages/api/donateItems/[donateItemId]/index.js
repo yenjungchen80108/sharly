@@ -1,9 +1,12 @@
-import { ValidateProps } from '../../../../api-lib/constants';
-import { findDonateItemById, updateDonateItemById } from '../../../../api-lib/db';
-import { findDonateItems, insertDonateItem } from '../../../../api-lib/db';
-import { auths, database, validateBody } from '../../../../api-lib/middlewares';
-import { ncOpts } from '../../../../api-lib/nc';
-import nc from 'next-connect';
+import { ValidateProps } from "../../../../api-lib/constants";
+import {
+  findDonateItemById,
+  updateDonateItemById,
+} from "../../../../api-lib/db";
+import { findDonateItems, insertDonateItem } from "../../../../api-lib/db";
+import { auths, database, validateBody } from "../../../../api-lib/middlewares";
+import { ncOpts } from "../../../../api-lib/nc";
+import nc from "next-connect";
 
 const handler = nc(ncOpts);
 
@@ -13,7 +16,9 @@ handler.get(async (req, res) => {
   const donateItem = await findDonateItemById(req.db, req.query._id);
 
   if (!donateItem) {
-    return res.status(404).json({ error: { message: 'donate item is not found GET.' } });
+    return res
+      .status(404)
+      .json({ error: { message: "donate item is not found GET." } });
   }
 
   const donateItems = await findPartners(
@@ -29,11 +34,13 @@ handler.get(async (req, res) => {
 handler.post(
   ...auths,
   validateBody({
-    type: 'object',
+    type: "object",
     properties: {
       // itemId: ValidateProps.donateItem.itemId,
       partnerId: ValidateProps.donateItem.partnerId,
       size: ValidateProps.donateItem.size,
+      itemName: ValidateProps.donateItem.itemName,
+      subTitle: ValidateProps.donateItem.subTitle,
       brand: ValidateProps.donateItem.brand,
       info: ValidateProps.donateItem.info,
       status: ValidateProps.donateItem.status,
@@ -42,7 +49,7 @@ handler.post(
       img: ValidateProps.donateItem.img,
       demand: ValidateProps.donateItem.demand,
     },
-    required: ['_id'],
+    required: ["_id"],
     additionalProperties: false,
   }),
   async (req, res) => {
@@ -50,18 +57,41 @@ handler.post(
       return res.status(401).end();
     }
 
-    const { _id, partnerId, itemName, size, brand, info,
-      status, time, category, img, demand  } = req.body;
+    const {
+      _id,
+      partnerId,
+      itemName,
+      subTitle,
+      size,
+      brand,
+      info,
+      status,
+      time,
+      category,
+      img,
+      demand,
+    } = req.body;
     // console.log('req.query',req.query._id);
     const donateItem = await findDonateItemById(req.db, req.query._id);
     if (!donateItem) {
-      return res.status(404).json({ error: { message: 'donate item is not found POST.' } });
+      return res
+        .status(404)
+        .json({ error: { message: "donate item is not found POST." } });
     }
 
     const donateItems = await insertDonateItem(req.db, donateItem._id, {
       // creatorId: req.user._id,
-      partnerId, itemName, size, brand, info,
-      status, time, category, img, demand
+      partnerId,
+      itemName,
+      subTitle,
+      size,
+      brand,
+      info,
+      status,
+      time,
+      category,
+      img,
+      demand,
     });
 
     return res.json({ donateItems });

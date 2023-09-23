@@ -1,8 +1,15 @@
-import { ValidateProps } from '../../../api-lib/constants';
-import { findDonateItems, countDonateItems, insertDonateItem, updateDonateItemById, findDonateItemById, deleteDonateItemById } from '../../../api-lib/db';
-import { auths, database, validateBody } from '../../../api-lib/middlewares';
-import { ncOpts } from '../../../api-lib/nc';
-import nc from 'next-connect';
+import { ValidateProps } from "../../../api-lib/constants";
+import {
+  findDonateItems,
+  countDonateItems,
+  insertDonateItem,
+  updateDonateItemById,
+  findDonateItemById,
+  deleteDonateItemById,
+} from "../../../api-lib/db";
+import { auths, database, validateBody } from "../../../api-lib/middlewares";
+import { ncOpts } from "../../../api-lib/nc";
+import nc from "next-connect";
 
 const handler = nc(ncOpts);
 
@@ -30,22 +37,24 @@ handler.get(async (req, res) => {
   const [count, items] = await Promise.all([countPromise, donateInfo]);
   const pageCount = Math.ceil(countPromise / ITEMS_PER_PAGE);
 
-  return res.json({ 
+  return res.json({
     pagination: {
       count,
-      pageCount
+      pageCount,
     },
-    donateItems: items })
+    donateItems: items,
+  });
 });
 
 handler.post(
   ...auths,
   validateBody({
-    type: 'object',
+    type: "object",
     properties: {
       // itemId: ValidateProps.donateItem.itemId,
       partnerId: ValidateProps.donateItem.partnerId,
       itemName: ValidateProps.donateItem.itemName,
+      subTitle: ValidateProps.donateItem.subTitle,
       size: ValidateProps.donateItem.size,
       brand: ValidateProps.donateItem.brand,
       info: ValidateProps.donateItem.info,
@@ -53,7 +62,7 @@ handler.post(
       time: ValidateProps.donateItem.time,
       category: ValidateProps.donateItem.category,
       img: ValidateProps.donateItem.img,
-      demand: ValidateProps.donateItem.demand
+      demand: ValidateProps.donateItem.demand,
     },
     // required: ['_id'],
     additionalProperties: true,
@@ -67,6 +76,7 @@ handler.post(
       // _id: req.body._id,
       partnerId: req.body.partnerId,
       itemName: req.body.itemName,
+      subTitle: req.body.subTitle,
       size: req.body.size,
       brand: req.body.brand,
       info: req.body.info,
@@ -85,11 +95,12 @@ handler.post(
 handler.patch(
   ...auths,
   validateBody({
-    type: 'object',
+    type: "object",
     properties: {
       _id: ValidateProps.donateItem._id,
       partnerId: ValidateProps.donateItem.partnerId,
       itemName: ValidateProps.donateItem.itemName,
+      subTitle: ValidateProps.donateItem.subTitle,
       size: ValidateProps.donateItem.size,
       brand: ValidateProps.donateItem.brand,
       info: ValidateProps.donateItem.info,
@@ -97,8 +108,8 @@ handler.patch(
       time: ValidateProps.donateItem.time,
       category: ValidateProps.donateItem.category,
       img: ValidateProps.donateItem.img,
-      demand: ValidateProps.donateItem.demand
-    }
+      demand: ValidateProps.donateItem.demand,
+    },
   }),
   async (req, res) => {
     if (!req.user) {
@@ -106,38 +117,58 @@ handler.patch(
       return;
     }
 
-    const { _id, partnerId, itemName, size, brand, info,
-      status, time, category, img, demand  } = req.body;
+    const {
+      _id,
+      partnerId,
+      itemName,
+      subTitle,
+      size,
+      brand,
+      info,
+      status,
+      time,
+      category,
+      img,
+      demand,
+    } = req.body;
     // const newPartner = { rest };
     // const partner = await findpartnerById(req.db, _id);
     // if (!partner) {
     //   return res.status(404).json({ error: { message: 'partner is not found PATCH.' } });
     // }
-    const donateItems = await updateDonateItemById(req.db, _id, { partnerId, itemName, size, brand, info,
-      status, time, category, img, demand });
+    const donateItems = await updateDonateItemById(req.db, _id, {
+      partnerId,
+      itemName,
+      subTitle,
+      size,
+      brand,
+      info,
+      status,
+      time,
+      category,
+      img,
+      demand,
+    });
 
     res.json({ donateItems });
   }
 );
 
-handler.delete(
-  ...auths,
-  async (req, res) => {
-    if (!req.user) {
-      req.status(401).end();
-      return;
-    }
-
-    const { _id } = req.body;
-    // const newpartner = { rest };
-    // const partner = await findpartnerById(req.db, _id);
-    // if (!partner) {
-    //   return res.status(404).json({ error: { message: 'partner is not found PATCH.' } });
-    // }
-    const donateItems = await deleteDonateItemById(req.db, _id);
-
-    res.json({ donateItems });
+handler.delete(...auths, async (req, res) => {
+  if (!req.user) {
+    req.status(401).end();
+    return;
   }
-);
+
+  const { _id } = req.body;
+  // const newpartner = { rest };
+  // const partner = await findpartnerById(req.db, _id);
+  // if (!partner) {
+  //   return res.status(404).json({ error: { message: 'partner is not found PATCH.' } });
+  // }
+  const donateItems = await deleteDonateItemById(req.db, _id);
+
+  res.json({ donateItems });
+});
 
 export default handler;
