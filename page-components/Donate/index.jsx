@@ -28,7 +28,6 @@ export const Donate = ({ item }) => {
         passHref
         href={{
           pathname: `/card/[cardId]/[category]/add`,
-          category: category,
           query: {
             cardId: cardId,
             category: category,

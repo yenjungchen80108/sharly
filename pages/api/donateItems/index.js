@@ -15,18 +15,10 @@ const handler = nc(ncOpts);
 
 handler.use(database);
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 6;
 handler.get(async (req, res) => {
   const page = req.query.page || 1;
   const skip = (page - 1) * ITEMS_PER_PAGE;
-  // add skip and limit query for pagination
-  const donateInfo = await findDonateItems(
-    req.db,
-    req.query.before ? new Date(req.query.before) : undefined,
-    req.query.by,
-    req.query.skip ? req.query.skip : skip,
-    req.query.limit ? req.query.limit : ITEMS_PER_PAGE
-  );
   // get all items in donate item table
   const donateInfoAll = await countDonateItems(
     req.db,
@@ -34,6 +26,14 @@ handler.get(async (req, res) => {
     req.query.by
   );
   const countPromise = donateInfoAll.length;
+  // add skip and limit query for pagination
+  const donateInfo = await findDonateItems(
+    req.db,
+    req.query.before ? new Date(req.query.before) : undefined,
+    req.query.by,
+    req.query.skip ? req.query.skip : skip,
+    req.query.limit ? +req.query.limit : ITEMS_PER_PAGE
+  );
   const [count, items] = await Promise.all([countPromise, donateInfo]);
   const pageCount = Math.ceil(countPromise / ITEMS_PER_PAGE);
 
@@ -51,18 +51,7 @@ handler.post(
   validateBody({
     type: "object",
     properties: {
-      // itemId: ValidateProps.donateItem.itemId,
-      partnerId: ValidateProps.donateItem.partnerId,
-      itemName: ValidateProps.donateItem.itemName,
-      subTitle: ValidateProps.donateItem.subTitle,
-      size: ValidateProps.donateItem.size,
-      brand: ValidateProps.donateItem.brand,
-      info: ValidateProps.donateItem.info,
-      status: ValidateProps.donateItem.status,
-      time: ValidateProps.donateItem.time,
-      category: ValidateProps.donateItem.category,
-      img: ValidateProps.donateItem.img,
-      demand: ValidateProps.donateItem.demand,
+      ...ValidateProps.donateItem,
     },
     // required: ['_id'],
     additionalProperties: true,
@@ -87,7 +76,6 @@ handler.post(
       demand: req.body.demand,
       // creatorId: req.user._id,
     });
-    // console.log('partner',partner);
     return res.json({ donateItem });
   }
 );
