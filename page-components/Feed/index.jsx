@@ -8,7 +8,7 @@ import HomeCardSettings from "../Settings/Component";
 export const Feed = () => {
   return (
     <div className={styles.root}>
-      <img alt="" src="/png/plant.png" />
+      <img alt="" src="/png/banner.png" />
       <CategoryList />
       <HomeCardSettings />
       {/* <Spacer size={1} axis="vertical" />      
