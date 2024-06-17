@@ -15,8 +15,7 @@ const CategoryList = () => {
   // if (!data) return <LoadingDots className={styles.loading} />;
   // const posts = data?.[0]?.message?.length === 0 && data === null ? [] : data.reduce((acc, val) => [...acc, ...val.posts], []);
   return (
-    <div className="flex justify-center bg-pink-50">
-      <Spacer axis="vertical" size={1} />
+    <div className="flex justify-center bg-pink-50 overflow-scroll">
       {data ? (
         data.cards.map((card, id) => (
           <Link

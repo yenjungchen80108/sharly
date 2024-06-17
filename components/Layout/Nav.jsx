@@ -138,7 +138,7 @@ const Nav = () => {
           <img
             width={32}
             className="cursor-pointer"
-            src="/favicon/give-love.png"
+            src="/favicon/logo.png"
             alt=""
           />
         </Link>
