@@ -57,12 +57,9 @@ handler.post(
     additionalProperties: true,
   }),
   async (req, res) => {
-    // if (!req.user) {
-    //   return res.status(401).end();
-    // }
-
     const donateItem = await insertDonateItem(req.db, {
       // _id: req.body._id,
+      // creatorId: req.user._id,
       partnerId: req.body.partnerId,
       itemName: req.body.itemName,
       subTitle: req.body.subTitle,
@@ -74,7 +71,6 @@ handler.post(
       category: req.body.category,
       img: req.body.img,
       demand: req.body.demand,
-      // creatorId: req.user._id,
     });
     return res.json({ donateItem });
   }
@@ -119,11 +115,7 @@ handler.patch(
       img,
       demand,
     } = req.body;
-    // const newPartner = { rest };
-    // const partner = await findpartnerById(req.db, _id);
-    // if (!partner) {
-    //   return res.status(404).json({ error: { message: 'partner is not found PATCH.' } });
-    // }
+
     const donateItems = await updateDonateItemById(req.db, _id, {
       partnerId,
       itemName,
@@ -149,11 +141,6 @@ handler.delete(...auths, async (req, res) => {
   }
 
   const { _id } = req.body;
-  // const newpartner = { rest };
-  // const partner = await findpartnerById(req.db, _id);
-  // if (!partner) {
-  //   return res.status(404).json({ error: { message: 'partner is not found PATCH.' } });
-  // }
   const donateItems = await deleteDonateItemById(req.db, _id);
 
   res.json({ donateItems });

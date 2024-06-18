@@ -1,8 +1,15 @@
-import { ValidateProps } from '../../../api-lib/constants';
-import { findCards, countCards, insertCard, updateCardById, findCardById, deleteCardById } from '../../../api-lib/db';
-import { auths, database, validateBody } from '../../../api-lib/middlewares';
-import { ncOpts } from '../../../api-lib/nc';
-import nc from 'next-connect';
+import { ValidateProps } from "../../../api-lib/constants";
+import {
+  findCards,
+  countCards,
+  insertCard,
+  updateCardById,
+  findCardById,
+  deleteCardById,
+} from "../../../api-lib/db";
+import { auths, database, validateBody } from "../../../api-lib/middlewares";
+import { ncOpts } from "../../../api-lib/nc";
+import nc from "next-connect";
 
 const handler = nc(ncOpts);
 
@@ -29,26 +36,27 @@ handler.get(async (req, res) => {
   const countPromise = cardInfoAll.length;
   const [count, items] = await Promise.all([countPromise, cardInfo]);
   const pageCount = Math.ceil(countPromise / ITEMS_PER_PAGE);
-  return res.json({ 
+  return res.json({
     pagination: {
       count,
-      pageCount
+      pageCount,
     },
-    cards: items })
+    cards: items,
+  });
 });
 
 handler.post(
   ...auths,
   validateBody({
-    type: 'object',
+    type: "object",
     properties: {
       title: ValidateProps.card.title,
       content: ValidateProps.card.content,
       image: ValidateProps.card.image,
       category: ValidateProps.card.category,
-      tags: ValidateProps.card.tags
+      tags: ValidateProps.card.tags,
     },
-    required: ['title'],
+    required: ["title"],
     additionalProperties: true,
   }),
   async (req, res) => {
@@ -56,9 +64,13 @@ handler.post(
       return res.status(401).end();
     }
 
-    const { title, content, image, category, tags } = req.body
+    const { title, content, image, category, tags } = req.body;
     const cards = await insertCard(req.db, {
-      title, content, image, category, tags,
+      title,
+      content,
+      image,
+      category,
+      tags,
       creatorId: req.user._id,
     });
 
@@ -69,14 +81,14 @@ handler.post(
 handler.patch(
   ...auths,
   validateBody({
-    type: 'object',
+    type: "object",
     properties: {
       title: ValidateProps.card.title,
       content: ValidateProps.card.content,
       image: ValidateProps.card.image,
       category: ValidateProps.card.category,
-      tags: ValidateProps.card.tags
-    }
+      tags: ValidateProps.card.tags,
+    },
   }),
   async (req, res) => {
     if (!req.user) {
@@ -84,31 +96,29 @@ handler.patch(
       return;
     }
 
-    const { _id, title, content, image, category, tags  } = req.body;
-    const cards = await updateCardById(req.db, _id, { title, content, image, category, tags });
+    const { _id, title, content, image, category, tags } = req.body;
+    const cards = await updateCardById(req.db, _id, {
+      title,
+      content,
+      image,
+      category,
+      tags,
+    });
 
     res.json({ cards });
   }
 );
 
-handler.delete(
-  ...auths,
-  async (req, res) => {
-    if (!req.user) {
-      req.status(401).end();
-      return;
-    }
-
-    const { _id  } = req.body;
-    // const newCard = { rest };
-    // const card = await findCardById(req.db, _id);
-    // if (!card) {
-    //   return res.status(404).json({ error: { message: 'Card is not found PATCH.' } });
-    // }
-    const cards = await deleteCardById(req.db, _id);
-
-    res.json({ cards });
+handler.delete(...auths, async (req, res) => {
+  if (!req.user) {
+    req.status(401).end();
+    return;
   }
-);
+
+  const { _id } = req.body;
+  const cards = await deleteCardById(req.db, _id);
+
+  res.json({ cards });
+});
 
 export default handler;

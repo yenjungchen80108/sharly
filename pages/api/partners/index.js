@@ -1,8 +1,15 @@
-import { ValidateProps } from '../../../api-lib/constants';
-import { findPartners, countPartners, insertPartner, updatePartnerById, findPartnerById, deletePartnerById } from '../../../api-lib/db';
-import { auths, database, validateBody } from '../../../api-lib/middlewares';
-import { ncOpts } from '../../../api-lib/nc';
-import nc from 'next-connect';
+import { ValidateProps } from "../../../api-lib/constants";
+import {
+  findPartners,
+  countPartners,
+  insertPartner,
+  updatePartnerById,
+  findPartnerById,
+  deletePartnerById,
+} from "../../../api-lib/db";
+import { auths, database, validateBody } from "../../../api-lib/middlewares";
+import { ncOpts } from "../../../api-lib/nc";
+import nc from "next-connect";
 
 const handler = nc(ncOpts);
 
@@ -30,18 +37,19 @@ handler.get(async (req, res) => {
   const countPromise = partnerInfoAll.length;
   const [count, items] = await Promise.all([countPromise, partnerInfo]);
   const pageCount = Math.ceil(countPromise / ITEMS_PER_PAGE);
-  return res.json({ 
+  return res.json({
     pagination: {
       count,
-      pageCount
+      pageCount,
     },
-    partners: items })
+    partners: items,
+  });
 });
 
 handler.post(
   ...auths,
   validateBody({
-    type: 'object',
+    type: "object",
     properties: {
       partnerId: ValidateProps.partner.partnerId,
       title: ValidateProps.partner.title,
@@ -49,9 +57,9 @@ handler.post(
       content: ValidateProps.partner.content,
       image: ValidateProps.partner.image,
       tags: ValidateProps.partner.tags,
-      accountInfo: ValidateProps.partner.accountInfo
+      accountInfo: ValidateProps.partner.accountInfo,
     },
-    required: ['partnerId'],
+    required: ["partnerId"],
     additionalProperties: true,
   }),
   async (req, res) => {
@@ -66,7 +74,7 @@ handler.post(
       content: req.body.content,
       image: req.body.image,
       tags: req.body.tags,
-      accountInfo: req.body.accountInfo
+      accountInfo: req.body.accountInfo,
       // creatorId: req.user._id,
     });
     // console.log('partner',partner);
@@ -77,7 +85,7 @@ handler.post(
 handler.patch(
   ...auths,
   validateBody({
-    type: 'object',
+    type: "object",
     properties: {
       partnerId: ValidateProps.partner.partnerId,
       title: ValidateProps.partner.title,
@@ -85,8 +93,8 @@ handler.patch(
       content: ValidateProps.partner.content,
       image: ValidateProps.partner.image,
       tags: ValidateProps.partner.tags,
-      accountInfo: ValidateProps.partner.accountInfo
-    }
+      accountInfo: ValidateProps.partner.accountInfo,
+    },
   }),
   async (req, res) => {
     if (!req.user) {
@@ -94,36 +102,32 @@ handler.patch(
       return;
     }
 
-    const { _id, partnerId, title, year, content, image, tags, accountInfo  } = req.body;
-    // const newPartner = { rest };
-    // const partner = await findpartnerById(req.db, _id);
-    // if (!partner) {
-    //   return res.status(404).json({ error: { message: 'partner is not found PATCH.' } });
-    // }
-    const partners = await updatePartnerById(req.db, _id, { partnerId, title, year, content, image, tags, accountInfo });
+    const { _id, partnerId, title, year, content, image, tags, accountInfo } =
+      req.body;
+    const partners = await updatePartnerById(req.db, _id, {
+      partnerId,
+      title,
+      year,
+      content,
+      image,
+      tags,
+      accountInfo,
+    });
 
     res.json({ partners });
   }
 );
 
-handler.delete(
-  ...auths,
-  async (req, res) => {
-    if (!req.user) {
-      req.status(401).end();
-      return;
-    }
-
-    const { _id } = req.body;
-    // const newpartner = { rest };
-    // const partner = await findpartnerById(req.db, _id);
-    // if (!partner) {
-    //   return res.status(404).json({ error: { message: 'partner is not found PATCH.' } });
-    // }
-    const partners = await deletePartnerById(req.db, _id);
-
-    res.json({ partners });
+handler.delete(...auths, async (req, res) => {
+  if (!req.user) {
+    req.status(401).end();
+    return;
   }
-);
+
+  const { _id } = req.body;
+  const partners = await deletePartnerById(req.db, _id);
+
+  res.json({ partners });
+});
 
 export default handler;

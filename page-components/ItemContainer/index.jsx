@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 export const ItemContainer = ({ item }) => {
   const { t } = useTranslation();
   const { category, itemName, subTitle, img, info, demand } = item || {};
-  console.log({ item });
   return (
     <div className="bg-white">
       <div className="pt-6">

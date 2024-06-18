@@ -7,10 +7,6 @@ import { useRouter } from "next/router";
 import { useDonateItems } from "../../lib/donateItem";
 import styles from "./Donate.module.css";
 import { useTranslation } from "react-i18next";
-// import { Post as PostItem } from '../../components/Post';
-// import Commenter from './Commenter';
-// import CommentList from './CommentList';
-// import { useCards } from '../../lib/card';
 
 export const Donate = ({ item }) => {
   const router = useRouter();
@@ -18,10 +14,6 @@ export const Donate = ({ item }) => {
   const { cardId, category } = router.query;
   const { t } = useTranslation();
 
-  // router.query.category = 'book';
-  // router.push(router);
-  // const { data } = useCards();
-  // if (!data) return <div></div>;
   return (
     <div className={styles.root}>
       <Link
@@ -48,8 +40,6 @@ export const Donate = ({ item }) => {
           <LoadingDots className={styles.loading} />
         )}
       </div>
-      {/* <Commenter post={post} />
-      <CommentList post={post} /> */}
     </div>
   );
 };

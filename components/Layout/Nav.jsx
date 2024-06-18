@@ -134,7 +134,7 @@ const Nav = () => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Link href="/feed" passHref className={styles.logo}>
+        <Link href="/" passHref className={styles.logo}>
           <img
             width={32}
             className="cursor-pointer"

@@ -1,31 +1,30 @@
-import { Avatar } from '../../components/Avatar';
-import { Button } from '../../components/Button';
-import { Input, Textarea } from '../../components/Input';
-import { Container, Spacer } from '../../components/Layout';
-import Wrapper from '../../components/Layout/Wrapper';
-import HomeCardSettings from './Component'
-import { fetcher } from '../../lib/fetch';
-import { useCurrentUser } from '../../lib/user';
-// import { useCardPages } from '../../lib/card';
-import { useRouter } from 'next/router';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import toast from 'react-hot-toast';
-import styles from './Settings.module.css';
-import { cloneDeep } from 'lodash';
+import { Avatar } from "../../components/Avatar";
+import { Button } from "../../components/Button";
+import { Input, Textarea } from "../../components/Input";
+import { Container, Spacer } from "../../components/Layout";
+import Wrapper from "../../components/Layout/Wrapper";
+import HomeCardSettings from "./Component";
+import { fetcher } from "../../lib/fetch";
+import { useCurrentUser } from "../../lib/user";
+import { useRouter } from "next/router";
+import { useCallback, useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
+import styles from "./Settings.module.css";
+import { cloneDeep } from "lodash";
 
 const EmailVerify = ({ user }) => {
   const [status, setStatus] = useState();
   const verify = useCallback(async () => {
     try {
-      setStatus('loading');
-      await fetcher('/api/user/email/verify', { method: 'POST' });
+      setStatus("loading");
+      await fetcher("/api/user/email/verify", { method: "POST" });
       toast.success(
-        'An email has been sent to your mailbox. Follow the instruction to verify your email.'
+        "An email has been sent to your mailbox. Follow the instruction to verify your email."
       );
-      setStatus('success');
+      setStatus("success");
     } catch (e) {
       toast.error(e.message);
-      setStatus('');
+      setStatus("");
     }
   }, []);
   if (user.emailVerified) return null;
@@ -39,10 +38,10 @@ const EmailVerify = ({ user }) => {
       </Container>
       <Spacer size={1} axis="horizontal" />
       <Button
-        loading={status === 'loading'}
+        loading={status === "loading"}
         size="small"
         onClick={verify}
-        disabled={status === 'success'}
+        disabled={status === "success"}
       >
         Verify
       </Button>
@@ -60,21 +59,21 @@ const Auth = () => {
     e.preventDefault();
     try {
       setIsLoading(true);
-      await fetcher('/api/user/password', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+      await fetcher("/api/user/password", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           oldPassword: oldPasswordRef.current.value,
           newPassword: newPasswordRef.current.value,
         }),
       });
-      toast.success('Your password has been updated');
+      toast.success("Your password has been updated");
     } catch (e) {
       toast.error(e.message);
     } finally {
       setIsLoading(false);
-      oldPasswordRef.current.value = '';
-      newPasswordRef.current.value = '';
+      oldPasswordRef.current.value = "";
+      newPasswordRef.current.value = "";
     }
   }, []);
 
@@ -134,19 +133,19 @@ const AboutYou = ({ user, mutate }) => {
       try {
         setIsLoading(true);
         const formData = new FormData();
-        formData.append('username', usernameRef.current.value);
-        formData.append('name', nameRef.current.value);
-        formData.append('bio', bioRef.current.value);
+        formData.append("username", usernameRef.current.value);
+        formData.append("name", nameRef.current.value);
+        formData.append("bio", bioRef.current.value);
         if (profilePictureRef.current.files[0]) {
-          let test = { 'name': profilePictureRef.current.files[0].name }
-          formData.append('profilePicture', test);
+          let test = { name: profilePictureRef.current.files[0].name };
+          formData.append("profilePicture", test);
         }
-        const response = await fetcher('/api/user', {
-          method: 'PATCH',
+        const response = await fetcher("/api/user", {
+          method: "PATCH",
           body: formData,
         });
         mutate({ user: response.user }, false);
-        toast.success('Your profile has been updated');
+        toast.success("Your profile has been updated");
       } catch (e) {
         toast.error(e.message);
       } finally {
@@ -160,7 +159,7 @@ const AboutYou = ({ user, mutate }) => {
     usernameRef.current.value = user.username;
     nameRef.current.value = user.name;
     bioRef.current.value = user.bio;
-    profilePictureRef.current.value = '';
+    profilePictureRef.current.value = "";
     setAvatarHref(user.profilePicture);
   }, [user]);
 
@@ -201,12 +200,11 @@ const AboutYou = ({ user, mutate }) => {
 
 export const Settings = () => {
   const { data, error, mutate } = useCurrentUser();
-  // const { cardData } = useCardPages();
   const router = useRouter();
   useEffect(() => {
     if (!data && !error) return;
     if (!data.user) {
-      router.replace('/login');
+      router.replace("/login");
     }
   }, [router, data, error]);
   return (
@@ -217,7 +215,6 @@ export const Settings = () => {
           <EmailVerify user={data.user} />
           <AboutYou user={data.user} mutate={mutate} />
           <Auth user={data.user} />
-          {/* <HomeCardSettings user={data.user} mutate={mutate} /> */}
         </>
       ) : null}
     </Wrapper>

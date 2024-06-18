@@ -22,23 +22,6 @@
   margin-bottom: -20px;
 }
 
-/* .nextjs {
-  background: linear-gradient(90deg, #7928ca, #ff0080);
-}
-
-.mongodb {
-  background: linear-gradient(90deg, rgb(110, 96, 245), rgb(131, 219, 167));
-}
-
-.nextjs,
-.mongodb {
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  position: relative;
-  z-index: 1;
-} */
-
 .buttons {
   max-width: 26rem;
   margin: 0 auto 64px;

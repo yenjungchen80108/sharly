@@ -1,31 +1,30 @@
-import { Button } from '../../components/Button';
-import { ButtonLink } from '../../components/Button/Button';
-import { Input } from '../../components/Input';
-import { Spacer, Wrapper } from '../../components/Layout';
-import { fetcher } from '../../lib/fetch';
-import Link from 'next/link';
-import { useCallback, useRef, useState } from 'react';
-import toast from 'react-hot-toast';
-import styles from './ForgetPassword.module.css';
+import { Button } from "../../components/Button";
+import { ButtonLink } from "../../components/Button/Button";
+import { Input } from "../../components/Input";
+import { Spacer, Wrapper } from "../../components/Layout";
+import { fetcher } from "../../lib/fetch";
+import Link from "next/link";
+import { useCallback, useRef, useState } from "react";
+import toast from "react-hot-toast";
+import styles from "./ForgetPassword.module.css";
 
 const NewPassword = ({ token }) => {
   const passwordRef = useRef();
-  // 'loading' | 'success'
   const [status, setStatus] = useState();
   const onSubmit = useCallback(
     async (event) => {
       event.preventDefault();
-      setStatus('loading');
+      setStatus("loading");
       try {
-        await fetcher('/api/user/password/reset', {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
+        await fetcher("/api/user/password/reset", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             token,
             password: passwordRef.current.value,
           }),
         });
-        setStatus('success');
+        setStatus("success");
       } catch (e) {
         toast.error(e.message);
         setStatus(undefined);
@@ -36,7 +35,7 @@ const NewPassword = ({ token }) => {
   return (
     <div className={styles.main}>
       <h1 className={styles.title}>Reset Password</h1>
-      {status === 'success' ? (
+      {status === "success" ? (
         <>
           <p className={styles.subtitle}>
             Your password has been updated successfully.

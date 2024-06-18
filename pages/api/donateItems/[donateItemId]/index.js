@@ -71,7 +71,7 @@ handler.post(
       img,
       demand,
     } = req.body;
-    // console.log('req.query',req.query._id);
+
     const donateItem = await findDonateItemById(req.db, req.query._id);
     if (!donateItem) {
       return res
@@ -98,42 +98,44 @@ handler.post(
   }
 );
 
-// handler.put(
-//   ...auths,
-//   validateBody({
-//     type: 'object',
-//     properties: {
-//       title: ValidateProps.partner.title,
-//       content: ValidateProps.partner.content,
-//       image: ValidateProps.partner.image,
-//       tags: ValidateProps.partner.tags
-//     },
-//     required: ['title'],
-//     additionalProperties: false,
-//   }),
-//   async (req, res) => {
-//     if (!req.user) {
-//       return res.status(401).end();
-//     }
+/*
+handler.put(
+  ...auths,
+  validateBody({
+    type: 'object',
+    properties: {
+      title: ValidateProps.partner.title,
+      content: ValidateProps.partner.content,
+      image: ValidateProps.partner.image,
+      tags: ValidateProps.partner.tags
+    },
+    required: ['title'],
+    additionalProperties: false,
+  }),
+  async (req, res) => {
+    if (!req.user) {
+      return res.status(401).end();
+    }
 
-//     const title = req.body.title;
-//     const content = req.body.content;
-//     const image = req.body.image;
-//     const tags = req.body.tags;
-//     console.log('req.query',req.query.partnerId);
-//     const partner = await findpartnerById(req.db, req.query.partnerId);
+    const title = req.body.title;
+    const content = req.body.content;
+    const image = req.body.image;
+    const tags = req.body.tags;
+    console.log('req.query',req.query.partnerId);
+    const partner = await findpartnerById(req.db, req.query.partnerId);
 
-//     if (!partner) {
-//       return res.status(404).json({ error: { message: 'partner is not found PUT.' } });
-//     }
+    if (!partner) {
+      return res.status(404).json({ error: { message: 'partner is not found PUT.' } });
+    }
 
-//     const partners = await updatepartnerById(req.db, partner._id, {
-//       creatorId: req.user._id,
-//       content, title, image, tags
-//     });
+    const partners = await updatepartnerById(req.db, partner._id, {
+      creatorId: req.user._id,
+      content, title, image, tags
+    });
 
-//     return res.json({ partners });
-//   }
-// )
+    return res.json({ partners });
+  }
+)
+*/
 
 export default handler;

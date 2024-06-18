@@ -1,10 +1,9 @@
-import { ObjectId } from 'mongodb';
-import { dbProjectionUsers } from './user';
+import { ObjectId } from "mongodb";
+import { dbProjectionUsers } from "./user";
 
 export async function findPartnerById(db, id) {
-  // console.log('db-id', id);
   const partners = await db
-    .collection('partners')
+    .collection("partners")
     .aggregate([
       { $match: { _id: new ObjectId(id) } },
       { $limit: 1 },
@@ -20,14 +19,14 @@ export async function findPartnerById(db, id) {
       // { $project: dbProjectionUsers('creator.') },
     ])
     .toArray();
-    // console.log('partners',partners);
+  // console.log('partners',partners);
   if (!partners[0]) return null;
   return partners[0];
 }
 
 export async function findPartners(db, before, by, skip, limit) {
   return db
-    .collection('partners')
+    .collection("partners")
     .aggregate([
       {
         $match: {
@@ -54,24 +53,33 @@ export async function findPartners(db, before, by, skip, limit) {
 
 export function countPartners(db, before, by) {
   return db
-  .collection('partners')
-  .aggregate([
-    {
-      $match: {
-        ...(by && { creatorId: new ObjectId(by) }),
-        ...(before && { createdAt: { $lt: before } }),
+    .collection("partners")
+    .aggregate([
+      {
+        $match: {
+          ...(by && { creatorId: new ObjectId(by) }),
+          ...(before && { createdAt: { $lt: before } }),
+        },
       },
-    },
-  ])
-  .toArray();
+    ])
+    .toArray();
 }
 
-export async function insertPartner(db, { partnerId, title, year, content, image, tags, accountInfo }) {
+export async function insertPartner(
+  db,
+  { partnerId, title, year, content, image, tags, accountInfo }
+) {
   const partner = {
-    partnerId, title, year, content, image, tags, accountInfo,
+    partnerId,
+    title,
+    year,
+    content,
+    image,
+    tags,
+    accountInfo,
     createdAt: new Date(),
   };
-  const { insertedId } = await db.collection('partners').insertOne(partner);
+  const { insertedId } = await db.collection("partners").insertOne(partner);
   partner._id = insertedId;
   return partner;
 }
@@ -89,32 +97,37 @@ export async function insertPartner(db, { partnerId, title, year, content, image
 //   });
 // }
 
-export async function updatePartnerById(db, id, { partnerId, title, year, content, image, tags, accountInfo }) {
+export async function updatePartnerById(
+  db,
+  id,
+  { partnerId, title, year, content, image, tags, accountInfo }
+) {
   const partner = {
-    partnerId, title, year, content, image, tags, accountInfo,
+    partnerId,
+    title,
+    year,
+    content,
+    image,
+    tags,
+    accountInfo,
     createdAt: new Date(),
   };
-  
+
   return db
-    .collection('partners')
-    .findOneAndUpdate(
-      { _id: new ObjectId(id) },
-      { $set: partner },
-    )
-    .then((value) => console.log('Value: ' + value))
+    .collection("partners")
+    .findOneAndUpdate({ _id: new ObjectId(id) }, { $set: partner })
+    .then((value) => console.log("Value: " + value))
     .catch((err) => {
-      console.log('Error: ' + err);
+      console.log("Error: " + err);
     });
 }
 
 export async function deletePartnerById(db, id) {
   return db
-    .collection('partners')
-    .deleteOne(
-      { _id: new ObjectId(id) },
-    )
-    .then((value) => console.log('Value: ' + value))
+    .collection("partners")
+    .deleteOne({ _id: new ObjectId(id) })
+    .then((value) => console.log("Value: " + value))
     .catch((err) => {
-      console.log('Error: ' + err);
+      console.log("Error: " + err);
     });
 }

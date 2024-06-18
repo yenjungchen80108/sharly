@@ -1,32 +1,31 @@
-import { Button } from '../../components/Button';
-import { ButtonLink } from '../../components/Button/Button';
-import { Input } from '../../components/Input';
-import { Spacer, Wrapper } from '../../components/Layout';
-import { Text } from '../../components/Text';
-import { fetcher } from '../../lib/fetch';
-import Link from 'next/link';
-import { useCallback, useRef, useState } from 'react';
-import toast from 'react-hot-toast';
-import styles from './ForgetPassword.module.css';
+import { Button } from "../../components/Button";
+import { ButtonLink } from "../../components/Button/Button";
+import { Input } from "../../components/Input";
+import { Spacer, Wrapper } from "../../components/Layout";
+import { Text } from "../../components/Text";
+import { fetcher } from "../../lib/fetch";
+import Link from "next/link";
+import { useCallback, useRef, useState } from "react";
+import toast from "react-hot-toast";
+import styles from "./ForgetPassword.module.css";
 
 const ForgetPasswordIndex = () => {
   const emailRef = useRef();
-  // 'loading' || 'success'
   const [status, setStatus] = useState();
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const onSubmit = useCallback(async (e) => {
     e.preventDefault();
     try {
-      setStatus('loading');
-      await fetcher('/api/user/password/reset', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      setStatus("loading");
+      await fetcher("/api/user/password/reset", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: emailRef.current.value,
         }),
       });
       setEmail(emailRef.current.value);
-      setStatus('success');
+      setStatus("success");
     } catch (e) {
       toast.error(e.message);
       setStatus(undefined);
@@ -36,11 +35,11 @@ const ForgetPasswordIndex = () => {
   return (
     <Wrapper className={styles.root}>
       <div className={styles.main}>
-        {status === 'success' ? (
+        {status === "success" ? (
           <>
             <h1 className={styles.title}>Check your inbox</h1>
             <p className={styles.subtitle}>
-              An email has been sent{' '}
+              An email has been sent{" "}
               <Text as="span" color="link">
                 {email}
               </Text>
@@ -71,7 +70,7 @@ const ForgetPasswordIndex = () => {
                 className={styles.submit}
                 type="success"
                 size="large"
-                loading={status === 'loading'}
+                loading={status === "loading"}
               >
                 Continue
               </Button>

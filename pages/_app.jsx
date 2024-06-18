@@ -1,12 +1,11 @@
-import '../assets/base.scss';
-import '../styles/globals.css'
-import { Layout } from '../components/Layout';
-import { ThemeProvider } from 'next-themes';
-import { Toaster } from 'react-hot-toast';
-import { I18nextProvider } from 'react-i18next';
-import i18n from '../page-components/i18n';
-import '../components/Layout/Side.css';
-// import '../public/fonts';
+import "../assets/base.scss";
+import "../styles/globals.css";
+import { Layout } from "../components/Layout";
+import { ThemeProvider } from "next-themes";
+import { Toaster } from "react-hot-toast";
+import { I18nextProvider } from "react-i18next";
+import i18n from "../page-components/i18n";
+import "../components/Layout/Side.css";
 
 export default function MyApp({ Component, pageProps }) {
   return (
