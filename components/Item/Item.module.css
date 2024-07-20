@@ -13,11 +13,17 @@
 }
 
 .contentWrap {
-  width: 60%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contentInnerWrap {
+  width: 200px;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-content: center;
-  row-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  row-gap: 3px;
 }

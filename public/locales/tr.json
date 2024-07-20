@@ -55,6 +55,15 @@
     "TITLE": "物品設定",
     "MODAL_TITLE": "物品資料表單"
   },
+  "CART": {
+    "TITLE": "捐物箱",
+    "STATUS": {
+      "EMPTY": "暫無資料"
+    },
+    "ACTION": {
+      "REMOVE": "移除"
+    }
+  },
   "COMMON": {
     "PLACEHOLDER": "請輸入...",
     "ADD": "新增",

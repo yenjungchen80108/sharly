@@ -1,6 +1,6 @@
 import styles from "./Feed.module.css";
 import CategoryList from "./CategoryList";
-import HomeCardSettings from "../Settings/Component";
+import HomeCardSettings from "../Settings/Category";
 
 export const Feed = () => {
   return (

@@ -1,11 +1,12 @@
 .sideBar {
   margin: 0;
   padding: 0;
-  width: 200px;
+  width: 260px;
   background-color: transparent;
   position: fixed;
   height: 100vh;
   overflow: auto;
+  border-right: 1px #b7b7b7 solid;
 }
 
 .item {

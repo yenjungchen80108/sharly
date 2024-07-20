@@ -35,6 +35,7 @@ export const CategoryForm = (props) => {
       <Label name="image" value={values.image} onChange={handleChange}></Label>
       <Label
         name="category"
+        type="select"
         value={values.category}
         onChange={handleChange}
       ></Label>

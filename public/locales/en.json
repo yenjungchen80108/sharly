@@ -55,6 +55,15 @@
     "TITLE": "Item Settings",
     "MODAL_TITLE": "Item Info Form"
   },
+  "CART": {
+    "TITLE": "Donate Box",
+    "STATUS": {
+      "EMPTY": "Empty"
+    },
+    "ACTION": {
+      "REMOVE": "remove"
+    }
+  },
   "COMMON": {
     "PLACEHOLDER": "Please Type...",
     "ADD": "Add",
@@ -63,7 +72,7 @@
     "SAVE": "Save",
     "YES": "Yes",
     "NO": "No",
-    "ADD_CART": "Add to Cart",
+    "ADD_CART": "Add to Box",
     "VIEW_MORE": "View more"
   },
   "MESSAGE": {

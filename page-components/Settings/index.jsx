@@ -3,7 +3,7 @@ import { Button } from "../../components/Button";
 import { Input, Textarea } from "../../components/Input";
 import { Container, Spacer } from "../../components/Layout";
 import Wrapper from "../../components/Layout/Wrapper";
-import HomeCardSettings from "./Component";
+import HomeCardSettings from "./Category";
 import { fetcher } from "../../lib/fetch";
 import { useCurrentUser } from "../../lib/user";
 import { useRouter } from "next/router";

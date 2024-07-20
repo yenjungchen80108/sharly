@@ -1,80 +1,36 @@
 import styles from "./Stepper.module.scss";
-import styled from "styled-components";
-import classnames from "classnames";
-import { useState } from "react";
-
-const donateBox = [
-  {
-    id: 1,
-    name: "Donate List",
-  },
-  {
-    id: 2,
-    name: "Donor Info",
-  },
-  {
-    id: 3,
-    name: "Note",
-  },
-];
-
-const donateList = [
-  {
-    id: 1,
-    title: "Item List1",
-  },
-  {
-    id: 2,
-    title: "Item List2",
-  },
-];
+// import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useCart } from "../../lib/cart/hooks";
+import Cart from "../Cart/Cart";
 
 const Stepper = () => {
-  const [activeTab, setActiveTab] = useState(1);
+  const { t } = useTranslation();
+  const { cart, removeItem } = useCart();
+  console.log("cart", cart);
+
   return (
     <div className={styles.sideBar}>
-      {donateBox?.map((data) => (
-        <div key={data.id} className={styles.item}>
-          <TabNavItem
-            {...data}
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-          />
-          <ItemList list={donateList} />
+      <div className="flex flex-col justify-start items-end mx-2 ">
+        <div className="w-full flex justify-center items-center border border-grey-200 mt-3 text-lg text-gray-600">
+          {t("CART.TITLE")}
         </div>
-      ))}
+        <div className="h-96 w-full overflow-y-scroll">
+          {cart.length > 0 &&
+            cart?.map((data) => (
+              <div key={data._id} className={styles.item}>
+                <Cart {...data} onRemove={() => removeItem(data._id)} />
+              </div>
+            ))}
+          {cart.length === 0 && (
+            <div className="flex justify-center items-center h-full   text-md text-gray-500">
+              <span>{t("CART.STATUS.EMPTY")}</span>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
 
 export default Stepper;
-
-const TabNavItem = ({ id, name, activeTab, setActiveTab }) => {
-  const handleClick = () => {
-    setActiveTab(id);
-  };
-
-  return (
-    <div
-      onClick={handleClick}
-      className={classnames(styles.boxBorder, {
-        [styles.active]: activeTab === id,
-      })}
-    >
-      <div className={styles.circle}>{id}</div>
-      <div>{name}</div>
-    </div>
-  );
-};
-
-const ItemList = ({ list }) => {
-  return (
-    <div className={styles.boxBorder}>
-      {list.length > 0 ? (
-        list?.map((data, id) => <div key={id}>{data.title}</div>)
-      ) : (
-        <div>暫無資料</div>
-      )}
-    </div>
-  );
-};
