@@ -1,41 +1,41 @@
-import { Avatar } from '../Avatar';
-import { Container } from '../Layout';
-import { format } from '@lukeed/ms';
-import clsx from 'clsx'; // clsx is generally used to conditionally apply a given className
-import Link from 'next/link';
-import { useMemo } from 'react';
-import styles from './Card.module.css';
+import { Avatar } from "../Avatar";
+import { Container } from "../Layout";
+import { format } from "@lukeed/ms";
+import clsx from "clsx";
+import Link from "next/link";
+import { useMemo } from "react";
+import styles from "./Card.module.css";
 
 const classes = {
-  inlineTag: "inline-block bg-pink-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-}
+  inlineTag: "bg-pink-300 rounded-md p-0.5 text-sm text-white",
+};
 
 const Card = ({ card, className }) => {
-  let separateTags = card.tags.join(',').split(',');
-  // console.log('separateTags',separateTags.map(item => console.log('item', item)));
-  
-//   const timestampTxt = useMemo(() => {
-//     const diff = Date.now() - new Date(comment.createdAt).getTime();
-//     if (diff < 1 * 60 * 1000) return 'Just now';
-//     return `${format(diff, true)} ago`;
-//   }, [comment.createdAt]);
+  let separateTags = card.tags.join(",").split(",");
+
   return (
-    <div className={clsx(styles.root, className)}>
-       <div className="h-50 rounded overflow-hidden">
-          <img className="w-full h-40" src={card.image} alt="image"/>
-          <div className="px-6 py-4">
-              <div className="font-bold text-xl mb-2">{card.title}</div>
-              <p className="text-gray-700 text-base">{card.content}</p>
-          </div>
-          <div className="px-1 pt-1 pb-2">
-              {separateTags.map((item, id) => {
-                  return <span className={classes.inlineTag} key={id}>{item}</span>
-              })}
-              {/* <span className={classes.inlineTag}>#photography</span>
-              <span className={classes.inlineTag}>#travel</span>
-              <span className={classes.inlineTag}>#winter</span> */}
-          </div>
-        </div> 
+    // <div className={className}>
+    <div className="flex flex-col bg-white">
+      <div className="h-28 w-30 flex-shrink-0 overflow-hidden">
+        <img
+          className="h-full w-full object-cover object-center"
+          src={card.image}
+          alt="image"
+        />
+      </div>
+      <div className="px-2 py-2">
+        <div className="text-sm mb-2">{card.title}</div>
+        <p className="text-gray-700 text-sm">{card.content}</p>
+      </div>
+      <div className="my-1">
+        {separateTags.map((item, id) => {
+          return (
+            <span className={classes.inlineTag} key={id}>
+              {item}
+            </span>
+          );
+        })}
+      </div>
     </div>
   );
 };

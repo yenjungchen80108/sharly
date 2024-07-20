@@ -1,9 +1,9 @@
-.itemWrap {
+/* .itemWrap {
   display: flex;
   align-items: center;
   box-shadow: 0 3px 5px #ddd;
   padding: 10px;
-}
+} */
 
 .imgWrap {
   width: 40%;
@@ -19,11 +19,11 @@
   align-items: center;
 }
 
-.contentInnerWrap {
+/* .contentInnerWrap {
   width: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   row-gap: 3px;
-}
+} */

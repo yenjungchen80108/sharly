@@ -11,11 +11,14 @@ const Stepper = () => {
 
   return (
     <div className={styles.sideBar}>
-      <div className="flex flex-col justify-start items-end mx-2 ">
+      <div className="flex flex-col justify-start items-end mx-2">
         <div className="w-full flex justify-center items-center border border-grey-200 mt-3 text-lg text-gray-600">
           {t("CART.TITLE")}
         </div>
-        <div className="h-96 w-full overflow-y-scroll">
+        <div
+          className="h-96 sm:h-48 md:h-80 lg:h-96 xl:h-96 w-full 
+        flex flex-col overflow-y-scroll"
+        >
           {cart.length > 0 &&
             cart?.map((data) => (
               <div key={data._id} className={styles.item}>

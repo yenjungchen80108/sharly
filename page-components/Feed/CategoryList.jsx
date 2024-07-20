@@ -14,28 +14,29 @@ const CategoryList = () => {
   if (!data) return <div></div>;
 
   return (
-    <div className="flex justify-center bg-pink-50 overflow-scroll">
-      {data ? (
-        data.cards.map((card, id) => (
-          <Link
-            key={card._id}
-            href={{
-              pathname: `/card/${card._id}`,
-              query: {
-                // cardId: card._id,
-                category: card.category,
-              },
-            }}
-            passHref
-          >
-            <div className="flex text-gray-400 text-center px-1 py-1 m-3 cursor-pointer">
-              <Card className={styles.post} card={card} key={card._id}></Card>
-            </div>
-          </Link>
-        ))
-      ) : (
-        <LoadingDots className={styles.loading} />
-      )}
+    <div className="h-full bg-pink-50">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
+        {data ? (
+          data.cards.map((card, id) => (
+            <Link
+              key={card._id}
+              href={{
+                pathname: `/card/${card._id}`,
+                query: {
+                  category: card.category,
+                },
+              }}
+              passHref
+            >
+              <div className="text-gray-400 text-center px-1 py-1 m-3 cursor-pointer">
+                <Card className={styles.post} card={card} key={card._id}></Card>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <LoadingDots className={styles.loading} />
+        )}
+      </div>
     </div>
   );
 };

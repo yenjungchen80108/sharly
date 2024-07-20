@@ -18,7 +18,7 @@ const Item = ({ item }) => {
   };
 
   return (
-    <div className={styles.itemWrap}>
+    <div className="flex justify-center items-center p-2 shadow">
       <div className="h-24 w-24 flex-shrink-0 overflow-hidden">
         <img
           className="h-full w-full object-cover object-center"
@@ -27,8 +27,8 @@ const Item = ({ item }) => {
         />
       </div>
       <div className={styles.contentWrap}>
-        <div className={styles.contentInnerWrap}>
-          <div className="flex justify-center items-center text-gray-900 font-bold text-xl">
+        <div className="w-3/6 flex flex-col justify-center items-center">
+          <div className="flex justify-center items-center text-gray-900 font-bold text-l">
             {itemName}
           </div>
           <div className="flex justify-center items-center">
@@ -37,8 +37,8 @@ const Item = ({ item }) => {
             </div>
           </div>
           <button
-            className="bg-pink-500 hover:bg-pink-400 text-white font-bold py-2 px-4
-            border-b-4 border-pink-700 hover:border-pink-500 rounded"
+            className="bg-rose-400 hover:bg-rose-500 text-sm text-white py-1 mb-1 w-full
+            border-b-4 border-rose-500 hover:border-rose-500 rounded"
             onClick={handleAdd}
           >
             {t("COMMON.ADD_CART")}
@@ -57,8 +57,8 @@ const Item = ({ item }) => {
             passHref
           >
             <button
-              className="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4
-            border-b-4 border-green-700 hover:border-green-500 rounded"
+              className="bg-rose-300 hover:bg-rose-400 text-sm text-white py-1 w-full
+              border-b-4 border-rose-400 hover:border-rose-400 rounded"
             >
               {t("COMMON.VIEW_MORE")}
             </button>
