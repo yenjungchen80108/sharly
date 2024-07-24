@@ -29,7 +29,7 @@ const CategoryList = () => {
               passHref
             >
               <div className="text-gray-400 text-center px-1 py-1 m-3 cursor-pointer">
-                <Card className={styles.post} card={card} key={card._id}></Card>
+                <Card card={card} key={card._id}></Card>
               </div>
             </Link>
           ))

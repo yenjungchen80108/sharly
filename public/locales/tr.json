@@ -56,12 +56,23 @@
     "MODAL_TITLE": "物品資料表單"
   },
   "CART": {
-    "TITLE": "捐物箱",
+    "TITLE": {
+      "1": "捐物箱",
+      "2": "明細"
+    },
     "STATUS": {
       "EMPTY": "暫無資料"
     },
     "ACTION": {
-      "REMOVE": "移除"
+      "REMOVE": "移除",
+      "VIEW": "查看",
+      "COLLAPSE": "收合",
+      "SUBMIT": "提交"
+    },
+    "TABLE": {
+      "COL_1": "類別",
+      "COL_2": "數量",
+      "COL_LAST": "總計"
     }
   },
   "COMMON": {

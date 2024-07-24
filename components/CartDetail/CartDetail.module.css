@@ -1,0 +1,26 @@
+.tableBody {
+  width: 90%;
+  height: auto;
+  margin: 10px auto 0;
+  color: rgb(107, 114, 128);
+  background: rgba(255, 226, 241, 0.2);
+  border-radius: 10px;
+}
+
+.tableHeader {
+  color: rgb(236, 72, 153);
+  border-bottom: rgb(236, 72, 153) solid 1px;
+}
+
+.tableRow {
+  text-align: center;
+  padding: 5px 0;
+  border-bottom: rgb(174, 177, 184) dashed 1px;
+}
+
+.tableBottom {
+  font-weight: 500;
+  color: #000;
+  text-align: center;
+  padding-bottom: 5px;
+}

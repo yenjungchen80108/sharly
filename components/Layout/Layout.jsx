@@ -37,8 +37,8 @@ const Layout = ({ children }) => {
           <main id="page-wrap" className={styles.content}>
             {children}
           </main>
-          <Footer />
         </div>
+        <Footer />
       </div>
     </>
   );

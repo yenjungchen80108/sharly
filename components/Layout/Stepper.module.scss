@@ -5,7 +5,7 @@
   background-color: transparent;
   position: fixed;
   height: 100vh;
-  overflow: auto;
+  overflow: scroll;
   border-right: 1px #b7b7b7 solid;
 }
 
@@ -14,6 +14,13 @@
   color: black;
   padding: 5px;
   text-decoration: none;
+}
+
+.hrLine {
+  content: "";
+  border-bottom: 1px dashed #c8c8c8;
+  margin: 1px auto;
+  width: 90%;
 }
 
 @media screen and (max-width: 700px) {

@@ -1,5 +1,5 @@
-import { Login } from '../page-components/Auth';
-import Head from 'next/head';
+import { Login } from "../page-components/Auth";
+import Head from "next/head";
 
 const LoginPage = () => {
   return (

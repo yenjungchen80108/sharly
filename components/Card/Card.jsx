@@ -14,8 +14,7 @@ const Card = ({ card, className }) => {
   let separateTags = card.tags.join(",").split(",");
 
   return (
-    // <div className={className}>
-    <div className="flex flex-col bg-white">
+    <div className="flex flex-col bg-white shadow-md">
       <div className="h-28 w-30 flex-shrink-0 overflow-hidden">
         <img
           className="h-full w-full object-cover object-center"

@@ -56,12 +56,23 @@
     "MODAL_TITLE": "Item Info Form"
   },
   "CART": {
-    "TITLE": "Donate Box",
+    "TITLE": {
+      "1": "Donate Box",
+      "2": "Box Detail"
+    },
     "STATUS": {
       "EMPTY": "Empty"
     },
     "ACTION": {
-      "REMOVE": "remove"
+      "REMOVE": "remove",
+      "VIEW": "View",
+      "COLLAPSE": "Collapse",
+      "SUBMIT": "Submit"
+    },
+    "TABLE": {
+      "COL_1": "Category",
+      "COL_2": "Quantity",
+      "COL_LAST": "Total"
     }
   },
   "COMMON": {
