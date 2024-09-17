@@ -17,7 +17,9 @@ const Cart = ({ _id, img, itemName, onRemove, className }) => {
           />
         </div>
         <div className="ml-4 flex flex-col w-full">
-          <div className="text-sm font-small text-gray-500">{itemName}</div>
+          <div className="text-sm font-small text-gray-500 truncate w-20">
+            {itemName}
+          </div>
           <InputCounter id={_id} />
           <button className="flex items-center" onClick={onRemove}>
             <TrashIcon className="flex-shrink-0 h-6 w-6 mr-1 text-red-500" />

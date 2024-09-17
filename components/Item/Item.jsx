@@ -28,7 +28,7 @@ const Item = ({ item }) => {
       </div>
       <div className={styles.contentWrap}>
         <div className="w-3/6 flex flex-col justify-center items-center">
-          <div className="flex justify-center items-center text-gray-900 font-bold text-l">
+          <div className="w-40 truncate text-center text-gray-900 font-bold text-l">
             {itemName}
           </div>
           <div className="flex justify-center items-center">

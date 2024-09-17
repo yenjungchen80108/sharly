@@ -31,7 +31,10 @@ export const Donate = ({ item }) => {
           <Button>{t("ITEM.TITLE")}</Button>
         </div>
       </Link>
-      <div className="grid gap-4 h-96 sm:h-80 md:h-64 lg:h-48 xl:h-32 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+      <div
+        className="grid gap-4 h-96 sm:h-80 md:h-64 lg:h-48 xl:h-32 
+      sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4"
+      >
         {data ? (
           data.donateItems
             .filter((data) => data.category === category)

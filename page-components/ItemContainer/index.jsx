@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useCart } from "../../lib/cart/hooks";
 
 export const ItemContainer = ({ item }) => {
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
   const { category, itemName, subTitle, img, info, demand } = item || {};
   const { addItem } = useCart();
 
@@ -183,10 +183,11 @@ export const ItemContainer = ({ item }) => {
               </div>
               <button
                 type="submit"
-                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                className="mt-10 flex w-full items-center justify-center  py-3 px-8 bg-rose-400 hover:bg-rose-500 text-sm text-white
+            border-b-4 border-rose-500 hover:border-rose-500 rounded"
                 onClick={handleAddItem}
               >
-                Add to bag
+                {t("COMMON.ADD_CART")}
               </button>
             </form>
           </div>
