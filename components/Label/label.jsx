@@ -1,4 +1,5 @@
-import React, { Children, forwardRef } from "react";
+import React, { Children, forwardRef, useState } from "react";
+
 import PropTypes from "prop-types";
 import StyledLabel from "./StyledLabel";
 import { Spacer } from "../Layout";
@@ -16,7 +17,19 @@ const classes = {
 
 const Label = (props) => {
   let elementToRender;
-  const { type, handleAddTag, removeTag, tags } = props;
+  const { type, value } = props;
+  const [tags, setTags] = useState([]);
+
+  const handleAddTag = function (e) {
+    e.preventDefault();
+    setTags([...tags, value]);
+    // setValues({ ...values, tags: [values.tags] });
+  };
+
+  const removeTag = function (index) {
+    setTags(tags.filter((el, i) => i !== index));
+  };
+
   switch (type) {
     case "tag":
       elementToRender = (

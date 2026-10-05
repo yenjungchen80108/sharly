@@ -21,7 +21,7 @@ import { useTranslation } from "react-i18next";
 // common form for add, edit, delete mode
 export const CategoryForm = (props) => {
   const { t } = useTranslation();
-  const { handleChange, handleAddTag, removeTag, values, tags } = props;
+  const { handleChange, values, tags } = props;
 
   return (
     <section>
@@ -45,8 +45,8 @@ export const CategoryForm = (props) => {
         tags={tags}
         value={values.tags}
         onChange={handleChange}
-        handleAddTag={handleAddTag}
-        removeTag={removeTag}
+        // handleAddTag={handleAddTag}
+        // removeTag={removeTag}
       ></Label>
     </section>
   );
@@ -62,7 +62,6 @@ export const HomeCardSettingsInner = () => {
     tags: [],
   };
   const [values, setValues] = useState(init);
-  const [tags, setTags] = useState([]);
   const { mutate } = useSWRConfig();
   const { t } = useTranslation();
   const tableRef = useRef();
@@ -72,6 +71,7 @@ export const HomeCardSettingsInner = () => {
     try {
       e.preventDefault();
       e.stopPropagation();
+      console.log("value", values);
       // add/edit item when submit
       await fetcher("/api/cards", {
         method: mode === "add" ? "POST" : "PATCH",
@@ -123,16 +123,6 @@ export const HomeCardSettingsInner = () => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const handleAddTag = function (e) {
-    e.preventDefault();
-    setTags([...tags, values.tags]);
-    setValues({ ...values, tags: [values.tags] });
-  };
-
-  const removeTag = function (index) {
-    setTags(tags.filter((el, i) => i !== index));
-  };
-
   return (
     <Wrapper>
       <div>
@@ -155,10 +145,10 @@ export const HomeCardSettingsInner = () => {
             >
               <CategoryForm
                 handleChange={handleChange}
-                handleAddTag={handleAddTag}
-                removeTag={removeTag}
+                // handleAddTag={handleAddTag}
+                // removeTag={removeTag}
                 values={values}
-                tags={tags}
+                // tags={tags}
               ></CategoryForm>
             </SingleTableList>
           </>
